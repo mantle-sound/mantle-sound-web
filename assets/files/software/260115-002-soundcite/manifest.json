@@ -1,0 +1,98 @@
+{
+  "schema": "https://mantle-sound.org/schemas/soundcite/0.1",
+  "created_at": "2026-07-23T16:58:12.495104+00:00",
+  "created_by": {
+    "tool": "soundcite",
+    "version": "0.1.0"
+  },
+  "citation": {
+    "title": "Take 002 · 01:00:00 excerpt",
+    "recordist": "Mountaineering Acoustics Network",
+    "recorded_at": "2026-01-15T13:19:25+08:00",
+    "location": "Yema Haizi, Kangding, Sichuan",
+    "license": "All rights reserved",
+    "notes": null
+  },
+  "clip": {
+    "start_seconds": 3600.0,
+    "start_timecode": "01:00:00.000",
+    "duration_seconds": 20.0,
+    "end_seconds": 3620.0,
+    "end_timecode": "01:00:20.000",
+    "track_count": 2
+  },
+  "sources": [
+    {
+      "name": "260115_002_Tr1.WAV",
+      "path_as_provided": "260115_002_Tr1.WAV",
+      "size_bytes": 2101379072,
+      "modified_at": "2026-01-15T15:21:50+00:00",
+      "technical": {
+        "codec": "pcm_f32le",
+        "sample_format": "flt",
+        "sample_rate_hz": 48000,
+        "channels": 1,
+        "bits_per_sample": 32,
+        "duration_seconds": 10944.0,
+        "container": "wav",
+        "embedded_tags": {
+          "comment": "zTAKE=002\r\nzSCENE=260115\r\nzTAPE=\r\nzCIRCLED=FALSE\r\nzTRK3=Tr1\r\nzNOTE=\r\n",
+          "encoded_by": "ZOOM F3",
+          "date": "2026-01-15",
+          "creation_time": "12:19:25",
+          "time_reference": "0",
+          "coding_history": "A=PCM,F=48000,W=32,M=mono,T=F3;VERSION=1.10;P="
+        }
+      }
+    },
+    {
+      "name": "260115_002_Tr2.WAV",
+      "path_as_provided": "260115_002_Tr2.WAV",
+      "size_bytes": 2101379072,
+      "modified_at": "2026-01-15T15:21:50+00:00",
+      "technical": {
+        "codec": "pcm_f32le",
+        "sample_format": "flt",
+        "sample_rate_hz": 48000,
+        "channels": 1,
+        "bits_per_sample": 32,
+        "duration_seconds": 10944.0,
+        "container": "wav",
+        "embedded_tags": {
+          "comment": "zTAKE=002\r\nzSCENE=260115\r\nzTAPE=\r\nzCIRCLED=FALSE\r\nzTRK4=Tr2\r\nzNOTE=\r\n",
+          "encoded_by": "ZOOM F3",
+          "date": "2026-01-15",
+          "creation_time": "12:19:25",
+          "time_reference": "0",
+          "coding_history": "A=PCM,F=48000,W=32,M=mono,T=F3;VERSION=1.10;P="
+        }
+      }
+    }
+  ],
+  "artifacts": {
+    "lossless_excerpts": [
+      {
+        "name": "excerpt-track1.wav",
+        "sha256": "d8fc0986740cc2e8aaab2b0dc90486cad31ace544be6dfdabc1c0e476277d99f",
+        "size_bytes": 3840206
+      },
+      {
+        "name": "excerpt-track2.wav",
+        "sha256": "7fe11a35a595f66fa35c14cc3f9ca5da58b6da9fa163370de5f427427f1a0ed9",
+        "size_bytes": 3840206
+      }
+    ],
+    "preview": {
+      "name": "preview.ogg",
+      "sha256": "c2a7f6fcf1db97efe20b793f0eab84237cf220d47abfd5eaf292f75f2e9b6c45",
+      "lossy": true,
+      "processing": "Opus encoding with a 0.95 peak limiter"
+    },
+    "spectrogram": {
+      "name": "spectrogram.png",
+      "sha256": "f17a6e8771efeefd946d9d23c09ef18900eac91b3b922c5c0e7ad8c76ec93815",
+      "source": "preview.ogg",
+      "frequency_scale": "logarithmic"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{% macro render_homepage_header(page) %}
+  <div class="homepage-header-wrap">
+  <div class="intro-f">
+    <div class="intro-logo">
+      <img src="{{ bag('homepage-sections.intro-f.logo_image') }}">
+    </div>
+    <div class="intro-p">
+      {{ bag('homepage-sections.intro-f.description') }}
+    </div>
+  </div>
+  </div>
+{% endmacro %}

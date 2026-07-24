@@ -1,0 +1,16 @@
+_model: page
+---
+title: Support Us
+---
+_template: page.html
+---
+date: 2026-02-07
+---
+_hidden: yes
+---
+body:
+
+You can support our research in the following ways:
+
+- <img src="/static/ko-fi.svg" alt="Ko-fi" class="social-media-icon"> [Ko-fi](https://ko-fi.com/mantle_sound) - One-time support for our research projects
+- <img src="/static/liberapay.svg" alt="Liberapay" class="social-media-icon"> [Liberapay](https://liberapay.com/mantle_sound) - Recurring support for sustainable research

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+{% if this._path == '/' %}
+<div class="home-index">
+  {% from "macros/homepage-sections.html" import render_homepage_sections %}
+  {{ render_homepage_sections(this) }}
+</div>
+{% else %}
+<div class="blog-post-bare">
+  <h1>{{ this.title }}</h1>
+  {% if this.date %}
+  <div class="post-date">{{ this.date.strftime('%B %d, %Y') }}</div>
+  {% endif %}
+  {{ this.body }}
+</div>
+{% endif %}
+{% endblock %}

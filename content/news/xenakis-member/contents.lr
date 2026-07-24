@@ -1,0 +1,26 @@
+_model: news-post
+---
+title: MAN Network joins Les Amis de Xenakis Association
+---
+pub_date: 2025-08-01
+---
+body:
+
+<div class="image-gallery">
+  <div class="image-container">
+    <img src="/files/Amis-Xenakis.jpg" alt="Les Amis de Xenakis Association" style="max-width: 300px;">
+    <div class="image-caption">Les Amis de Xenakis Association</div>
+  </div>
+  <div class="image-container">
+    <a title="The Friends of Xenakis (permission link), CC BY 2.5 &lt;https://creativecommons.org/licenses/by/2.5&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Iannis_Xenakis_1975.jpg">
+      <img width="256" alt="Iannis Xenakis" src="/files/xenakis.jpg">
+    </a>
+    <div class="image-caption">Xenakis in his Paris studio, c. 1970, <a href="https://creativecommons.org/licenses/by/2.5/deed.en" target="_blank">CC BY 2.5</a></div>
+  </div>
+</div>
+
+As of August 2025, [we](/about/#team) joined the [Les Amis de Xenakis Association](https://www.iannis-xenakis.org/en) as members.
+
+Iannis Xenakis (1922–2001) was a pioneering Greek-French composer, architect, and engineer who revolutionized contemporary music through mathematical composition and computer-assisted techniques.
+
+The association Les Amis de Xenakis promotes events, publications and information related to the thought and work of Iannis Xenakis.

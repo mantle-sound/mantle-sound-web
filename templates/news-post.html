@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% from "macros/news-cards.html" import render_news_post %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<div class="news-post-page">
+  <a href="{{ '/news'|url }}" class="news-back-link">← Back to News</a>
+  {{ render_news_post(this) }}
+</div>
+{% endblock %}

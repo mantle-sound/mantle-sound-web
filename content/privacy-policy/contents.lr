@@ -1,0 +1,76 @@
+_model: page
+---
+title: Privacy Policy
+---
+_template: page-toc.html
+---
+date: 2025-09-01
+---
+body:
+
+**Last updated:** Sep 2025
+
+## Introduction
+
+The Mountaineering Acoustics Network (MAN) is committed to protecting your privacy and ensuring transparency in how we handle your data. This privacy policy explains our practices regarding data collection, usage, and protection.
+
+## Our Services
+
+Our primary business activities are:
+- Publishing team news and research on our website
+- Providing academic and research information
+- Maintaining a professional network platform
+
+## Data Collection
+
+**We do not collect personal data from visitors to our website.**
+
+### No Cookies
+Our website does not use cookies or any form of tracking technology.
+
+### No Analytics
+We do not use third-party analytics services or tracking tools.
+
+### No Registration Required
+We do not offer public registration for any services on our servers. All information is provided publicly without requiring user accounts.
+
+## Technical Implementation
+
+### Self-Hosted JavaScript
+All JavaScript code on our website is self-hosted. We do not load external scripts from third-party services.
+
+### Server Information
+For debugging purposes only, we maintain standard nginx server logs. These logs contain:
+- IP addresses
+- Access timestamps
+- Requested URLs
+- HTTP status codes
+
+These logs are used solely for technical maintenance and are not shared with third parties.
+
+## Data Storage
+
+**We do not store any personal information on our servers.**
+
+- No user accounts or profiles
+- No contact form submissions
+- No newsletter subscriptions
+- No personal data collection
+
+## Third-Party Services
+
+We do not integrate with any third-party services that would collect user data.
+
+## Contact Information
+
+For privacy-related inquiries, please contact us at:
+- Email: [gewenxin.yu@proton.me](mailto:gewenxin.yu@proton.me)
+- Matrix: [@g.yu:matrix.org](https://matrix.to/#/@g.yu:matrix.org)
+
+## Updates
+
+This privacy policy may be updated periodically. Any significant changes will be announced on our website.
+
+---
+
+*This privacy policy reflects our commitment to transparency and minimal data collection.*

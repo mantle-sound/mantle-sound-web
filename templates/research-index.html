@@ -1,0 +1,16 @@
+{% extends "layout-blog-index.html" %}
+{% from "macros/research-cards.html" import render_blog_post %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<div class="research-index">
+  <div class="blog-post-bare">
+    <h1>{{ this.title }}</h1>
+We carry out field recording in mountain and glacial environments and work on audio processing, including neural codecs for geophone and microphone data.
+  </div>
+  <div class="blog-post-cards">
+    {% for child in this.pagination.items %}
+      {{ render_blog_post(child, from_index=true) }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "layout-research-post.html" %}
+{% from "macros/research.html" import render_blog_post %}
+{% block page_title %}{{ this.title }}{% if this.subtitle %}: {{ this.subtitle }}{% endif %}{% endblock %}
+{% block body %}
+  {{ render_blog_post(this) }}
+{% endblock %}

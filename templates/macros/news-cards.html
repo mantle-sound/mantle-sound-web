@@ -1,0 +1,16 @@
+{% macro render_news_post(post, from_index=false) %}
+<div class="news-card" id="news-{{ post._id }}">
+  {% if post.pub_date %}
+    <div class="news-card-date">
+      {% if from_index %}
+        <a href="#news-{{ post._id }}">{{ post.pub_date }}</a>
+      {% else %}
+        {{ post.pub_date }}
+      {% endif %}
+    </div>
+  {% endif %}
+  <div class="news-card-content">
+    {{ post.body }}
+  </div>
+</div>
+{% endmacro %}
