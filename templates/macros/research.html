@@ -1,0 +1,25 @@
+{% macro render_blog_post(post, from_index=false) %}
+  {% if from_index %}
+  <div class="blog-post-bare">
+    <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
+    {{ post.body }}
+  </div>
+  {% else %}
+  <div class="blog-post-bare research-article">
+    <h1>{{ post.subtitle or post.title }}</h1>
+    {% if post.subtitle %}
+    <p class="subtitle">{{ post.title }}</p>
+    {% endif %}
+    {% if post.pub_date %}
+    <div class="post-date">{{ post.pub_date.strftime('%B %Y') }}</div>
+    {% endif %}
+    {% set visual = post.attachments.get('visual.svg') or post.attachments.get('visual.jpg') or post.attachments.get('visual.png') or post.attachments.get('visual.webp') %}
+    {% if visual %}
+    <figure class="research-visual" aria-hidden="true">
+      <img src="{{ visual|url }}" alt="">
+    </figure>
+    {% endif %}
+    {{ post.body }}
+  </div>
+  {% endif %}
+{% endmacro %}

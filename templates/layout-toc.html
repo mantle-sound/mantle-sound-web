@@ -1,0 +1,42 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% include "macros/favicon.html" %}
+<link rel="stylesheet" href="{{ '/static/style.css'|url }}">
+<title>{% block title %}Welcome{% endblock %} - Mountaineering Acoustics Network (MAN)</title>
+{% from "macros/structured-data-nav.html" import structured_data_nav %}
+{{ structured_data_nav(this) }}
+<body>
+  <header>
+    <div id="header-box">
+      <div class="container">
+        <div id="header-content">
+            {% from "macros/header.html" import header %}
+            {{ header() }}
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="nav-box">
+    {% from "macros/menu-less.html" import menu %}
+    {{menu(is_homepage=(this._path == "/"))}}
+  </div>
+  <div class="page-with-toc">
+    <nav class="toc" aria-label="Table of contents">
+      <h4>Table Of Contents</h4>
+      <ul>
+        {% for item in this.body.toc recursive %}
+        <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
+          if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="page">
+      {% block body %}{% endblock %}
+    </div>
+  </div>
+  {% from "macros/footer.html" import footer %}
+  {{ footer() }}
+  
+  <script src="{{ '/static/navbar.js'|url }}"></script>
+</body>

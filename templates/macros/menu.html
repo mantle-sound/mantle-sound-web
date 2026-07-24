@@ -1,0 +1,18 @@
+{% macro menu() %}
+          <a href="/" class="first">Home</a>
+          <a href="/software">Software</a>
+          <a href="/news">News</a>
+          <a href="https://prod.mantle-sound.org/">Mantle Prod.</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <hr style="width: 50px; border: none; border-top: 1px solid #e0e0e0; margin: 10px 0;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            {% for platform in bag('social-media') %}
+              {% if platform != 'order' and bag('social-media', platform + '.display') == 'true' %}
+                <a{% if bag('social-media', platform + '.rel') %} rel="{{ bag('social-media', platform + '.rel') }}"{% endif %} href="{% if platform == 'rss' %}{{ '/news/feed.xml'|url }}{% else %}{{ bag('social-media', platform + '.url') }}{% endif %}"{% if platform == 'rss' %} type="application/atom+xml"{% endif %}>
+                  <img src="{{ bag('social-media', platform + '.icon') }}" alt="{{ bag('social-media', platform + '.name') }}" style="width: 16px; height: 16px; color: #333333;">
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+{% endmacro %}

@@ -1,0 +1,8 @@
+[project]
+name = mantle
+url = https://mantle-sound.org/
+
+[packages]
+lektor-markdown-admonition = 0.3.1
+lektor-markdown-header-anchors = 0.3.1
+lektor-atom = 0.4.0

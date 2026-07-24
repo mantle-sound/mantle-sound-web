@@ -1,0 +1,28 @@
+{% macro render_blog_post(post, from_index=false) %}
+<div class="blog-post-card rs" id="{{ post|url }}">
+  <div class="card-post">
+  {% if from_index %}
+    <div class="card-post-media">
+      <div class="card-tags">
+        <div class="card-type-rs">{{ post.tag }}</div>
+        {% if post.tag_2 %}
+        <div class="card-type-rs list">{{ post.tag_2 }}</div>
+        {% endif %}
+      </div>
+      <img src="/research/{{ post|url }}banner.jpg" alt="">
+    </div>
+    <div class="blog-post-card-info">
+    <h2>{{ post.title }}{% if post.subtitle %}: {{ post.subtitle }}{% endif %}</h2>
+    <p>{{ post.excerpt or post.body|striptags|truncate(280) }}</p>
+    </div>
+  {% else %}
+    <div class="card-type-rs">{{ post.tag }}</div>
+    {% if post.tag_2 %}
+    <div class="card-type-rs list">{{ post.tag_2 }}</div>
+    {% endif %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.excerpt or post.body|striptags|truncate(280) }}</p>
+  {% endif %}
+  </div>
+</div>
+{% endmacro %}

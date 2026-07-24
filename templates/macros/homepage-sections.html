@@ -1,0 +1,77 @@
+{% macro render_home_intro(section_num) %}
+  {% set key = 'homepage-sections.section' ~ section_num %}
+  {% set title = bag(key ~ '.title') %}
+  {% set image_caption = bag(key ~ '.image_caption') %}
+  {% set description = bag(key ~ '.description') %}
+  {% set description_continued = bag(key ~ '.description_continued') %}
+  {% set link_url = bag(key ~ '.link_url') or '/research' %}
+  {% set link_text = bag(key ~ '.link_text') or 'Current Research' %}
+  {% set image = bag(key ~ '.image') %}
+
+  <div class="intro" id="home-section-{{ section_num }}">
+    <div class="intro-image">
+      <a href="{{ link_url|url }}"><img src="{{ image }}" alt="{{ title }}"></a>
+      {% if image_caption %}
+      <div class="caption">{{ image_caption }}</div>
+      {% endif %}
+    </div>
+    <div class="intro-text">
+      <h2 class="intro-h">{{ title }}</h2>
+      {% if description %}
+      <p>{{ description }}</p>
+      {% endif %}
+      {% if description_continued %}
+      <p>{{ description_continued }}</p>
+      {% endif %}
+      <a class="button button--primary intro-more" href="{{ link_url|url }}">{{ link_text }}</a>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro render_homepage_sections(page) %}
+  <div class="home-sections">
+    {{ render_home_intro(1) }}
+    {% if bag('homepage-sections.section2.enabled') != 'false' %}
+    {{ render_home_intro(2) }}
+    {% endif %}
+    {{ render_home_intro(3) }}
+  </div>
+
+  {% if bag('homepage-sections.partners.enabled') == 'true' %}
+  <div class="partners-section">
+    <p class="partners-label">{{ bag('homepage-sections.partners.title') }}</p>
+    {% if bag('homepage-sections.partners.description') %}
+    <p class="partners-note">{{ bag('homepage-sections.partners.description') }}</p>
+    {% endif %}
+    <ul class="partners-list">
+      <li class="partners-list__item">
+        <a class="partners-list__link" href="{{ bag('homepage-sections.partners.softwerke_url') }}" target="_blank" rel="noopener noreferrer">
+          <img class="partners-list__logo" src="{{ bag('homepage-sections.partners.softwerke_logo') }}" alt="{{ bag('homepage-sections.partners.softwerke_name') }}">
+          <span class="partners-list__name">{{ bag('homepage-sections.partners.softwerke_name') }}</span>
+        </a>
+      </li>
+      <li class="partners-list__item">
+        <a class="partners-list__link" href="{{ bag('homepage-sections.partners.umap_url') }}" target="_blank" rel="noopener noreferrer">
+          <img class="partners-list__logo" src="{{ bag('homepage-sections.partners.umap_logo') }}" alt="{{ bag('homepage-sections.partners.umap_name') }}">
+          <span class="partners-list__name">{{ bag('homepage-sections.partners.umap_name') }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if bag('homepage-sections.s-banner.enabled') == 'true' %}
+  <div class="s-banner">
+    <h3 class="s-banner__title">{{ bag('homepage-sections.s-banner.title') }}</h3>
+    {% if bag('homepage-sections.s-banner.subtitle') %}
+    <p class="s-banner__subtitle">{{ bag('homepage-sections.s-banner.subtitle') }}</p>
+    {% endif %}
+    <p class="s-banner__description">{{ bag('homepage-sections.s-banner.description') }}</p>
+    <div class="buttons">
+      <a href="{{ bag('homepage-sections.s-banner.button_url') }}" class="button button--primary">
+        {{ bag('homepage-sections.s-banner.button_text') }}
+      </a>
+    </div>
+  </div>
+  {% endif %}
+{% endmacro %}

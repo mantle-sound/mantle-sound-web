@@ -1,0 +1,30 @@
+{% macro footer() %}
+<div class="subfooter">
+  <div id="container">
+    <div id="flex">
+      <main>
+        <div id="mainbox">
+          <!-- <a href="https://mantle-sound.org"><img id="subfooterlogo" src="/mantle-logo-2.png"></a> -->
+          <!-- <a href="https://wiki.mantle-sound.org"><img id="subfooterlogo" src="/wikilogo.png"></a> -->
+        </div>
+      </main>
+      <aside id="rightside">
+        {% from "macros/menu.html" import menu %}
+        {{menu()}}
+      </aside>
+    </div>
+  </div>
+  <footer>
+    <div id="copyright">
+      <a href="https://mantle-sound.org/">Mantle Sound</a> © 2025 <br>Our content is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+      <span class="cc-icons">
+        <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
+        <img src="/files/cc-icons/by.svg" alt="Attribution">
+        <img src="/files/cc-icons/nc.svg" alt="NonCommercial">
+        <img src="/files/cc-icons/sa.svg" alt="ShareAlike">
+      </span>
+      <br><a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </footer>
+</div>
+{% endmacro %}

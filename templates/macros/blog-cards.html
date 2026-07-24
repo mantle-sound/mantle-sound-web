@@ -1,0 +1,22 @@
+{% macro render_blog_post(post, from_index=false) %}
+<div class="blog-post-card">
+  <div class="blog-post">
+  {% if from_index %}
+    {% if "Intro" in post.title %}
+    <div class="card-type">announcement</div>
+    {% else %}
+    <div class="card-type">blog</div>
+    {% endif %}
+    <a href="{{ post|url }}"><img src="/blog/{{ post|url }}banner.jpg"></a>
+    <div class="blog-post-card-info">
+    <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
+  {% else %}
+    <h2>{{ post.title }}</h2>
+  {% endif %}
+  <p class="meta">
+    published on {{ post.pub_date }}
+  </p>
+  </div>
+  </div>
+  </div>
+{% endmacro %}

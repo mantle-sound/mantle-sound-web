@@ -1,0 +1,33 @@
+_hidden: no
+---
+title: E2E Neural Audio Codecs for Geophone and Microphone Recordings
+---
+subtitle: Neural compression for multi-sensor field audio
+---
+tag: soundscape
+---
+tag_2: geoacoustics
+---
+pub_date: 2025-08-05
+---
+excerpt: Adapts end-to-end neural audio codecs for field recordings from microphones and geophones in mountain environments.
+---
+body:
+
+This project adapts end-to-end neural audio codecs for field recordings used in soundscape and infrasound work. The aim is to compress and reconstruct signals from microphones and geophones across different frequency ranges and noise conditions typical of mountain environments.
+
+## Approach
+
+We integrate and evaluate E2E neural codecs with hybrid architectures aimed at broad bandwidth coverage—from audible soundscape content to low-frequency geophone data. Models are developed and tested on field-derived material, not studio-only benchmarks alone.
+
+## Equipment
+
+Field capture includes standard microphones and a Geophone from [Interharmonics Instruments](https://interharmonics.at/) (Elektroakustisches Musiklab, Wien), used alongside other MAN recording setups (hydrophones, additional sensors as conditions allow).
+
+## Field context
+
+Recent alpine capture sessions inform the material used in this work. See the [Yema Haizi field report](/news/man-field-update-feb-2026/) (Feb 2026).
+
+## Status
+
+Ongoing prototype: codec integration, evaluation on paired geophone and microphone streams, and iterative testing as new field recordings are collected.
