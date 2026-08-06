@@ -2379,6 +2379,55 @@ body:has(.page-with-toc) .software-tools-grid {
   max-width: 100%;
 }
 
+.research-index--compact {
+  max-width: 100%;
+  margin: 0.25rem 0 2rem;
+}
+
+.research-index--compact .blog-post-bare {
+  margin-bottom: 8px;
+}
+
+.research-index--compact .blog-post-cards {
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.research-index--compact .blog-post-card.rs {
+  width: 100%;
+  max-width: 380px;
+  margin: 0;
+}
+
+.research-index--compact .blog-post-card {
+  height: auto;
+  margin: 0;
+}
+
+.research-index--compact .rs img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.research-index--compact .blog-post-card-info h2 {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin: 0 0 6px;
+}
+
+.research-index--compact .blog-post-card-info p {
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.research-index--compact .card-post {
+  padding: 8px;
+}
+
+.research-index--compact .blog-post-card-info {
+  padding: 8px;
+}
+
 .software-tool-column {
   display: flex;
   flex-direction: column;
