@@ -1,0 +1,24 @@
+{% macro software_sidebar(page) %}
+<nav class="toc" aria-label="Table of contents">
+  {% if page.body.toc %}
+  <h4>Table Of Contents</h4>
+  <ul>
+    {% for item in page.body.toc recursive %}
+    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
+      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</nav>
+<nav class="toc software-project-nav-mobile" aria-label="Table of contents">
+  {% if page.body.toc %}
+  <h4>Table Of Contents</h4>
+  <ul>
+    {% for item in page.body.toc recursive %}
+    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
+      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</nav>
+{% endmacro %}

@@ -1,8 +1,12 @@
-{% extends "layout.html" %}
+{% extends "layout-software-index.html" %}
 {% block title %}{{ this.title }}{% endblock %}
+{% block sidebar %}
+{% from "macros/software-project-nav.html" import software_sidebar %}
+{{ software_sidebar(this) }}
+{% endblock %}
 {% block body %}
 <div class="blog-post-bare">
-  <h1>{{ this.title }}</h1>
+  <h1><code>{{ this.title }}</code></h1>
   {% if this.date %}
   <div class="post-date">{{ this.date.strftime('%B %d, %Y') }}</div>
   {% endif %}

@@ -78,10 +78,18 @@ document.addEventListener('DOMContentLoaded', function() {
       navBoxTop = navSentinel.getBoundingClientRect().top + window.pageYOffset;
     }
 
+    function updateMascot() {
+      var show =
+        navBox.classList.contains('navbar-fixed') &&
+        window.matchMedia('(min-width: 1301px)').matches;
+      document.body.classList.toggle('has-scroll-mascot', show);
+    }
+
     function handleLogoScroll() {
       if (scrollFrame !== null) return;
       scrollFrame = window.requestAnimationFrame(function() {
         navBox.classList.toggle('navbar-fixed', window.pageYOffset >= navBoxTop);
+        updateMascot();
         scrollFrame = null;
       });
     }
