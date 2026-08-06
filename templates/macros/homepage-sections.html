@@ -1,21 +1,63 @@
-{% macro render_home_intro(section_num) %}
+{% macro render_home_intro(section_num, reverse=false) %}
   {% set key = 'homepage-sections.section' ~ section_num %}
+  {% set enabled_key = key ~ '.enabled' %}
+  {% if bag(enabled_key) == 'false' %}
+  {% else %}
   {% set title = bag(key ~ '.title') %}
   {% set image_caption = bag(key ~ '.image_caption') %}
   {% set description = bag(key ~ '.description') %}
   {% set description_continued = bag(key ~ '.description_continued') %}
   {% set link_url = bag(key ~ '.link_url') or '/research' %}
   {% set link_text = bag(key ~ '.link_text') or 'Current Research' %}
+  {% set link_external = link_url.startswith('http://') or link_url.startswith('https://') %}
+  {% set link_href = link_url if link_external else (link_url|url) %}
   {% set image = bag(key ~ '.image') %}
+  {% set images_line = bag(key ~ '.images') %}
+  {% if images_line %}
+  {% set gallery_images = images_line.split(',') %}
+  {% else %}
+  {% set gallery_images = [image] %}
+  {% endif %}
 
-  <div class="intro" id="home-section-{{ section_num }}">
-    <div class="intro-image">
-      <a href="{{ link_url|url }}"><img src="{{ image }}" alt="{{ title }}"></a>
-      {% if image_caption %}
-      <div class="caption">{{ image_caption }}</div>
-      {% endif %}
+  <div class="home-intro{% if reverse %} home-intro--reverse{% endif %}" id="home-section-{{ section_num }}">
+    <div
+      class="home-intro__image home-gallery"
+      data-home-gallery
+      tabindex="0"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="{{ title }}">
+      <div class="home-gallery__stack">
+        <div class="home-gallery__viewport">
+          <div class="home-gallery__track">
+            {% for src in gallery_images %}
+            {% set src_trim = src.strip() %}
+            {% if src_trim %}
+            <figure class="home-gallery__slide">
+              <a href="{{ link_href }}"{% if link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                <img src="{{ src_trim }}" alt="{{ title }}" decoding="async">
+              </a>
+            </figure>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <button type="button" class="home-gallery__prev" aria-label="Previous image"><span aria-hidden="true">‹</span></button>
+          <button type="button" class="home-gallery__next" aria-label="Next image"><span aria-hidden="true">›</span></button>
+        </div>
+        {% if image_caption %}
+        <div class="caption home-gallery__caption">{{ image_caption }}</div>
+        {% endif %}
+      </div>
+      <div class="home-gallery__dots" role="tablist" aria-label="Gallery pagination">
+        {% for src in gallery_images %}
+        {% set src_trim = src.strip() %}
+        {% if src_trim %}
+        <button type="button" class="home-gallery__dot{% if loop.first %} is-active{% endif %}" role="tab" aria-label="Image {{ loop.index }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}"></button>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
-    <div class="intro-text">
+    <div class="home-intro__text">
       <h2 class="intro-h">{{ title }}</h2>
       {% if description %}
       <p>{{ description }}</p>
@@ -23,18 +65,20 @@
       {% if description_continued %}
       <p>{{ description_continued }}</p>
       {% endif %}
-      <a class="button button--primary intro-more" href="{{ link_url|url }}">{{ link_text }}</a>
+      <a class="button button--primary intro-more" href="{{ link_href }}"{% if link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link_text }}</a>
     </div>
   </div>
+  {% endif %}
 {% endmacro %}
 
 {% macro render_homepage_sections(page) %}
+  {% set section2_enabled = bag('homepage-sections.section2.enabled') != 'false' %}
   <div class="home-sections">
-    {{ render_home_intro(1) }}
-    {% if bag('homepage-sections.section2.enabled') != 'false' %}
-    {{ render_home_intro(2) }}
+    {{ render_home_intro(1, false) }}
+    {{ render_home_intro(3, true) }}
+    {% if section2_enabled %}
+    {{ render_home_intro(2, false) }}
     {% endif %}
-    {{ render_home_intro(3) }}
   </div>
 
   {% if bag('homepage-sections.partners.enabled') == 'true' %}
@@ -68,7 +112,10 @@
     {% endif %}
     <p class="s-banner__description">{{ bag('homepage-sections.s-banner.description') }}</p>
     <div class="buttons">
-      <a href="{{ bag('homepage-sections.s-banner.button_url') }}" class="button button--primary">
+      {% set banner_url = bag('homepage-sections.s-banner.button_url') %}
+      {% set banner_external = banner_url.startswith('http://') or banner_url.startswith('https://') %}
+      {% set banner_href = banner_url if banner_external else (banner_url|url) %}
+      <a href="{{ banner_href }}" class="button button--primary"{% if banner_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
         {{ bag('homepage-sections.s-banner.button_text') }}
       </a>
     </div>

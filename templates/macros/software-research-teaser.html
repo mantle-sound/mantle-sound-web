@@ -1,0 +1,18 @@
+{% macro render_software_research_teaser() %}
+{% from "macros/research-cards.html" import render_blog_post %}
+{% set research_hub = site.get('/research') %}
+{% if research_hub %}
+<div class="research-index">
+  <div class="blog-post-bare">
+    <p class="meta">Ongoing project.</p>
+  </div>
+  <div class="blog-post-cards">
+    {% for child in research_hub.children %}
+      {% if not child._hidden %}
+      {{ render_blog_post(child, from_index=true) }}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
