@@ -6,7 +6,7 @@
 <title>{% block title %}Welcome{% endblock %} - Mountaineering Acoustics Network (MAN)</title>
 {% from "macros/structured-data-nav.html" import structured_data_nav %}
 {{ structured_data_nav(this) }}
-<body>
+<body data-software-tool-mark="{{ '/static/field-audio-tools-mark.svg'|url }}">
   <header>
     <div id="header-box">
       <div class="container">
@@ -31,4 +31,5 @@
   {{ footer() }}
 
   <script src="{{ '/static/navbar.js'|url }}"></script>
+  <script src="{{ '/static/software-tool-mark.js'|url }}"></script>
 </body>

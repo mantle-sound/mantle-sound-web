@@ -1,0 +1,45 @@
+{% macro render_take002_showcase_gallery(class_name='software-report__gallery') %}
+<div class="{{ class_name }}" aria-label="Take 002 field recording photographs">
+  <img
+    class="software-report__gallery-photo"
+    src="/files/software/260115-002-showcase/recording-rig-on-ice.webp"
+    width="1200"
+    height="677"
+    alt="Field recorder and microphones set up on a frozen alpine lake"
+    fetchpriority="high">
+  <img
+    class="software-report__gallery-photo"
+    id="take002-photo-2"
+    src="/files/software/260115-002-showcase/frozen-lake.webp"
+    width="1200"
+    height="677"
+    alt="Frozen alpine lake surrounded by steep mountain slopes"
+    loading="lazy">
+  <img
+    class="software-report__gallery-photo"
+    id="take002-photo-3"
+    src="/files/software/260115-002-showcase/valley-recording-site.webp"
+    width="1200"
+    height="677"
+    alt="Microphone stand at the recording site in a high mountain valley"
+    loading="lazy">
+  <div class="software-report__gallery-cell" id="take002-photo-4">
+    <img
+      class="software-report__gallery-photo"
+      src="/files/software/260115-002-showcase/recordist-by-lake.webp"
+      width="1200"
+      height="677"
+      alt="Recordist working beside a frozen alpine lake"
+      loading="lazy">
+    <div class="caption software-report__gallery-caption">
+      <span class="software-report__gallery-caption-text">MAN Network, CC BY-NC-SA 4.0</span>
+      <span class="cc-icons">
+        <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
+        <img src="/files/cc-icons/by.svg" alt="Attribution">
+        <img src="/files/cc-icons/nc.svg" alt="NonCommercial">
+        <img src="/files/cc-icons/sa.svg" alt="ShareAlike">
+      </span>
+    </div>
+  </div>
+</div>
+{% endmacro %}

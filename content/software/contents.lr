@@ -1,47 +1,41 @@
-title: field-audio-tools
+title: Softwares
+---
+_model: software-page
 ---
 _template: software.html
 ---
 date: 2026-07-24
 ---
+intro:
+
+## Background
+
+### Tools
+
+Two CLI tools for long Zoom F3 takes: excerpt a timestamped range with *provenance*, or screen fixed windows for *low-frequency dominance*.
+
+### Prerequisites
+
+Python 3.11+; FFmpeg (`ffmpeg`, `ffprobe`) on `PATH`; NumPy with the package. Dev install: `pip install -e '.[test]'` from a checkout (no PyPI release yet). GPL-3.0-or-later; alpha until a stable public release.
+
+### This note
+
+We ran both commands on *Take 002*, a three-hour Zoom F3 recording. The notes below cover the input, the files written, and two gaps we found in `lowdom` reporting and threshold calibration.
+
+### Field and recording setup
+
+The GPX trail to the recording site begins on highway S434 at Yagya Ge, Sichuan, at roughly 3,894 m elevation, with roadside access on the pass before the walk in. It ends at the dome tent at Yema Haizi, about 4,055 m, with Yema Haizi lake to the east of that camp. We were guided by Dong Sheng & Xiao Zhang (local mountain guides in Kangding) and made most of the recordings the next morning.
+
+The recording files used in this report were captured at specific positions on Yema Haizi lake itself. The season was suitable and the lake had frozen over. On the northeast side, the ice thinned toward the deeper water shown in <a class="software-report__fig-link" href="#take002-photo-2">Fig. 2</a> and along the shelf leading into the area of <a class="software-report__fig-link" href="#take002-photo-3">Fig. 3</a>; that is, to the right of where I stood in <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a>, where thinning ice and open water were clearly visible. We treated that edge with caution when passing through. Other positions on the lake were safe for extended recording.
+
+In fact, melting ice that season produced especially vivid sounds. Our local guides call the phenomenon *long hou* (“dragon roar”); people who live in the area know it well. On the <a href="/files/software/260115-002-lowdom/report-js.html">multimedia report</a>, that signature is easy to find in green bar areas. It sits within the wider biological soundscape of the basin in a way that still feels astonishing.
+
+Our recording setups in the field vary; for this three-hour test take, the chain we used is described under <a href="#input-and-test-conditions">Input and test conditions</a>. See <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a> for a field photograph of the session.
+
+## Result formats
+
+*Bare* HTML from the CLI; demo packages linked here add site navigation and shared media styling.
+
+---
 body:
 
-Two local CLI programs for long Zoom F3 recordings: cut a timestamped excerpt with
-provenance, or screen a take in fixed windows for low-frequency dominance.
-
-Requires Python 3.11+, FFmpeg (`ffmpeg`, `ffprobe`) on `PATH`, and NumPy
-(installed with the package). Development install: `pip install -e '.[test]'`
-from a `field-audio-tools` checkout (no PyPI release yet). License in tree:
-GPL-3.0-or-later; this page describes an alpha until a stable public release.
-
-CLI output is bare HTML 4.01. The linked demonstration packages under
-`/files/software/` add Mantle navigation and load `/static/software-package-media.css`
-for the audio player and spectrogram; bare CLI pages are kept as `index-bare.html`,
-`report-bare.html`, or `report-multimedia-bare.html` where applicable.
-
-## `soundcite`
-
-<p class="software-tags"><span class="card-type-rs">citation</span><span class="card-type-rs">excerpt</span><span class="card-type-rs">provenance</span><span class="card-type-rs">manifest</span></p>
-
-Extracts a time range and writes lossless excerpts, a listening copy, a
-spectrogram, `manifest.json`, and checksums.
-
-<pre class="software-example"><code>soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
-  --start 01:00:00 --duration 20 --output 260115-002-soundcite</code></pre>
-
-## `lowdom`
-
-<p class="software-tags"><span class="card-type-rs">screening</span><span class="card-type-rs">low-frequency</span><span class="card-type-rs">windows</span><span class="card-type-rs">heuristic</span></p>
-
-Scores each short window for low-frequency dominance and writes CSV, JSON, and
-static reports. The score is a screening heuristic, not wind probability; water,
-handling, and vehicles can look similar.
-
-<pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
-  --window 10 --threshold 0.95 --report both --output 260115-002-lowdom</code></pre>
-
-## A test note
-
-Check the first test note on one complete F3 run [here](/software/running-field-audio-tools-on-a-long-f3-take).
-
-A quick view of the results: [soundcite package](/files/software/260115-002-soundcite/index.html) | [lowdom data report](/files/software/260115-002-lowdom/report.html) | [lowdom data report (multimedia)](/files/software/260115-002-lowdom/report-js.html)

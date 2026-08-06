@@ -1,0 +1,21 @@
+{% macro software_tool_mark(class_name='software-tool-mark') %}
+<img
+  class="{{ class_name }}"
+  src="{{ '/static/field-audio-tools-mark.svg'|url }}"
+  alt=""
+  width="20"
+  height="20"
+  decoding="async"
+  aria-hidden="true">
+{% endmacro %}
+
+{% macro software_tool_code(name) %}
+<img
+  class="software-tool-mark"
+  src="{{ '/static/field-audio-tools-mark.svg'|url }}"
+  alt=""
+  width="20"
+  height="20"
+  decoding="async"
+  aria-hidden="true"><code>{{ name }}</code>
+{% endmacro %}
