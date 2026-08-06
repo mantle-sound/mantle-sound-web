@@ -5,9 +5,12 @@
 <link rel="icon" type="image/x-icon" href="{{ 'static/favicon.ico'|asseturl }}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ 'static/apple-touch-icon.png'|asseturl }}">
 {# Preload critical fonts for faster first paint and better caching. #}
+<link rel="preload" href="/font/TT_Modernoir_Trial_Medium.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/font/DIN Alternate Bold.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/font/MuseoSans_500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/MuseoSans-300.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/estre.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/font/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin>
 {# Preload banner for current viewport only (desktop vs mobile) so preload is used. #}
 <link rel="preload" href="/banner.png" as="image" media="(min-width: 1301px)">
 <link rel="preload" href="/banner-mobile.png" as="image" media="(max-width: 1300px)">

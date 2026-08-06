@@ -1,4 +1,4 @@
-title: Software
+title: field-audio-tools
 ---
 _template: software.html
 ---
@@ -6,47 +6,36 @@ date: 2026-07-24
 ---
 body:
 
-We wrote these tools for our own Zoom F3 recordings. Both are free software,
-run locally and remain rough around the edges.
+Two local CLI programs for long Zoom F3 recordings: cut a timestamped excerpt with
+provenance, or screen a take in fixed windows for low-frequency dominance.
 
-Requires Python 3.11+ and [FFmpeg](https://github.com/FFmpeg/FFmpeg)
-(`ffmpeg`, `ffprobe`) on `PATH`. NumPy is installed with the package. Provides
-`soundcite` and `windwindow`.
+Requires Python 3.11+, FFmpeg (`ffmpeg`, `ffprobe`) on `PATH`, and NumPy
+(installed with the package). Planned license: GPL-3.0-or-later after a stable
+public release.
 
-## field-audio-tools
+## `soundcite`
 
-Version 0.1.0 (alpha).
+<p class="software-tags"><span class="card-type-rs">citation</span><span class="card-type-rs">excerpt</span><span class="card-type-rs">provenance</span><span class="card-type-rs">manifest</span></p>
 
-Our first test recording was a three-hour take split across two 32-bit float
-mono WAV files. We kept repeating the same two jobs, so we wrote one command
-for each.
+Extracts a time range and writes lossless excerpts, a listening copy, a
+spectrogram, `manifest.json`, and checksums.
 
-[Test note 01: one complete run on a long F3 take](/software/demo)
+<pre class="software-example"><code>soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
+  --start 01:00:00 --duration 20 --output 260115-002-soundcite</code></pre>
 
-### soundcite
+## `lowdom`
 
-`soundcite` cuts a passage at a given timestamp. Alongside the WAV excerpt, it
-writes a listening copy, a spectrogram and a manifest containing source
-metadata and checksums.
+<p class="software-tags"><span class="card-type-rs">screening</span><span class="card-type-rs">low-frequency</span><span class="card-type-rs">windows</span><span class="card-type-rs">heuristic</span></p>
 
-### windwindow
+Scores each short window for low-frequency dominance and writes CSV, JSON, and
+static reports. The score is a screening heuristic, not wind probability; water,
+handling, and vehicles can look similar.
 
-`windwindow` scans a long take in short windows and measures the low-frequency
-energy in each one. We use its CSV output to decide where to listen first. It
-also writes a JSON summary and a static report.
+<pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
+  --window 10 --threshold 0.95 --output 260115-002-lowdom</code></pre>
 
-<pre class="software-example"><code>soundcite Tr1.WAV Tr2.WAV --start 01:23:40 --duration 20
-windwindow Tr1.WAV Tr2.WAV --window 10</code></pre>
+## A test note
 
-The score measures low-frequency dominance, not wind. Water, handling and
-vehicles can look similar. Listen before excluding anything.
+Check the first test note on one complete F3 run [here](/software/running-field-audio-tools-on-a-long-f3-take).
 
-Both commands run locally with Python 3.11+ and FFmpeg. They accept one mono or
-stereo file, or two synchronized mono files. The license is GPL-3.0-or-later.
-
-## Test and availability
-
-The command names and output formats may change while we test them against the
-original recordings. We will publish the source after that pass.
-
-[Contact us](/contact) if you have similar F3 files and want to try them.
+A quick view of the results: [soundcite package](/files/software/260115-002-soundcite/index.html) | [lowdom data report](/files/software/260115-002-lowdom/report.html) | [lowdom data report (multimedia)](/files/software/260115-002-lowdom/report-js.html)

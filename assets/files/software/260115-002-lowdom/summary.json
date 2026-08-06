@@ -1,8 +1,8 @@
 {
-  "schema": "https://mantle-sound.org/schemas/windwindow/0.1",
-  "created_at": "2026-07-23T16:59:17.594065+00:00",
+  "schema": "https://mantle-sound.org/schemas/lowdom/0.1",
+  "created_at": "2026-08-05T21:08:40.686896+00:00",
   "created_by": {
-    "tool": "windwindow",
+    "tool": "lowdom",
     "version": "0.1.0"
   },
   "sources": [
@@ -48,14 +48,14 @@
       10.0,
       1000.0
     ],
-    "threshold": 0.6,
+    "threshold": 0.95,
     "track_merge": "maximum score (conservative)"
   },
   "interpretation": "A screening score for broadband low-frequency dominance. It is not a trained wind classifier.",
   "window_count": 1094,
-  "flagged_windows": 1093,
-  "flagged_percent": 99.90859232175502,
+  "flagged_windows": 833,
+  "flagged_percent": 76.14259597806216,
   "duration_seconds": 10940.0,
   "duration_timecode": "03:02:20.000",
-  "candidate_clean_interval_count": 1
+  "candidate_clean_interval_count": 135
 }
