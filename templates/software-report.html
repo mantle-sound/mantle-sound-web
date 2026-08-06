@@ -1,6 +1,5 @@
 {% extends "layout-software-report.html" %}
 {% block title %}{{ this.title }}{% endblock %}
-{% block subtitle %}{{ this.subtitle }}{% endblock %}
 {% block sidebar %}
 {% from "macros/software-project-nav.html" import software_sidebar %}
 {{ software_sidebar(this) }}
@@ -8,7 +7,6 @@
 {% block body %}
 <main class="blog-post-bare software-report">
   <h1>{{ this.title|replace('field-audio-tools', '<code>field-audio-tools</code>')|safe }}</h1>
-  <p class="subtitle">{{ this.subtitle }}</p>
   <p class="meta">written by {{ this.author }} on {{ this.pub_date }}</p>
   <div class="software-report__gallery" aria-label="Take 002 field recording photographs">
     <img

@@ -1,0 +1,64 @@
+/* Shared by soundcite packages, lowdom multimedia reports, and the software test note. */
+
+.report-controls {
+  margin: 0 0 34px;
+  padding: 20px;
+  background: var(--banner-bg);
+}
+
+.report-controls button {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--bg-btn);
+  color: var(--fg-btn);
+  font-family: var(--font-m);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.report-controls button:hover {
+  background: var(--link-hover);
+}
+
+.report-controls button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.report-controls .status {
+  min-height: 1.5em;
+  margin: 14px 0 10px;
+  color: var(--fg-dim);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.report-controls audio {
+  display: block;
+  width: 100%;
+  height: 36px;
+  margin: 0;
+}
+
+.soundcite-spectrogram {
+  margin: 0 0 34px;
+}
+
+.soundcite-spectrogram img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .report-controls {
+    padding: 14px;
+  }
+}

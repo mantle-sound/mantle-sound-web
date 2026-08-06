@@ -2581,27 +2581,8 @@ body:has(.page-with-toc) .software-report__gallery img:hover {
   filter: grayscale(0%);
 }
 
-.software-report__media {
-  margin: 34px 0 38px;
-}
-
-.software-report__media audio {
-  display: block;
-  width: 100%;
-  height: 34px;
-  margin: 0 0 18px;
-}
-
-.software-report__media img {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: auto;
-  margin: 0;
-}
-
-.software-report__media p {
-  margin: 10px 0 0;
+.software-report__media-caption {
+  margin: 0 0 38px;
   font-size: 0.7rem;
   font-weight: 300;
   line-height: 1.55;
@@ -2612,9 +2593,5 @@ body:has(.page-with-toc) .software-report__gallery img:hover {
   .software-report__gallery {
     gap: 6px;
     margin-bottom: 32px;
-  }
-
-  .software-report__media {
-    margin-top: 28px;
   }
 }
