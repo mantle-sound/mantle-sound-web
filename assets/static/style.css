@@ -527,7 +527,7 @@ header {
     position: fixed;
     left: var(--layout-gutter-wide);
     bottom: var(--layout-gutter-wide);
-    height: 72px;
+    height: 100px;
     width: auto;
     z-index: 90;
     opacity: 0;

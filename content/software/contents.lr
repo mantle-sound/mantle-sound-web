@@ -10,8 +10,14 @@ Two local CLI programs for long Zoom F3 recordings: cut a timestamped excerpt wi
 provenance, or screen a take in fixed windows for low-frequency dominance.
 
 Requires Python 3.11+, FFmpeg (`ffmpeg`, `ffprobe`) on `PATH`, and NumPy
-(installed with the package). Planned license: GPL-3.0-or-later after a stable
-public release.
+(installed with the package). Development install: `pip install -e '.[test]'`
+from a `field-audio-tools` checkout (no PyPI release yet). License in tree:
+GPL-3.0-or-later; this page describes an alpha until a stable public release.
+
+CLI output is bare HTML 4.01. The linked demonstration packages under
+`/files/software/` add Mantle navigation and load `/static/software-package-media.css`
+for the audio player and spectrogram; bare CLI pages are kept as `index-bare.html`,
+`report-bare.html`, or `report-multimedia-bare.html` where applicable.
 
 ## `soundcite`
 
@@ -32,7 +38,7 @@ static reports. The score is a screening heuristic, not wind probability; water,
 handling, and vehicles can look similar.
 
 <pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
-  --window 10 --threshold 0.95 --output 260115-002-lowdom</code></pre>
+  --window 10 --threshold 0.95 --report both --output 260115-002-lowdom</code></pre>
 
 ## A test note
 

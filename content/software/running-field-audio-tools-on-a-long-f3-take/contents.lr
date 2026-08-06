@@ -11,7 +11,8 @@ _template: software-report.html
 body:
 
 We ran both commands on Take 002, a three-hour Zoom F3 recording. The notes
-below cover the input, the files written and two problems found during the run.
+below cover the input, the files written, and two gaps we found in `lowdom`
+reporting and threshold calibration.
 
 ## Input and test conditions
 
@@ -89,6 +90,7 @@ audio file.
 <pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
   --window 10 \
   --threshold 0.95 \
+  --report both \
   --output 260115-002-lowdom</code></pre>
 
 - Runtime: about 67 seconds on the test workstation
@@ -98,11 +100,19 @@ audio file.
 - Rows above threshold: 833 (76.14%)
 - Rows below threshold: 261 (23.86%)
 
+### Two gaps in `lowdom` output
+
+1. **Unreported partial tail.** The source lasts 03:02:24 but analysis stopped at
+   03:02:20. The current code drops a final fragment shorter than half a window
+   without recording the dropped duration in `summary.json` or the reports.
+2. **Threshold placeholder.** The initial 0.6 CLI default separated almost nothing
+   on this take; it had not been checked on this recording before that exploratory
+   run. We recalibrated with blind listening and adopted 0.95 for the run
+   documented here.
+
 ### A provisional threshold from blind listening
 
-The initial 0.6 threshold separated almost nothing. That value was only the
-early CLI default—a placeholder not checked on this recording before the run.
-We therefore tested 0.95 with two blinded listening rounds: each round contained ten randomly selected
+We tested 0.95 with two blinded listening rounds: each round contained ten randomly selected
 windows above the threshold and ten below it. Of the 20 windows above 0.95, 19
 were judged to contain obvious wind noise. Of the 20 below it, 17 were judged
 not to contain obvious wind noise.
@@ -113,14 +123,12 @@ sample is small, it comes from one recording setup, and it was reviewed by one
 listener. The score remains a low-frequency screening heuristic rather than a
 wind probability.
 
-The source also lasts four seconds longer than the analysed duration. The
-current code drops a final fragment shorter than half a window. We need to
-report that fragment or make its omission an explicit option.
-
 ### Output we kept
 
 - `windows.csv` retains both tracks' score, RMS level, low-frequency ratio,
   spectral flatness, and peak for every interval.
+- `candidate-clean-intervals.csv` lists contiguous below-threshold ranges for
+  listening queues (135 intervals on this take).
 - `summary.json` records the frequency bands, sample rate, threshold, merge
   rule, source metadata, and totals.
 - The static report allows a quick overview without Python, a notebook, or a
@@ -135,7 +143,7 @@ report that fragment or make its omission an explicit option.
 - No interval is silently removed from the source audio; the “candidate clean”
   file is only a list of timestamps.
 
-[Open the multimedia report](/files/software/260115-002-lowdom/report-js.html) | [Open the bare CLI multimedia report](/files/software/260115-002-lowdom/report-multimedia-bare.html) | [Open the site data report](/files/software/260115-002-lowdom/report.html) | [Open the bare CLI timeline report](/files/software/260115-002-lowdom/report-bare.html) | [Download the window data](/files/software/260115-002-lowdom/windows.csv) | [Read the summary](/files/software/260115-002-lowdom/summary.json)
+[Open the multimedia report](/files/software/260115-002-lowdom/report-js.html) | [Open the bare CLI multimedia report](/files/software/260115-002-lowdom/report-multimedia-bare.html) | [Open the site data report](/files/software/260115-002-lowdom/report.html) | [Open the bare CLI timeline report](/files/software/260115-002-lowdom/report-bare.html) | [Download the window data](/files/software/260115-002-lowdom/windows.csv) | [Download candidate clean intervals](/files/software/260115-002-lowdom/candidate-clean-intervals.csv) | [Read the summary](/files/software/260115-002-lowdom/summary.json)
 
 ## Outcome of this test
 
