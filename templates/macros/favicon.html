@@ -12,5 +12,5 @@
 <link rel="preload" href="/font/estre.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin>
 {# Preload banner for current viewport only (desktop vs mobile) so preload is used. #}
-<link rel="preload" href="/banner.png" as="image" media="(min-width: 1301px)">
-<link rel="preload" href="/banner-mobile.png" as="image" media="(max-width: 1300px)">
+<link rel="preload" href="{{ '/static/banner.png'|url }}" as="image" media="(min-width: 1301px)">
+<link rel="preload" href="{{ '/static/banner-mobile.png'|url }}" as="image" media="(max-width: 1300px)">

@@ -1,6 +1,6 @@
 # MAN mascot brand pack
 
-Line-art mascot: a field recordist with headphones, seated on a mountain peak with a handheld recorder. Master artwork lives at `content/man.png` (white strokes on transparent black via alpha, 2042×1393 px). This folder holds line-art export variants for print, social, and UI.
+Line-art mascot: a field recordist with headphones, seated on a mountain peak with a handheld recorder. Master artwork lives at `assets/brand/mascot/man.png` (white strokes on transparent black via alpha, 2042×1393 px). This folder holds line-art export variants for print, social, and UI.
 
 Public URLs (Lektor `assets/`): `/brand/mascot/…`
 
@@ -21,7 +21,7 @@ Public URLs (Lektor `assets/`): `/brand/mascot/…`
 
 | File | Description |
 |------|-------------|
-| `mascot-master-black-bg.png` | Copy of site master (`content/man.png`) |
+| `mascot-master-black-bg.png` | Copy of site master (`assets/brand/mascot/man.png`) |
 
 ### Line art (transparent background)
 
@@ -74,8 +74,8 @@ Square social and avatar PNGs use **contain** fit: crop to ink bounds, scale the
 
 ## Site usage today
 
-- Scroll mascot: `/man.png` with `filter: invert(1)`, `transform: scaleX(-1)`, height 100px (`assets/static/style.css`, `.header-mascot`).
-- Homepage logo image databag may reference `/man.png`.
+- Scroll mascot: `/brand/mascot/man.png` with `filter: invert(1)`, `transform: scaleX(-1)`, height 100px (`assets/static/style.css`, `.header-mascot`).
+- Homepage logo image databag may reference `/brand/mascot/man.png`.
 
 To switch the scroll mascot to a pack asset (e.g. pre-inverted white on transparent):
 
@@ -104,14 +104,14 @@ Then remove `filter: invert(1)` from `.header-mascot` in CSS.
 From repo root, with ImageMagick 7 (`magick`):
 
 ```sh
-SRC=content/man.png
+SRC=assets/brand/mascot/man.png
 OUT=assets/brand/mascot
 # Re-run the export script in the commit that introduced this pack, or:
 magick "$SRC" -alpha on -fuzz 8% -transparent black "$OUT/png/mascot-line-white-transparent.png"
 magick "$SRC" -negate -alpha on -fuzz 8% -transparent white "$OUT/png/mascot-line-black-transparent.png"
 ```
 
-After editing `content/man.png`, regenerate all variants and update checksums if any are committed in manifests.
+After editing `assets/brand/mascot/man.png`, regenerate all variants and update checksums if any are committed in manifests.
 
 ## Preview
 

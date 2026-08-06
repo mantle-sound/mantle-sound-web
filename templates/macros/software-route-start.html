@@ -1,21 +1,30 @@
 {% macro render_take002_route_notes(class_name='software-route-details') %}
-<details class="{{ class_name }}">
-  <summary class="software-route-details__summary">
-    <svg class="software-route-details__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 20l5.5-8.5L13 14l3.5-6L21 10"/>
-      <circle cx="3" cy="20" r="1.75" fill="currentColor" stroke="none"/>
-      <circle cx="21" cy="10" r="1.75" fill="currentColor" stroke="none"/>
-      <path d="M9 3v2M12 2v2M15 4v2"/>
-    </svg>
-    <span class="software-route-details__label">Routing details</span>
-    <svg class="software-route-details__chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M6 9l6 6 6-6"/>
-    </svg>
-  </summary>
-  <div class="software-route-details__body">
-    <p>Hiking route start: about 3,894&nbsp;m on highway S434 at Yagya Ge, Sichuan.</p>
-    <p>End: dome tent at Yema Haizi, about 4,055&nbsp;m; Yema Haizi lake is to the east.</p>
-    <p>Take 002 (the files in this report) was recorded at specific lake positions; coordinates pending.</p>
-  </div>
-</details>
+<div class="{{ class_name }}" data-software-route-details>
+  <button
+    type="button"
+    class="software-route-details__summary software-hover-anchor"
+    aria-expanded="false"
+    aria-controls="take002-route-details-panel">
+    <span class="software-route-details__face">
+      <svg class="software-route-details__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 20l5.5-8.5L13 14l3.5-6L21 10"/>
+        <circle cx="3" cy="20" r="1.75" fill="currentColor" stroke="none"/>
+        <circle cx="21" cy="10" r="1.75" fill="currentColor" stroke="none"/>
+        <path d="M9 3v2M12 2v2M15 4v2"/>
+      </svg>
+      <span class="software-route-details__label">Routing details</span>
+      <svg class="software-route-details__chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </span>
+    <span
+      id="take002-route-details-panel"
+      class="software-route-details__body"
+      role="tooltip">
+      <span class="software-route-details__line">Hiking route start: about 3,894&nbsp;m on highway S434 at Yagya Ge, Sichuan.</span>
+      <span class="software-route-details__line">End: dome tent at Yema Haizi, about 4,055&nbsp;m; Yema Haizi lake is to the east.</span>
+      <span class="software-route-details__line">Take 002 (the files in this report) was recorded at specific lake positions; coordinates pending.</span>
+    </span>
+  </button>
+</div>
 {% endmacro %}
