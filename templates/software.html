@@ -6,10 +6,13 @@
 {% endblock %}
 {% block body %}
 <div class="blog-post-bare">
-  <h1><code>{{ this.title }}</code></h1>
+  <h1>{{ this.title }}</h1>
   {% if this.date %}
   <div class="post-date">{{ this.date.strftime('%B %d, %Y') }}</div>
   {% endif %}
-  {{ this.body }}
+  {% from "macros/software-test-note-promo.html" import render_software_test_note_promo %}
+  {{ render_software_test_note_promo() }}
 </div>
+{% from "macros/software-tool-cards.html" import render_software_tool_cards %}
+{{ render_software_tool_cards() }}
 {% endblock %}

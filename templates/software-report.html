@@ -7,33 +7,20 @@
 {% block body %}
 <main class="blog-post-bare software-report">
   <h1>{{ this.title|replace('field-audio-tools', '<code>field-audio-tools</code>')|safe }}</h1>
-  <p class="meta">written by {{ this.author }} on {{ this.pub_date }}</p>
-  <div class="software-report__gallery" aria-label="Take 002 field recording photographs">
-    <img
-      src="/files/software/260115-002-showcase/recording-rig-on-ice.webp"
-      width="1200"
-      height="677"
-      alt="Field recorder and microphones set up on a frozen alpine lake"
-      fetchpriority="high">
-    <img
-      src="/files/software/260115-002-showcase/frozen-lake.webp"
-      width="1200"
-      height="677"
-      alt="Frozen alpine lake surrounded by steep mountain slopes"
-      loading="lazy">
-    <img
-      src="/files/software/260115-002-showcase/valley-recording-site.webp"
-      width="1200"
-      height="677"
-      alt="Microphone stand at the recording site in a high mountain valley"
-      loading="lazy">
-    <img
-      src="/files/software/260115-002-showcase/recordist-by-lake.webp"
-      width="1200"
-      height="677"
-      alt="Recordist working beside a frozen alpine lake"
-      loading="lazy">
+  <div class="software-location-row">
+    {% from "macros/software-recording-location.html" import render_take002_location %}
+    {{ render_take002_location('software-report__location') }}
+    {% from "macros/software-route-start.html" import render_take002_route_notes %}
+    {{ render_take002_route_notes() }}
   </div>
+  <p class="meta">written by {{ this.author }} on {{ this.pub_date }}</p>
+  <p class="software-report__lede">Tool overview, Take 002 commands, outputs, and calibration notes.</p>
+  {% from "macros/software-showcase-gallery.html" import render_take002_showcase_gallery %}
+  {{ render_take002_showcase_gallery() }}
+  {% set software_hub = site.get('/software') %}
+  {% if software_hub and software_hub.intro %}
+  <div class="software-report__tool-intro">{{ software_hub.intro }}</div>
+  {% endif %}
   {{ this.body }}
 </main>
 {% endblock %}

@@ -1,6 +1,6 @@
 _model: blog-post
 ---
-title: Running field-audio-tools on a long F3 take
+title: Running field-audio-tools on a long dual-mic F3 take
 ---
 author: Gewenxin Yu
 ---
@@ -10,20 +10,16 @@ _template: software-report.html
 ---
 body:
 
-We ran both commands on Take 002, a three-hour Zoom F3 recording. The notes
-below cover the input, the files written, and two gaps we found in `lowdom`
-reporting and threshold calibration.
-
 ## Input and test conditions
 
-We recorded Take 002 with two EM272 omnidirectional microphones connected to a
-Zoom F3. The recorder wrote each microphone to its own synchronized mono file.
-We passed those files to each command in track order, and both tools read them
-in place.
+Both commands used the same pair of synchronized mono WAV exports from *Take 002*.
+They read the files in track order, in place, without creating a merged stereo
+intermediate. Site access, camp, and on-lake conditions are under
+[Field and recording setup](#field-and-recording-setup) above.
 
 - Files: `260115_002_Tr1.WAV` and `260115_002_Tr2.WAV`
 - Recordist: Gewenxin Yu
-- Microphones: two EM272 omnidirectional microphones
+- Microphones: two Primo [EM273](https://www.primomic.com/pdf/EM273.pdf) omni-directional microphones, −37 dB ± 3 dB at 1 kHz sensitivity, 80 dB S/N ratio, 60 Hz ~ 20 kHz frequency range
 - Recorder: Zoom F3, firmware 1.10 metadata
 - Encoding: 48 kHz, mono, 32-bit floating-point PCM per track
 - Duration: 03:02:24 per track
@@ -43,7 +39,7 @@ filenames without exposing local absolute paths.
   --recorded-at "2026-01-15T13:19:25+08:00" \
   --location "Yema Haizi, Kangding, Sichuan" \
   --license "CC BY-NC-SA 4.0" \
-  --notes "Recorded with two EM272 omnidirectional microphones connected to a Zoom F3." \
+  --notes "Recorded with two Primo EM273 omni-directional microphones (−37 dB ± 3 dB at 1 kHz, 80 dB S/N ratio, 60 Hz ~ 20 kHz) connected to a Zoom F3." \
   --output 260115-002-soundcite</code></pre>
 
 - Runtime: about 2.2 seconds on the test workstation
@@ -79,7 +75,9 @@ filenames without exposing local absolute paths.
 - The package labels the lossy listening copy separately from the
   preservation-oriented excerpts.
 
-[Open the generated package](/files/software/260115-002-soundcite/index.html) | [Open the bare CLI package page (tool-generated HTML)](/files/software/260115-002-soundcite/index-bare.html) | [Read its manifest](/files/software/260115-002-soundcite/manifest.json) | [Verify its checksums](/files/software/260115-002-soundcite/SHA256SUMS)
+<p class="software-report-links">
+<a href="/files/software/260115-002-soundcite/index.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the generated package</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/index-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/SHA256SUMS">Verify its checksums</a>
+</p>
 
 ## Screening the complete take in fixed windows by `lowdom`
 
@@ -120,8 +118,8 @@ not to contain obvious wind noise.
 The threshold and listening judgement agreed on 36 of 40 samples. This is useful
 for prioritising listening on this take, but it is not a validation study: the
 sample is small, it comes from one recording setup, and it was reviewed by one
-listener. The score remains a low-frequency screening heuristic rather than a
-wind probability.
+listener. The score remains a *low-frequency screening* heuristic rather than a
+*wind probability*.
 
 ### Output we kept
 
@@ -132,7 +130,7 @@ wind probability.
 - `summary.json` records the frequency bands, sample rate, threshold, merge
   rule, source metadata, and totals.
 - The static report allows a quick overview without Python, a notebook, or a
-  server. The Mantle site report adds navigation and styling; the bare HTML 4.01
+  server. The Mantle site report adds navigation and styling; the *bare* HTML 4.01
   page that `lowdom` writes to `report.html` is also kept in the package as
   `report-bare.html`.
 - The multimedia report adds a lossy 48 kbit/s stereo preview. After enabling
@@ -140,18 +138,20 @@ wind probability.
   The Mantle site report adds navigation and styling; the bare HTML 4.01 page
   the CLI writes as `report-multimedia.html` is also kept here as
   `report-multimedia-bare.html` (same `recording-preview-48k/` segments).
-- No interval is silently removed from the source audio; the “candidate clean”
+- No interval is silently removed from the source audio; the *candidate clean*
   file is only a list of timestamps.
 
-[Open the multimedia report](/files/software/260115-002-lowdom/report-js.html) | [Open the bare CLI multimedia report](/files/software/260115-002-lowdom/report-multimedia-bare.html) | [Open the site data report](/files/software/260115-002-lowdom/report.html) | [Open the bare CLI timeline report](/files/software/260115-002-lowdom/report-bare.html) | [Download the window data](/files/software/260115-002-lowdom/windows.csv) | [Download candidate clean intervals](/files/software/260115-002-lowdom/candidate-clean-intervals.csv) | [Read the summary](/files/software/260115-002-lowdom/summary.json)
+<p class="software-report-links">
+<a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
+</p>
 
 ## Outcome of this test
 
 `soundcite` did its job on this recording: it turned a timestamp into a small
 package with enough information to trace the excerpt back to its sources.
-`lowdom` completed the analysis, and the provisional 0.95 threshold produced
+`lowdom` completed the analysis, and the *provisional* 0.95 threshold produced
 a useful listening split on this take.
 
 Next, we need to report partial windows and repeat the listening test across
-other recordings, microphones, wind protection and environments. “Low-frequency
-screening” remains more accurate than “wind detection”.
+other recordings, microphones, wind protection and environments. *Low-frequency
+screening* remains more accurate than *wind detection*.

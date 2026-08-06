@@ -18,7 +18,7 @@ This project adapts end-to-end neural audio codecs for field recordings used in 
 
 ## Approach
 
-We integrate and evaluate E2E neural codecs with hybrid architectures aimed at broad bandwidth coverage—from audible soundscape content to low-frequency geophone data. Models are developed and tested on field-derived material, not studio-only benchmarks alone.
+We integrate and evaluate E2E neural codecs with hybrid architectures aimed at broad bandwidth coverage, from audible soundscape content to low-frequency geophone data. Models are developed and tested on field-derived material, not studio-only benchmarks alone.
 
 ## Equipment
 

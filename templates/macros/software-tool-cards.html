@@ -1,0 +1,65 @@
+{% macro render_tool_card(title, demo_url, bg_url, tags, cta_label, line1, line2, line3) %}
+{% from "macros/software-tool-mark.html" import software_tool_mark %}
+<div
+  class="blog-post-card rs software-tool-card software-tool-card--bg"
+  style="--software-tool-card-bg: url('{{ bg_url }}');">
+  <a class="software-tool-card-hit" href="{{ demo_url }}">
+    <span class="software-tool-card-hit-label">Open demo: {{ title }} ({{ cta_label }})</span>
+    <div class="card-post">
+      <div class="software-tool-card-tags" aria-hidden="true">
+        {% for tag in tags %}
+        <div class="card-type-rs">{{ tag }}</div>
+        {% endfor %}
+      </div>
+      <div class="blog-post-card-info">
+        <h2 id="software-tool-{{ title }}-heading" class="software-tool-column-heading">{{ software_tool_mark() }}<code>{{ title }}</code></h2>
+        <p>{{ line1 }} {{ line2 }} {{ line3 }}</p>
+        <span class="software-tool-card-cta" aria-hidden="true">{{ cta_label }} →</span>
+      </div>
+    </div>
+    <span class="software-tool-card-suite" aria-hidden="true">in #field-audio-tools</span>
+  </a>
+</div>
+{% endmacro %}
+
+{% macro render_tool_column(title, demo_url, bg_url, tags, cta_label, line1, line2, line3, example_cmd) %}
+<section class="software-tool-column" id="{{ title }}" aria-labelledby="software-tool-{{ title }}-heading">
+  {{ render_tool_card(title, demo_url, bg_url, tags, cta_label, line1, line2, line3) }}
+  <pre class="software-example software-example--paired"><code>{{ example_cmd }}</code></pre>
+</section>
+{% endmacro %}
+
+{% macro render_software_tool_cards() %}
+{% set soundcite_example -%}
+soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
+  --start 01:00:00 --duration 20 --output 260115-002-soundcite
+{%- endset %}
+{% set lowdom_example -%}
+lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
+  --window 10 --threshold 0.95 --report both --output 260115-002-lowdom
+{%- endset %}
+<div class="software-tools-grid">
+  {{ render_tool_column(
+    'soundcite',
+    '/files/software/260115-002-soundcite/index.html',
+    '/files/software/260115-002-soundcite/spectrogram.png',
+    ['citation', 'excerpt', 'provenance', 'manifest'],
+    'Open demo package',
+    'Extract a time range from long F3 tracks with lossless excerpts and a listening copy.',
+    'Writes a spectrogram, manifest.json, and checksums for provenance.',
+    'Take 002: audio, spectrogram, and manifest.',
+    soundcite_example
+  ) }}
+  {{ render_tool_column(
+    'lowdom',
+    '/files/software/260115-002-lowdom/report-js.html',
+    '/files/software/260115-002-showcase/recording-rig-on-ice.webp',
+    ['screening', 'low-frequency', 'windows', 'heuristic'],
+    'Open interactive report',
+    'Score fixed windows for low-frequency dominance on long takes.',
+    'Export CSV, JSON, and static or multimedia HTML reports.',
+    'Heuristic screening only; not wind probability.',
+    lowdom_example
+  ) }}
+</div>
+{% endmacro %}

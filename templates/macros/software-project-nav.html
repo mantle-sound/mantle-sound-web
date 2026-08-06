@@ -1,23 +1,53 @@
 {% macro software_sidebar(page) %}
+{% from "macros/software-tool-mark.html" import software_tool_mark %}
+{% set software_hub = site.get('/software') %}
+{% set intro_toc = software_hub.intro.toc if software_hub and software_hub.intro else none %}
+{% set has_toc = page._path == '/software' or intro_toc or page.body.toc %}
 <nav class="toc" aria-label="Table of contents">
-  {% if page.body.toc %}
+  {% if has_toc %}
   <h4>Table Of Contents</h4>
   <ul>
+    {% if page._path == '/software' %}
+    <li class="toc-item-featured"><a href="/software/running-field-audio-tools-on-a-long-f3-take/">Case study with tools</a></li>
+    <li><a href="#soundcite">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>soundcite</code></a></li>
+    <li><a href="#lowdom">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>lowdom</code></a></li>
+    {% endif %}
+    {% if page._path != '/software' and intro_toc %}
+    {% for item in intro_toc recursive %}
+    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
+      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
+    {% endfor %}
+    {% endif %}
+    {% if page.body.toc %}
     {% for item in page.body.toc recursive %}
     <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
       if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
     {% endfor %}
+    {% endif %}
   </ul>
   {% endif %}
 </nav>
 <nav class="toc software-project-nav-mobile" aria-label="Table of contents">
-  {% if page.body.toc %}
+  {% if has_toc %}
   <h4>Table Of Contents</h4>
   <ul>
+    {% if page._path == '/software' %}
+    <li class="toc-item-featured"><a href="/software/running-field-audio-tools-on-a-long-f3-take/">Case study with tools</a></li>
+    <li><a href="#soundcite">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>soundcite</code></a></li>
+    <li><a href="#lowdom">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>lowdom</code></a></li>
+    {% endif %}
+    {% if page._path != '/software' and intro_toc %}
+    {% for item in intro_toc recursive %}
+    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
+      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
+    {% endfor %}
+    {% endif %}
+    {% if page.body.toc %}
     {% for item in page.body.toc recursive %}
     <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
       if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
     {% endfor %}
+    {% endif %}
   </ul>
   {% endif %}
 </nav>
