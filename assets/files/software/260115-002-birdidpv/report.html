@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>lowdom report</title>
+  <link rel="icon" href="/static/favicon.svg">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/software-package-media.css">
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <header>
+    <div id="header-box">
+      <div class="container">
+        <div id="header-content">
+          <div id="logo-box">
+            <h1><a href="/">Mountaineering Acoustics Network</a></h1>
+            <div class="slogan">Mountaineering Acoustics at the Summit of Discovery</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="nav-box">
+    <div class="navbar">
+      <div class="navbar-logo hidden"><a href="/"><span>MAN Network</span></a></div>
+      <div class="hamburger-menu" role="button" aria-label="Menu" aria-controls="main-nav" aria-expanded="false">
+        <div class="hamburger-icon"><span></span><span></span><span></span></div>
+      </div>
+      <div class="nav-menu" id="main-nav">
+        <div class="nav-menu-item"><div class="nav-menu-org"><a href="/">MAN Network</a></div></div>
+        <div class="nav-menu-item nav-menu-item--home"><a href="/" class="first">Home</a></div>
+        <div class="nav-menu-item"><a href="/software" aria-current="page">Software</a></div>
+        <div class="nav-menu-item"><a href="/news">News</a></div>
+        <div class="nav-menu-item"><a href="/about">About</a></div>
+        <div class="nav-menu-item"><a href="/contact">Contact</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="page birdidpv-page">
+    <main class="birdidpv-report">
+      <div class="report-breadcrumb"><a href="/software">Software</a> / field-audio-tools / birdidpv-report-and-analysis</div>
+      <h1>birdidpv identification report</h1>
+  <p class="notice"><strong>Machine identification, not a verified
+  record:</strong> BirdNET scores each 3-second frame; it does not confirm that a
+  species was present. Confidence is not a probability, and a high score on one
+  frame is not a record. Listen before citing any of this.</p>
+  <dl>
+    <dt>Sources</dt><dd>260115_002_Tr1.WAV (track 1 only)</dd>
+    <dt>Recordist</dt><dd>Gewenxin Yu</dd>
+    <dt>Recording setup</dt><dd>Two Primo EM273 omni-directional microphones (−37 dB ± 3 dB at 1 kHz, 80 dB S/N ratio, 60 Hz ~ 20 kHz) and a Zoom F3 recorder</dd>
+    <dt>Model</dt><dd>BirdNET (Cornell Lab / Chemnitz UT) via birdnetlib, 3-second frames</dd>
+    <dt>Ranges analysed</dt><dd>135 below-threshold ranges from lowdom · 00:43:30 of 03:02:24 (23.8% of the take)</dd>
+    <dt>Species filter</dt><dd>29.898°N, 102.03°E · week 3 of 48 · 6,522 species reduced to 788</dd>
+    <dt>Minimum confidence</dt><dd>0.25</dd>
+    <dt>Detections</dt><dd>128 frames in 11 species</dd>
+  </dl>
+  <canvas id="timeline" width="1400" height="320"
+    aria-label="Timeline of BirdNET detections inside the ranges lowdom left unflagged"></canvas>
+  <div class="report-legend">
+    <span><i class="report-swatch report-swatch--range"></i>range analysed</span>
+    <span><i class="report-swatch report-swatch--strong"></i>high confidence</span>
+    <span><i class="report-swatch report-swatch--weak"></i>low confidence</span>
+  </div>
+  <p class="report-explainer">The pale band marks the 135
+  ranges lowdom left below its threshold; the rest of the take was not analysed. Each
+  mark is one 3-second detection, taller and darker with higher confidence.</p>
+  <h2>Species</h2>
+  <table class="species-table">
+    <thead><tr><th class="species-photo-head">Reference</th><th>Species</th><th class="numeric">Frames</th><th class="numeric">Highest</th><th>At</th><th>First heard</th></tr></thead>
+    <tbody>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/8349" rel="noopener noreferrer" target="_blank"><img src="species-photos/pyrrhocorax-pyrrhocorax.jpg" alt="Reference photograph of Pyrrhocorax pyrrhocorax" loading="lazy" decoding="async"></a><span class="species-photo__credit">Pavel Shukov · CC-BY-NC</span></td><td>Red-billed Chough<span class="scientific">Pyrrhocorax pyrrhocorax</span></td><td class="numeric">82</td><td class="numeric">1.000</td><td>00:40:35</td><td>00:23:36</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/7068" rel="noopener noreferrer" target="_blank"><img src="species-photos/tadorna-ferruginea.jpg" alt="Reference photograph of Tadorna ferruginea" loading="lazy" decoding="async"></a><span class="species-photo__credit">egorbirder · CC-BY</span></td><td>Ruddy Shelduck<span class="scientific">Tadorna ferruginea</span><span class="flagged-note">check by ear</span></td><td class="numeric">2</td><td class="numeric">0.928</td><td>01:41:05</td><td>01:41:05</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/8026" rel="noopener noreferrer" target="_blank"><img src="species-photos/corvus-macrorhynchos.jpg" alt="Reference photograph of Corvus macrorhynchos" loading="lazy" decoding="async"></a><span class="species-photo__credit">Joe Bourget · CC-BY-NC</span></td><td>Large-billed Crow<span class="scientific">Corvus macrorhynchos</span></td><td class="numeric">17</td><td class="numeric">0.912</td><td>00:32:28</td><td>00:32:10</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/5033" rel="noopener noreferrer" target="_blank"><img src="species-photos/botaurus-stellaris.jpg" alt="Reference photograph of Botaurus stellaris" loading="lazy" decoding="async"></a><span class="species-photo__credit">Tatyana Zarubo · CC-BY-NC</span></td><td>Great Bittern<span class="scientific">Botaurus stellaris</span><span class="flagged-note">check by ear</span></td><td class="numeric">12</td><td class="numeric">0.906</td><td>00:11:19</td><td>00:10:15</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/3896" rel="noopener noreferrer" target="_blank"><img src="species-photos/numenius-arquata.jpg" alt="Reference photograph of Numenius arquata" loading="lazy" decoding="async"></a><span class="species-photo__credit">Анна Голубева · CC-BY-NC-ND</span></td><td>Eurasian Curlew<span class="scientific">Numenius arquata</span><span class="flagged-note">check by ear</span></td><td class="numeric">1</td><td class="numeric">0.684</td><td>02:52:35</td><td>02:52:35</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/7018" rel="noopener noreferrer" target="_blank"><img src="species-photos/anser-anser.jpg" alt="Reference photograph of Anser anser" loading="lazy" decoding="async"></a><span class="species-photo__credit">Frans Vandewalle · CC-BY-NC</span></td><td>Graylag Goose<span class="scientific">Anser anser</span><span class="flagged-note">check by ear</span></td><td class="numeric">2</td><td class="numeric">0.628</td><td>00:09:33</td><td>00:09:33</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/482" rel="noopener noreferrer" target="_blank"><img src="species-photos/fulica-atra.jpg" alt="Reference photograph of Fulica atra" loading="lazy" decoding="async"></a><span class="species-photo__credit">Wei Li Jiang · CC-BY-NC</span></td><td>Eurasian Coot<span class="scientific">Fulica atra</span><span class="flagged-note">check by ear</span></td><td class="numeric">8</td><td class="numeric">0.611</td><td>02:18:36</td><td>00:23:15</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/558441" rel="noopener noreferrer" target="_blank"><img src="species-photos/mareca-penelope.jpg" alt="Reference photograph of Mareca penelope" loading="lazy" decoding="async"></a><span class="species-photo__credit">zametnya · CC-BY-NC</span></td><td>Eurasian Wigeon<span class="scientific">Mareca penelope</span><span class="flagged-note">check by ear</span></td><td class="numeric">1</td><td class="numeric">0.443</td><td>00:37:06</td><td>00:37:06</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/6930" rel="noopener noreferrer" target="_blank"><img src="species-photos/anas-platyrhynchos.jpg" alt="Reference photograph of Anas platyrhynchos" loading="lazy" decoding="async"></a><span class="species-photo__credit">unknown photographer · CC-BY-SA</span></td><td>Mallard<span class="scientific">Anas platyrhynchos</span><span class="flagged-note">check by ear</span></td><td class="numeric">1</td><td class="numeric">0.439</td><td>02:08:17</td><td>02:08:17</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/7067" rel="noopener noreferrer" target="_blank"><img src="species-photos/tadorna-tadorna.jpg" alt="Reference photograph of Tadorna tadorna" loading="lazy" decoding="async"></a><span class="species-photo__credit">thegreatdodo · CC-BY-NC</span></td><td>Common Shelduck<span class="scientific">Tadorna tadorna</span><span class="flagged-note">check by ear</span></td><td class="numeric">1</td><td class="numeric">0.365</td><td>00:24:40</td><td>00:24:40</td></tr>
+      <tr><td class="species-photo"><a href="https://www.inaturalist.org/taxa/4954" rel="noopener noreferrer" target="_blank"><img src="species-photos/ardea-cinerea.jpg" alt="Reference photograph of Ardea cinerea" loading="lazy" decoding="async"></a><span class="species-photo__credit">Frank Sengpiel · CC-BY</span></td><td>Gray Heron<span class="scientific">Ardea cinerea</span><span class="flagged-note">check by ear</span></td><td class="numeric">1</td><td class="numeric">0.264</td><td>02:37:10</td><td>02:37:10</td></tr>
+    </tbody>
+  </table>
+  <p class="report-explainer">Reference photographs come from
+  <a href="https://www.inaturalist.org/">iNaturalist</a> and are stored in this
+  package rather than hot-linked, so it survives being archived and no reader's
+  address is disclosed to a third party. Each file is kept exactly as
+  iNaturalist served it and remains under its photographer's licence, credited
+  beside it; the machine-readable record is in
+  <a href="species-photos/credits.json">credits.json</a>. A photograph shows
+  what the species looks like. It is not evidence that the species was here —
+  nine of these eleven are the rows we are asking you to doubt, and one of those
+  nine is a photograph of a bird that was never there.</p>
+  <h2 id="taxon-identifiers">Taxon identifiers</h2>
+  <p class="report-explainer">The same eleven species in the databases a detection usually has to travel to. Matched on iNaturalist taxon ID, not on name — a name search returns a congener often enough that an identifier attached to the wrong bird is a real risk. Wikidata holds dozens more per species; those are kept in <a href="taxon-ids.json">taxon-ids.json</a>.</p>
+  <table class="species-table taxon-ids">
+    <thead><tr><th>Species</th><th>Elsewhere</th></tr></thead>
+    <tbody>
+      <tr><td>Red-billed Chough<span class="scientific">Pyrrhocorax pyrrhocorax</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=18D2C42A9AD30CD8">Avibase</a> <a href="https://ebird.org/species/rebcho1">eBird</a> <a href="https://www.gbif.org/species/2482552">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=562653">ITIS</a> <a href="https://www.iucnredlist.org/details/22705916/0">IUCN</a> <a href="https://eol.org/pages/45515240">EOL</a> <a href="https://www.inaturalist.org/taxa/8349">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q643836">Wikidata</a></td></tr>
+      <tr><td>Ruddy Shelduck<span class="scientific">Tadorna ferruginea</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=1F9D883EB44DEFD6">Avibase</a> <a href="https://ebird.org/species/rudshe">eBird</a> <a href="https://www.gbif.org/species/2498015">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=175056">ITIS</a> <a href="https://www.iucnredlist.org/details/22680003/0">IUCN</a> <a href="https://eol.org/pages/45513543">EOL</a> <a href="https://www.inaturalist.org/taxa/7068">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q170723">Wikidata</a></td></tr>
+      <tr><td>Large-billed Crow<span class="scientific">Corvus macrorhynchos</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=8891E279D6486CD9">Avibase</a> <a href="https://ebird.org/species/labcro1">eBird</a> <a href="https://www.gbif.org/species/2482487">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=559503">ITIS</a> <a href="https://www.iucnredlist.org/details/103727590/0">IUCN</a> <a href="https://www.inaturalist.org/taxa/8026">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q111674">Wikidata</a></td></tr>
+      <tr><td>Great Bittern<span class="scientific">Botaurus stellaris</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=0F42F11AC607C758">Avibase</a> <a href="https://ebird.org/species/grebit1">eBird</a> <a href="https://www.gbif.org/species/2480910">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=174859">ITIS</a> <a href="https://www.iucnredlist.org/details/22697346/0">IUCN</a> <a href="https://eol.org/pages/45511332">EOL</a> <a href="https://www.inaturalist.org/taxa/5033">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25709">Wikidata</a></td></tr>
+      <tr><td>Eurasian Curlew<span class="scientific">Numenius arquata</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=3BB5CBA66CF48884">Avibase</a> <a href="https://ebird.org/species/eurcur">eBird</a> <a href="https://www.gbif.org/species/2481792">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=176596">ITIS</a> <a href="https://www.iucnredlist.org/details/22693190/0">IUCN</a> <a href="https://eol.org/pages/45509193">EOL</a> <a href="https://www.inaturalist.org/taxa/3896">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q18854">Wikidata</a></td></tr>
+      <tr><td>Graylag Goose<span class="scientific">Anser anser</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=4AED44E819A43204">Avibase</a> <a href="https://ebird.org/species/gragoo">eBird</a> <a href="https://www.gbif.org/species/2498036">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=175028">ITIS</a> <a href="https://www.iucnredlist.org/details/22679889/0">IUCN</a> <a href="https://eol.org/pages/45510528">EOL</a> <a href="https://www.inaturalist.org/taxa/7018">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25882">Wikidata</a></td></tr>
+      <tr><td>Eurasian Coot<span class="scientific">Fulica atra</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=B682B2A9C922D4C4">Avibase</a> <a href="https://ebird.org/species/eurcoo">eBird</a> <a href="https://www.gbif.org/species/2474377">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=176290">ITIS</a> <a href="https://www.iucnredlist.org/details/22692913/0">IUCN</a> <a href="https://www.inaturalist.org/taxa/482">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25376">Wikidata</a></td></tr>
+      <tr><td>Eurasian Wigeon<span class="scientific">Mareca penelope</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=15EE0D3685082E13">Avibase</a> <a href="https://ebird.org/species/eurwig">eBird</a> <a href="https://www.gbif.org/species/8000602">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=1192583">ITIS</a> <a href="https://www.iucnredlist.org/details/22680157/0">IUCN</a> <a href="https://eol.org/pages/52231960">EOL</a> <a href="https://www.inaturalist.org/taxa/558441">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q28106837">Wikidata</a></td></tr>
+      <tr><td>Mallard<span class="scientific">Anas platyrhynchos</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=85625D75F2524457">Avibase</a> <a href="https://ebird.org/species/mallar3">eBird</a> <a href="https://www.gbif.org/species/9761484">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=175063">ITIS</a> <a href="https://www.iucnredlist.org/details/22680186/0">IUCN</a> <a href="https://eol.org/pages/45510559">EOL</a> <a href="https://www.inaturalist.org/taxa/6930">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25348">Wikidata</a></td></tr>
+      <tr><td>Common Shelduck<span class="scientific">Tadorna tadorna</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=5EAB32D3007896F3">Avibase</a> <a href="https://ebird.org/species/comshe">eBird</a> <a href="https://www.gbif.org/species/2498009">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=175055">ITIS</a> <a href="https://www.iucnredlist.org/details/22680024/0">IUCN</a> <a href="https://eol.org/pages/45511262">EOL</a> <a href="https://www.inaturalist.org/taxa/7067">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25761">Wikidata</a></td></tr>
+      <tr><td>Gray Heron<span class="scientific">Ardea cinerea</span></td><td class="taxon-ids__links"><a href="https://avibase.bsc-eoc.org/species.jsp?avibaseid=6AC87967DC86D7EE">Avibase</a> <a href="https://ebird.org/species/graher1">eBird</a> <a href="https://www.gbif.org/species/9797180">GBIF</a> <a href="https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&amp;search_value=174781">ITIS</a> <a href="https://www.iucnredlist.org/details/22696993/0">IUCN</a> <a href="https://www.inaturalist.org/taxa/4954">iNaturalist</a> <a href="https://www.wikidata.org/wiki/Q25273">Wikidata</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Reading this against a frozen lake</h2>
+  <p class="report-explainer">Two corvids account for 99 of the 128 detections and
+  behave like real calls: they carry energy well above 2 kHz and sit 3–11 dB above
+  everything else. The other nine species are all deep-voiced waterbirds, on a lake
+  that had frozen over by mid-January at 4,055 m. Measuring the detected frames
+  after a 150 Hz high-pass shows where the two groups part:</p>
+  <table class="band-table">
+    <thead><tr><th>Detected as</th><th>150–400 Hz</th><th>400 Hz–2 kHz</th><th>2–8 kHz</th><th>Level</th></tr></thead>
+    <tbody>
+      <tr><td>Red-billed Chough</td><td>24%</td><td>55%</td><td>21%</td><td>−44.3 dBFS</td></tr>
+      <tr><td>Large-billed Crow</td><td>14%</td><td>85%</td><td>1%</td><td>−41.2 dBFS</td></tr>
+      <tr><td>Great Bittern</td><td>45%</td><td>49%</td><td>5%</td><td>−51.8 dBFS</td></tr>
+      <tr><td>Ruddy Shelduck</td><td>52%</td><td>45%</td><td>3%</td><td>−47.2 dBFS</td></tr>
+      <tr><td>Eurasian Coot</td><td>89%</td><td>10%</td><td>1%</td><td>−48.3 dBFS</td></tr>
+    </tbody>
+  </table>
+  <p class="report-explainer">The waterbird detections concentrate their energy
+  below 400 Hz at a lower level, and mostly show none of the high-frequency
+  structure the corvid detections do. That is the band the ice resonance occupies —
+  the sound the local guides call <em>long hou</em>, “dragon roar”. A plausible
+  reading is that BirdNET is mapping ice onto the birds whose calls are booms, and
+  <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a> at
+  0.906 is the clearest case: its twelve detections arrive in sustained runs,
+  eight of them inside seventy seconds, and not one of their spectrograms shows a
+  call above the ice.</p>
+  <p class="report-explainer">Listening to the species explains the mistake
+  rather than excusing it. On the first page of xeno-canto recordings for
+  <em>Botaurus stellaris</em> — <a href="https://xeno-canto.org/891071">XC891071</a>,
+  <a href="https://xeno-canto.org/1000766">XC1000766</a>,
+  <a href="https://xeno-canto.org/832807">XC832807</a> and
+  <a href="https://xeno-canto.org/741523">XC741523</a> among them — the booms
+  really are close to the dragon roar. Close enough that the confusion looks
+  reasonable rather than absurd. Listen to them here, then to any green stretch
+  of the timeline above:</p>
+  <ul class="reference-recordings">
+    <li class="reference-recording">
+      <img src="reference-recordings/xc891071.webp" alt="Spectrogram of xeno-canto recording 891071" loading="lazy" decoding="async">
+      <audio controls preload="none" src="reference-recordings/xc891071.mp3"></audio>
+      <span class="reference-recording__credit"><a href="https://xeno-canto.org/891071">XC891071</a> · Christian Bøggild · Denmark · CC BY-NC-SA</span>
+    </li>
+    <li class="reference-recording">
+      <img src="reference-recordings/xc1000766.webp" alt="Spectrogram of xeno-canto recording 1000766" loading="lazy" decoding="async">
+      <audio controls preload="none" src="reference-recordings/xc1000766.mp3"></audio>
+      <span class="reference-recording__credit"><a href="https://xeno-canto.org/1000766">XC1000766</a> · Christian Bøggild · Denmark · CC BY-NC-SA</span>
+    </li>
+    <li class="reference-recording">
+      <img src="reference-recordings/xc832807.webp" alt="Spectrogram of xeno-canto recording 832807" loading="lazy" decoding="async">
+      <audio controls preload="none" src="reference-recordings/xc832807.mp3"></audio>
+      <span class="reference-recording__credit"><a href="https://xeno-canto.org/832807">XC832807</a> · Cedric Mroczko · Ukraine · CC BY-NC-SA</span>
+    </li>
+    <li class="reference-recording">
+      <img src="reference-recordings/xc741523.webp" alt="Spectrogram of xeno-canto recording 741523" loading="lazy" decoding="async">
+      <audio controls preload="none" src="reference-recordings/xc741523.mp3"></audio>
+      <span class="reference-recording__credit"><a href="https://xeno-canto.org/741523">XC741523</a> · Romuald Mikusek · Poland · CC BY-NC-SA</span>
+    </li>
+  </ul>
+  <p class="report-explainer">These are stored in this package under their recordists' CC BY-NC-SA licences rather than embedded from xeno-canto, so the comparison survives archiving and no reader's address is disclosed to make it. The spectrograms are re-rendered here with the same axes and scaling as the detection frames above, because two pictures drawn to different rules cannot be set side by side; xeno-canto's own sonograms use a different frequency axis.</p>
+  <p class="report-explainer">One thing separates them by ear: the ice carries an
+  electronic quality that the bird does not. That difference is the interesting
+  part of the error, it is plainly audible, and none of the spectrogram
+  statistics on this page found it.</p>
+  <p class="report-explainer">Ice is not the only thing here that is not a bird.
+  The frame at 01:41:05, which BirdNET calls Ruddy Shelduck at 0.928 — the second
+  highest confidence in the whole run — is a person. It is Xiao Zhang, one of the
+  guides, calling across the lake to the recordist, who identified it on
+  listening. There is no bird in those three seconds at all.</p>
+  <p class="report-explainer">That frame is worth opening, because it also shows
+  how a spectrogram can be misread. It does carry harmonic stacks between 1 and
+  3 kHz, and we first took them for a call: ice does not produce structure like
+  that, so we moved the species out of the doubtful list. But a voice does. Those
+  are a pitch contour gliding through its harmonics, formants around 1.2 and
+  2 kHz, and four or five syllables in the last second — speech, not song. The
+  band average in the table above had hidden it under the low-frequency bed, and
+  the picture that uncovered it was then read wrong. Only listening settled it.</p>
+  <p class="report-explainer">So the ledger runs three ways, not two: real calls,
+  lake ice, and at least one human voice. Every row marked
+  <span class="flagged-note">check by ear</span> is one we would not cite without
+  going back to the source WAV — and the loudest argument for that rule is that
+  the model's second most confident bird in three hours was a man shouting.</p>
+  <p class="report-links">
+    <a href="report-js.html"><img class="report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a>
+    <a href="report-multimedia-bare.html"><img class="report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a>
+    <a href="report-bare.html"><img class="report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a>
+    <a href="../260115-002-lowdom/report-js.html"><img class="report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the lowdom screening report</a>
+    <a href="detections.csv"><img class="report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download every detection</a>
+    <a href="species.csv"><img class="report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the species roll-up</a>
+    <a href="taxon-ids.json"><img class="report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the taxon identifiers</a>
+    <a href="summary.json"><img class="report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
+  </p>
+  <p class="report-credit">Identification by
+  <a href="https://birdnet.cornell.edu/">BirdNET</a>, developed by the K. Lisa
+  Yang Center for Conservation Bioacoustics at the Cornell Lab of Ornithology
+  with Chemnitz University of Technology, reached through
+  <a href="https://github.com/joeweiss/birdnetlib">birdnetlib</a>. The BirdNET
+  models are licensed
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+  and that non-commercial condition applies to these results. Cite: Kahl, S.,
+  Wood, C. M., Eibl, M., &amp; Klinck, H. (2021). BirdNET: A deep learning
+  solution for avian diversity monitoring. <em>Ecological Informatics</em>, 61,
+  101236. Neither this report nor field-audio-tools is affiliated with or
+  endorsed by the BirdNET team.</p>
+    </main>
+  </div>
+  <div class="subfooter">
+    <div id="container">
+      <div id="flex">
+        <main><div id="mainbox"></div></main>
+        <aside id="rightside">
+          <a href="/" class="first">Home</a>
+          <a href="/software">Software</a>
+          <a href="/news">News</a>
+          <a href="https://prod.mantle-sound.org/">Mantle Prod.</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <hr style="width:50px;border:0;border-top:1px solid #e0e0e0;margin:10px 0">
+          <div style="display:flex;gap:10px;align-items:center">
+            <a href="/news/feed.xml" type="application/atom+xml"><img src="/static/rss.svg" alt="RSS" style="width:16px;height:16px"></a>
+            <a rel="me" href="https://mastodon.social/@mantle_sound"><img src="/static/mastodon.svg" alt="Mastodon" style="width:16px;height:16px"></a>
+            <a rel="me" href="https://trails.magdeburg.jetzt/profile/@g.yu"><img src="/static/trails.png" alt="Trails" style="width:16px;height:16px"></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <footer>
+      <div id="copyright">
+        <a href="https://mantle-sound.org/">Mantle Sound</a> © 2025-2026<br>
+        Our content is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+        <span class="cc-icons">
+          <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
+          <img src="/files/cc-icons/by.svg" alt="Attribution">
+          <img src="/files/cc-icons/nc.svg" alt="NonCommercial">
+          <img src="/files/cc-icons/sa.svg" alt="ShareAlike">
+        </span><br>
+        <a href="/privacy-policy">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+  <script src="/static/navbar.js"></script>
+  <script>
+    const data = {"duration":10944.0,"ranges":[[0.0,10.0],[20.0,50.0],[80.0,110.0],[170.0,180.0],[200.0,210.0],[230.0,240.0],[340.0,370.0],[490.0,500.0],[520.0,540.0],[570.0,580.0],[600.0,620.0],[640.0,690.0],[770.0,780.0],[790.0,800.0],[820.0,830.0],[840.0,860.0],[880.0,900.0],[1130.0,1140.0],[1280.0,1310.0],[1380.0,1430.0],[1480.0,1500.0],[1850.0,1860.0],[1890.0,1900.0],[1930.0,1950.0],[1960.0,1980.0],[1990.0,2020.0],[2040.0,2060.0],[2140.0,2180.0],[2220.0,2230.0],[2280.0,2290.0],[2300.0,2310.0],[2400.0,2410.0],[2420.0,2450.0],[2660.0,2670.0],[2680.0,2720.0],[2840.0,2850.0],[2900.0,2940.0],[2960.0,2970.0],[2980.0,2990.0],[3030.0,3040.0],[3070.0,3080.0],[3100.0,3110.0],[3170.0,3200.0],[3230.0,3260.0],[3360.0,3370.0],[3420.0,3430.0],[3450.0,3460.0],[3480.0,3490.0],[3750.0,3760.0],[3770.0,3800.0],[3860.0,3890.0],[4000.0,4020.0],[4070.0,4080.0],[4160.0,4170.0],[4210.0,4240.0],[4250.0,4270.0],[4350.0,4450.0],[4470.0,4480.0],[4500.0,4510.0],[4570.0,4580.0],[4700.0,4720.0],[4840.0,4850.0],[4860.0,4870.0],[4950.0,4960.0],[5020.0,5030.0],[5040.0,5050.0],[5150.0,5160.0],[5290.0,5300.0],[5310.0,5320.0],[5490.0,5500.0],[5520.0,5530.0],[5540.0,5600.0],[5610.0,5620.0],[5630.0,5640.0],[5650.0,5660.0],[5670.0,5700.0],[5880.0,5890.0],[6050.0,6070.0],[6080.0,6100.0],[6140.0,6170.0],[6180.0,6190.0],[6310.0,6330.0],[6540.0,6550.0],[6710.0,6750.0],[6800.0,6810.0],[6850.0,6870.0],[6920.0,6950.0],[7000.0,7010.0],[7130.0,7140.0],[7540.0,7550.0],[7560.0,7570.0],[7610.0,7650.0],[7670.0,7700.0],[7880.0,7890.0],[8020.0,8050.0],[8110.0,8130.0],[8160.0,8190.0],[8200.0,8220.0],[8270.0,8280.0],[8310.0,8320.0],[8360.0,8370.0],[8490.0,8500.0],[8530.0,8560.0],[8610.0,8640.0],[8650.0,8660.0],[8750.0,8760.0],[8790.0,8810.0],[9220.0,9230.0],[9240.0,9260.0],[9290.0,9300.0],[9330.0,9340.0],[9350.0,9380.0],[9400.0,9440.0],[9450.0,9460.0],[9490.0,9510.0],[9520.0,9540.0],[9570.0,9590.0],[9600.0,9620.0],[9630.0,9640.0],[9780.0,9830.0],[9840.0,9850.0],[9860.0,9870.0],[9920.0,9930.0],[9950.0,10010.0],[10230.0,10240.0],[10270.0,10280.0],[10290.0,10330.0],[10340.0,10370.0],[10400.0,10410.0],[10440.0,10450.0],[10460.0,10470.0],[10710.0,10740.0],[10760.0,10790.0],[10810.0,10840.0],[10900.0,10940.0]],"detections":[{"s":573.0,"e":576.0,"n":"Graylag Goose","t":"Anser anser","c":0.6281},{"s":615.0,"e":618.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.2701},{"s":643.0,"e":646.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.5602},{"s":646.0,"e":649.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.7349},{"s":658.0,"e":661.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.7985},{"s":679.0,"e":682.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.9064},{"s":682.0,"e":685.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.7981},{"s":685.0,"e":688.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.7197},{"s":880.0,"e":883.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.4998},{"s":1395.0,"e":1398.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.3518},{"s":1416.0,"e":1419.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8226},{"s":1425.0,"e":1428.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.266},{"s":1480.0,"e":1483.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8656},{"s":1480.0,"e":1483.0,"n":"Common Shelduck","t":"Tadorna tadorna","c":0.3653},{"s":1483.0,"e":1486.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9378},{"s":1486.0,"e":1489.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9178},{"s":1489.0,"e":1492.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9956},{"s":1495.0,"e":1498.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4574},{"s":1853.0,"e":1856.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6921},{"s":1856.0,"e":1859.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.48},{"s":1890.0,"e":1893.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.868},{"s":1893.0,"e":1896.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.957},{"s":1930.0,"e":1933.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.6722},{"s":1936.0,"e":1939.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6096},{"s":1942.0,"e":1945.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9115},{"s":1945.0,"e":1948.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.5813},{"s":1948.0,"e":1950.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.9118},{"s":1963.0,"e":1966.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.2648},{"s":1966.0,"e":1969.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.3421},{"s":1978.0,"e":1980.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.5904},{"s":1993.0,"e":1996.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.9079},{"s":1996.0,"e":1999.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.8769},{"s":2002.0,"e":2005.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8689},{"s":2008.0,"e":2011.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7404},{"s":2011.0,"e":2014.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.5244},{"s":2052.0,"e":2055.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.569},{"s":2223.0,"e":2226.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8204},{"s":2226.0,"e":2229.0,"n":"Eurasian Wigeon","t":"Mareca penelope","c":0.4434},{"s":2280.0,"e":2283.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9018},{"s":2283.0,"e":2286.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6829},{"s":2286.0,"e":2289.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4448},{"s":2303.0,"e":2306.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9948},{"s":2306.0,"e":2309.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9988},{"s":2400.0,"e":2403.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.5425},{"s":2403.0,"e":2406.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.377},{"s":2406.0,"e":2409.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9601},{"s":2420.0,"e":2423.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9916},{"s":2429.0,"e":2432.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9863},{"s":2432.0,"e":2435.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9985},{"s":2435.0,"e":2438.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9998},{"s":2438.0,"e":2441.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9992},{"s":2441.0,"e":2444.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9986},{"s":2444.0,"e":2447.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9952},{"s":2447.0,"e":2450.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9997},{"s":2660.0,"e":2663.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.3005},{"s":2663.0,"e":2666.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9455},{"s":2686.0,"e":2689.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9469},{"s":2689.0,"e":2692.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9465},{"s":2692.0,"e":2695.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6956},{"s":2698.0,"e":2701.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.998},{"s":2704.0,"e":2707.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.5992},{"s":2707.0,"e":2710.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.2537},{"s":2710.0,"e":2713.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7887},{"s":2713.0,"e":2716.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9668},{"s":2846.0,"e":2849.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9977},{"s":2900.0,"e":2903.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8377},{"s":2903.0,"e":2906.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9311},{"s":2906.0,"e":2909.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9732},{"s":2912.0,"e":2915.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9968},{"s":2918.0,"e":2921.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9823},{"s":2924.0,"e":2927.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9054},{"s":2930.0,"e":2933.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9768},{"s":2933.0,"e":2936.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8167},{"s":2936.0,"e":2939.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9148},{"s":2963.0,"e":2966.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4208},{"s":2983.0,"e":2986.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7499},{"s":3076.0,"e":3079.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8418},{"s":3106.0,"e":3109.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8686},{"s":3170.0,"e":3173.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.5984},{"s":3173.0,"e":3176.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9791},{"s":3176.0,"e":3179.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.3214},{"s":3179.0,"e":3182.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.5314},{"s":3179.0,"e":3182.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.2765},{"s":3182.0,"e":3185.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6104},{"s":3188.0,"e":3191.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.3207},{"s":3191.0,"e":3194.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.4209},{"s":3194.0,"e":3197.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.4034},{"s":3197.0,"e":3200.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9927},{"s":3360.0,"e":3363.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.604},{"s":3363.0,"e":3366.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.3532},{"s":3366.0,"e":3369.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7889},{"s":3420.0,"e":3423.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.2768},{"s":3423.0,"e":3426.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7564},{"s":3426.0,"e":3429.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8025},{"s":3453.0,"e":3456.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.2707},{"s":3456.0,"e":3459.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9753},{"s":3480.0,"e":3483.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8598},{"s":3483.0,"e":3486.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9293},{"s":3486.0,"e":3489.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8715},{"s":4000.0,"e":4003.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.3827},{"s":4070.0,"e":4073.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.3402},{"s":4250.0,"e":4253.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4683},{"s":4256.0,"e":4259.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7192},{"s":4259.0,"e":4262.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6144},{"s":4410.0,"e":4413.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.942},{"s":4416.0,"e":4419.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.5385},{"s":4473.0,"e":4476.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.3254},{"s":4476.0,"e":4479.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7584},{"s":4709.0,"e":4712.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4909},{"s":4715.0,"e":4718.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.8622},{"s":4953.0,"e":4956.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.4561},{"s":5046.0,"e":5049.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.7362},{"s":5150.0,"e":5153.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.2884},{"s":5310.0,"e":5313.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.6503},{"s":5316.0,"e":5319.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.3996},{"s":5493.0,"e":5496.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.3789},{"s":5496.0,"e":5499.0,"n":"Red-billed Chough","t":"Pyrrhocorax pyrrhocorax","c":0.9915},{"s":6056.0,"e":6059.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.8068},{"s":6065.0,"e":6068.0,"n":"Ruddy Shelduck","t":"Tadorna ferruginea","c":0.9276},{"s":7625.0,"e":7628.0,"n":"Graylag Goose","t":"Anser anser","c":0.3234},{"s":7670.0,"e":7673.0,"n":"Ruddy Shelduck","t":"Tadorna ferruginea","c":0.5502},{"s":7697.0,"e":7700.0,"n":"Mallard","t":"Anas platyrhynchos","c":0.439},{"s":8163.0,"e":8166.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.3629},{"s":8316.0,"e":8319.0,"n":"Eurasian Coot","t":"Fulica atra","c":0.6111},{"s":8530.0,"e":8533.0,"n":"Large-billed Crow","t":"Corvus macrorhynchos","c":0.3243},{"s":9430.0,"e":9433.0,"n":"Gray Heron","t":"Ardea cinerea","c":0.2643},{"s":9962.0,"e":9965.0,"n":"Great Bittern","t":"Botaurus stellaris","c":0.363},{"s":10355.0,"e":10358.0,"n":"Eurasian Curlew","t":"Numenius arquata","c":0.6843}]};
+    const canvas = document.getElementById('timeline');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width, height = canvas.height;
+    const scale = seconds => seconds * width / data.duration;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#dfeee7';
+    data.ranges.forEach(range => {
+      const x = scale(range[0]);
+      ctx.fillRect(x, 0, Math.max(1, scale(range[1]) - x), height);
+    });
+    data.detections.forEach(det => {
+      const x = scale(det.s);
+      const bar = Math.max(4, det.c * height);
+      ctx.fillStyle = `rgba(20, 78, 58, ${0.25 + 0.75 * det.c})`;
+      ctx.fillRect(x, height - bar, Math.max(2, scale(det.e) - x), bar);
+    });
+  </script>
+</body>
+</html>

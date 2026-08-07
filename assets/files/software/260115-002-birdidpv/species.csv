@@ -1,0 +1,12 @@
+scientific_name,common_name,detection_count,max_confidence,max_confidence_timecode,first_start_timecode
+Pyrrhocorax pyrrhocorax,Red-billed Chough,82,0.9998,00:40:35.000,00:23:36.000
+Tadorna ferruginea,Ruddy Shelduck,2,0.9276,01:41:05.000,01:41:05.000
+Corvus macrorhynchos,Large-billed Crow,17,0.9118,00:32:28.000,00:32:10.000
+Botaurus stellaris,Great Bittern,12,0.9064,00:11:19.000,00:10:15.000
+Numenius arquata,Eurasian Curlew,1,0.6843,02:52:35.000,02:52:35.000
+Anser anser,Graylag Goose,2,0.6281,00:09:33.000,00:09:33.000
+Fulica atra,Eurasian Coot,8,0.6111,02:18:36.000,00:23:15.000
+Mareca penelope,Eurasian Wigeon,1,0.4434,00:37:06.000,00:37:06.000
+Anas platyrhynchos,Mallard,1,0.439,02:08:17.000,02:08:17.000
+Tadorna tadorna,Common Shelduck,1,0.3653,00:24:40.000,00:24:40.000
+Ardea cinerea,Gray Heron,1,0.2643,02:37:10.000,02:37:10.000
