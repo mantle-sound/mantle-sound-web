@@ -17,7 +17,7 @@
     "model_license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "source_license": "MIT",
     "citation": "Kahl, S., Wood, C. M., Eibl, M., & Klinck, H. (2021). BirdNET: A deep learning solution for avian diversity monitoring. Ecological Informatics, 61, 101236.",
-    "note": "Model files are not redistributed with this tool; they are downloaded on first run. Their CC BY-NC-SA 4.0 terms apply to how results are used, including the non-commercial condition. The BirdNET authors state that educational and research purposes count as non-commercial.",
+    "note": "This tool redistributes no model file. The models ship inside the birdnetlib package and are present once the birdnet extra is installed, so analysis needs no network. Installing therefore places a CC BY-NC-SA 4.0 copy on disk, and passing that environment on is redistribution. Those terms also apply to how results are used, including the non-commercial condition. The BirdNET authors state that educational and research purposes count as non-commercial.",
     "model_name": "BirdNET-Analyzer",
     "model_version": "2.4",
     "label_count": 6522,
