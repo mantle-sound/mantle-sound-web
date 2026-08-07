@@ -27,7 +27,7 @@ intermediate. Site access, camp, and on-lake conditions are under
 - Duration: 03:02:24 per track
 - Input size: 2,101,379,072 bytes per track
 
-## Making a small, self-describing excerpt by `soundcite`
+## Arbitrarily cutting an excerpt with `soundcite`
 
 We cut a 20-second passage beginning one hour into the take. Because we launched
 the command from the recording directory, the manifest kept the source
@@ -65,7 +65,7 @@ filenames without exposing local absolute paths.
     from the two WAV excerpts, which preserve floating-point samples.
 </p>
 
-### Files and provenance
+### What `soundcite` produced
 
 - The two mono F3 files can be treated as one paired take without first creating
   a multi-gigabyte stereo file. Before extraction, the tool verifies their
@@ -81,7 +81,7 @@ filenames without exposing local absolute paths.
 <a href="/files/software/260115-002-soundcite/index.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the generated package</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/index-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/SHA256SUMS">Verify its checksums</a>
 </p>
 
-## Screening the complete take in fixed windows by `lowdom`
+## Screening the take with `lowdom`
 
 `lowdom` decoded both tracks to mono at 4 kHz and divided them into
 10-second windows. It measured those windows without writing a transformed
@@ -100,17 +100,7 @@ audio file.
 - Rows above threshold: 833 (76.14%)
 - Rows below threshold: 261 (23.86%)
 
-### Two gaps in `lowdom` output
-
-1. **Unreported partial tail.** The source lasts 03:02:24 but analysis stopped at
-   03:02:20. The current code drops a final fragment shorter than half a window
-   without recording the dropped duration in `summary.json` or the reports.
-2. **Threshold placeholder.** The initial 0.6 CLI default separated almost nothing
-   on this take; it had not been checked on this recording before that exploratory
-   run. We recalibrated with blind listening and adopted 0.95 for the run
-   documented here.
-
-### A provisional threshold from blind listening
+### Testing the threshold by ear
 
 We tested 0.95 with two blinded listening rounds: each round contained ten randomly selected
 windows above the threshold and ten below it. Of the 20 windows above 0.95, 19
@@ -123,7 +113,7 @@ sample is small, it comes from one recording setup, and it was reviewed by one
 listener. The score remains a *low-frequency screening* heuristic rather than a
 *wind probability*.
 
-### Output we kept
+### What `lowdom` produced
 
 - `windows.csv` retains both tracks' score, RMS level, low-frequency ratio,
   spectral flatness, and peak for every interval.
@@ -147,12 +137,22 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 <a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-## Asking what is in the clean windows by `birdidpv`
+### Two gaps in the output
+
+1. **Unreported partial tail.** The source lasts 03:02:24 but analysis stopped at
+   03:02:20. The current code drops a final fragment shorter than half a window
+   without recording the dropped duration in `summary.json` or the reports.
+2. **Threshold placeholder.** The initial 0.6 CLI default separated almost nothing
+   on this take; it had not been checked on this recording before that exploratory
+   run. We recalibrated with blind listening and adopted 0.95 for the run
+   documented here.
+
+## Running `birdidpv` on the clean windows
 
 `lowdom` says where to listen. It does not say what is there. It has already
 found the stretches of this three-hour take where wind is low enough to work
 with, and `birdidpv` starts from that answer. The
-`candidate-clean-intervals.csv` file [above](#output-we-kept) becomes the list
+`candidate-clean-intervals.csv` file [above](#what-lowdom-produced) becomes the list
 of ranges we hand to [BirdNET](https://birdnet.cornell.edu/), as timestamps
 rather than as copied audio. The model then hears only the 23.86% of the take
 that screening left unflagged.
@@ -175,7 +175,7 @@ those seconds as recordings clean enough to send to a free archive like
   --output 260115-002-birdidpv</code></pre>
 
 - Track analysed: `260115_002_Tr1.WAV` only
-- Ranges: the [135 below-threshold intervals](#screening-the-complete-take-in-fixed-windows-by-lowdom), 00:43:30 of the
+- Ranges: the [135 below-threshold intervals](#screening-the-take-with-lowdom), 00:43:30 of the
   03:02:24 take
 - Frame length: 3 seconds, fixed by the model
 - Minimum confidence: 0.25
@@ -220,11 +220,11 @@ What the bird does not have is the electronic quality the ice carries. That is
 the one thing that tells them apart. It is easy to hear, and none of the
 spectrogram numbers we worked out found it.
 
-### The most confident bird in three hours is a person
+### A high score with no bird in it
 
 This one frame matters more than the pattern. The model calls the frame at
-01:41:05 Ruddy Shelduck at 0.928, its second highest confidence in the whole
-run. There is no bird in it. It is Xiao Zhang calling across the lake to the
+01:41:05 Ruddy Shelduck at 0.928, the second highest score any species reached
+in the run. There is no bird in it. It is Xiao Zhang calling across the lake to the
 recordist, who knew the voice as soon as he heard it.
 
 We only got there after two wrong answers. The band measurements put the frame
@@ -245,14 +245,14 @@ listening settled this one.
 
 ### What one track leaves out
 
-[`lowdom`](#screening-the-complete-take-in-fixed-windows-by-lowdom) screened both tracks and kept the higher score of the
+[`lowdom`](#screening-the-take-with-lowdom) screened both tracks and kept the higher score of the
 two. This
 `birdidpv` run read `Tr1` on its own. A call that came out better on the second
 microphone could be missed, and nothing here says anything about stereo or
 direction. The tool can read both tracks and keep the highest confidence per
 frame. That is the next thing to do.
 
-### What birdidpv wrote
+### What `birdidpv` produced
 
 - `detections.csv` has every 3-second frame above the minimum confidence, with
   its timecodes, species, and score. `species.csv` totals them by species.
@@ -294,9 +294,9 @@ frame. That is the next thing to do.
 <a href="/files/software/260115-002-birdidpv/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/detections.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download every detection</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/species.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the species roll-up</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-### Using `soundcite` after `birdidpv`
+## Citing a detection with `soundcite`
 
-The excerpt at the [top of this test](#making-a-small-self-describing-excerpt-by-soundcite)
+The excerpt at the [top of this test](#arbitrarily-cutting-an-excerpt-with-soundcite)
 starts at 01:00:00. We chose that time from the clock, before we had looked at
 the recording. It shows what the output format is, not what is in the take.
 
@@ -348,7 +348,7 @@ listening room around it. `--pad` sets both ends at once; `--pad-start` and
 `--pad-end` override it when the two differ.
 
 This step is manual. Before citing a time you have to listen to it, and the
-[0.93 that was a person](#the-most-confident-bird-in-three-hours-is-a-person)
+[0.93 that was a person](#a-high-score-with-no-bird-in-it)
 shows why. A script that sent detections straight to `soundcite` would have
 built an evidence package for a shout.
 
