@@ -35,15 +35,8 @@
 {% set software_hub = site.get('/software') %}
 {% set intro_toc = software_hub.intro.toc if software_hub and software_hub.intro else none %}
 {% set has_toc = page._path == '/software' or intro_toc or page.body.toc %}
-{# Desktop and mobile render the same entries. They were duplicated here, which
-   is the other half of why the tool list went stale. #}
+{# One contents block, shown on wide viewports only. #}
 <nav class="toc" aria-label="Table of contents">
-  {% if has_toc %}
-  <h4>Table Of Contents</h4>
-  {{ toc_entries(page, software_hub, intro_toc) }}
-  {% endif %}
-</nav>
-<nav class="toc software-project-nav-mobile" aria-label="Table of contents">
   {% if has_toc %}
   <h4>Table Of Contents</h4>
   {{ toc_entries(page, software_hub, intro_toc) }}

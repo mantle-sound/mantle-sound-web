@@ -167,12 +167,6 @@ logo {
   text-decoration: underline;
 }
 
-.software-project-nav-mobile {
-  display: none;
-  box-sizing: border-box;
-  background: var(--bg-footer);
-}
-
 /* 页面内锚点：滚动留白、标题间距、#hash 选中高亮 */
 .page [id] {
     scroll-margin-top: 80px;
@@ -2150,13 +2144,10 @@ blockquote::after {
     .page-with-toc {
       display: block;
     }
-    .toc:not(.software-project-nav-mobile) {
+    /* No contents block on narrow viewports: the page is one column and the
+       headings are a short scroll away. */
+    .toc {
         display: none;
-    }
-    .software-project-nav-mobile {
-        display: block;
-        margin: 0 0 4px;
-        padding: 28px 20px 20px;
     }
     .page-with-toc .page {
       padding: 28px 20px 40px;
