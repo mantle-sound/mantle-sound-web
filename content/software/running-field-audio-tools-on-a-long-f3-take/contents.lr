@@ -145,13 +145,145 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 <a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
+## Asking what is in the clean windows by `birdidpv`
+
+`lowdom` says where to listen, not what is there. `birdidpv` takes that answer as
+its input: the `candidate-clean-intervals.csv` written above becomes the list of
+ranges handed to [BirdNET](https://birdnet.cornell.edu/), so the model only sees
+the 23.86% of the take that screening left unflagged instead of three hours of
+wind.
+
+<pre class="software-example"><code>birdidpv 260115_002_Tr1.WAV \
+  --intervals 260115-002-lowdom/candidate-clean-intervals.csv \
+  --lat 29.898 --lon 102.030 --week 3 \
+  --min-conf 0.25 \
+  --photos \
+  --spectrograms \
+  --report both \
+  --output 260115-002-birdidpv</code></pre>
+
+- Track analysed: `260115_002_Tr1.WAV` only
+- Ranges: the 135 below-threshold intervals, 00:43:30 of the 03:02:24 take
+- Frame length: 3 seconds, fixed by the model
+- Minimum confidence: 0.25
+- Species filter: 29.898°N, 102.030°E, week 3 of 48
+- Runtime: about two minutes of analysis, plus 19 seconds for 126 spectrograms
+  and about 25 seconds for 11 reference photographs
+- Detections: 128 frames across 11 species
+
+### The position filter is not optional
+
+The coordinates come from the end of the GPX trace, at the camp on Yema Haizi.
+With them, BirdNET's 6,522-species vocabulary is cut to the 788 plausible at
+that place in mid-January. Without them the model will confidently offer species
+from the wrong continent, and a three-hour take gives it a great many chances to
+do so. The reduced list is still long enough to contain every mistake described
+below.
+
+### What came back
+
+Two corvids account for 99 of the 128 frames and are not in doubt: Red-billed
+Chough (82 frames, highest 0.9998) and Large-billed Crow (17 frames, highest
+0.9118). Both carry harmonic structure well above 2 kHz and sit 3–11 dB above
+everything else in the run.
+
+The remaining nine species share 29 frames and are all deep-voiced waterbirds —
+Great Bittern, Ruddy Shelduck, Eurasian Coot, Graylag Goose, Eurasian Curlew,
+Eurasian Wigeon, Mallard, Common Shelduck, Gray Heron — on a lake that had
+frozen over. <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great
+Bittern</a> is the clearest artefact: twelve detections, highest 0.9064, arriving
+in sustained runs with eight of them inside seventy seconds, and not one of their
+spectrograms shows a call above the low-frequency bed. That bed is the
+melting-ice resonance described under
+[Field and recording setup](#field-and-recording-setup) — the *long hou* our
+guides name — being heard as the birds whose calls are booms.
+
+The comparison is worth making by ear. On the first page of xeno-canto for
+*Botaurus stellaris* — <a href="https://xeno-canto.org/891071">XC891071</a>,
+<a href="https://xeno-canto.org/1000766">XC1000766</a>,
+<a href="https://xeno-canto.org/832807">XC832807</a>,
+<a href="https://xeno-canto.org/741523">XC741523</a> — the booms really do
+resemble the dragon roar, closely enough that the model's mistake looks
+reasonable. What the bird lacks is the electronic quality the ice carries. That
+is the one thing separating them, it is plainly audible, and no spectrogram
+statistic we computed found it.
+
+### The most confident bird in three hours is a person
+
+The exception matters more than the pattern. The frame at 01:41:05, which the
+model calls Ruddy Shelduck at 0.928 — its second highest confidence anywhere in
+the run — contains no bird at all. It is Xiao Zhang calling across the lake to
+the recordist, identified on listening by the person he was calling.
+
+We reached that only after getting it wrong twice. The band measurements grouped
+the frame with the ice, for the wrong reason. Its spectrogram then showed clear
+harmonic stacks between 1 and 3 kHz, which ice does not produce, so we read it as
+a genuine call and moved the species out of the doubtful list. Both readings were
+wrong in opposite directions, and the picture that corrected the first one was
+what misled us into the second. A voice looks like that too: a pitch contour
+gliding through its harmonics, formants near 1.2 and 2 kHz, four syllables in the
+last second.
+
+Three consequences we take from it. Confidence does not separate true from false
+on this take — at every threshold from 0.25 to 0.9, false positives equal or
+outnumber the real detections, so raising the bar only discards the harmless
+errors and keeps the dangerous ones. Anthropophony has no representation in a
+filtered species list, so human sound cannot be labelled as itself and must land
+on some bird. And a spectrogram tells you that something is there, not what it
+is; only listening closed this one.
+
+### One track, and what that leaves
+
+`lowdom` screened both tracks and merged them conservatively, taking the higher
+score. This `birdidpv` run read `Tr1` alone, so a call that favoured the second
+microphone could be missed entirely, and nothing here is a stereo or
+directional judgement. Re-running across both tracks and merging on highest
+confidence per frame is supported by the tool and is the obvious next step.
+
+### Output we kept
+
+- `detections.csv` holds every 3-second frame above the minimum confidence with
+  its timecodes, species, and score; `species.csv` is the per-species roll-up.
+- `summary.json` records the source, the ranges analysed, the position and week
+  used for filtering, and every other parameter of the run.
+- `detection-spectrograms/` holds 126 WebP images, one per detected frame,
+  rendered by FFmpeg from the source WAV rather than the lossy preview and on
+  logarithmic axes so the sub-400 Hz band stays readable. Frames sharing a start
+  time share an image, which is why 128 detections need 126 files.
+- `species-photos/` holds one reference photograph per species from
+  [iNaturalist](https://www.inaturalist.org/), stored in the package rather than
+  hot-linked so it survives archiving and discloses no reader's address.
+  `credits.json` records each photographer, licence, and source. A photograph
+  shows what a species looks like; it is not evidence that it was present, and
+  nine of these eleven illustrate rows we are asking you to doubt.
+- The multimedia report reuses `lowdom`'s existing `recording-preview-48k/`
+  segments instead of duplicating 62 MB of audio. Selecting a detection plays its
+  three seconds and shows its spectrogram; selecting a species filters the
+  timeline to that species alone.
+- As with `lowdom`, the site reports add navigation and styling, and the bare
+  HTML 4.01 pages the CLI writes are kept alongside them as `report-bare.html`
+  and `report-multimedia-bare.html`.
+
+<p class="software-report-links">
+<a href="/files/software/260115-002-birdidpv/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/detections.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download every detection</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/species.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the species roll-up</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
+</p>
+
 ## Outcome of this test
 
 `soundcite` did its job on this recording: it turned a timestamp into a small
 package with enough information to trace the excerpt back to its sources.
 `lowdom` completed the analysis, and the *provisional* 0.95 threshold produced
-a useful listening split on this take.
+a useful listening split on this take. `birdidpv` then turned that split into a
+listening queue with names attached, and the names are where the caution has to
+move next.
 
-Next, we need to report partial windows and repeat the listening test across
-other recordings, microphones, wind protection and environments. *Low-frequency
-screening* remains more accurate than *wind detection*.
+The three tools now chain: a timestamp becomes a citable package, three hours
+become 135 ranges worth hearing, and those ranges become 128 frames worth
+checking. Each step narrows what a person has to listen to. None of them removes
+the listening, and the 01:41:05 frame is the clearest argument for why.
+
+Next, we need to report partial windows, repeat the listening test across other
+recordings, microphones, wind protection and environments, and run `birdidpv`
+across both tracks rather than one. *Low-frequency screening* remains more
+accurate than *wind detection*, and a *machine identification* remains a
+prompt to listen rather than a record.

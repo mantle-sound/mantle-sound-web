@@ -1,16 +1,13 @@
 {% macro render_software_research_teaser() %}
 {% from "macros/research-cards.html" import render_blog_post %}
 {% set research_hub = site.get('/research') %}
-{% if research_hub %}
-<div class="research-index research-index--compact">
-  <div class="blog-post-bare">
-    <p class="meta">Ongoing project.</p>
-  </div>
+{# Render nothing rather than an empty frame when every entry is hidden. #}
+{% set visible_research = research_hub.children|rejectattr('_hidden')|list if research_hub else [] %}
+{% if visible_research %}
+<div class="research-index research-index--compact" id="software-research">
   <div class="blog-post-cards">
-    {% for child in research_hub.children %}
-      {% if not child._hidden %}
+    {% for child in visible_research %}
       {{ render_blog_post(child, from_index=true) }}
-      {% endif %}
     {% endfor %}
   </div>
 </div>

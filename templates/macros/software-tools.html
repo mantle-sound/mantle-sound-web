@@ -1,0 +1,49 @@
+{#
+  The tools in #field-audio-tools, defined once.
+
+  Both the cards on /software and the sidebar table of contents read this list.
+  They used to keep separate copies, which is how birdidpv came to have a card
+  and an anchor but no entry in the contents. Add a tool here and it appears in
+  both, on desktop and on mobile.
+
+  full_width lets the odd tool out span the two-column grid instead of leaving
+  a half-width gap.
+#}
+{% set SOFTWARE_TOOLS = [
+  {
+    'name': 'soundcite',
+    'demo_url': '/files/software/260115-002-soundcite/index.html',
+    'bg_url': '/files/software/260115-002-soundcite/spectrogram.png',
+    'tags': ['citation', 'excerpt', 'provenance', 'manifest'],
+    'cta_label': 'Open demo package',
+    'line1': 'Extract a time range from long F3 tracks with lossless excerpts and a listening copy.',
+    'line2': 'Writes a spectrogram, manifest.json, and checksums for provenance.',
+    'line3': 'Take 002: audio, spectrogram, and manifest.',
+    'example': 'soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \\\n  --start 01:00:00 --duration 20 --output 260115-002-soundcite',
+    'full_width': false,
+  },
+  {
+    'name': 'lowdom',
+    'demo_url': '/files/software/260115-002-lowdom/report-js.html',
+    'bg_url': '/files/software/260115-002-showcase/recording-rig-on-ice.webp',
+    'tags': ['screening', 'low-frequency', 'windows', 'heuristic'],
+    'cta_label': 'Open interactive report',
+    'line1': 'Score fixed windows for low-frequency dominance on long takes.',
+    'line2': 'Export CSV, JSON, and static or multimedia HTML reports.',
+    'line3': 'Heuristic screening only; not wind probability.',
+    'example': 'lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \\\n  --window 10 --threshold 0.95 --report both --output 260115-002-lowdom',
+    'full_width': false,
+  },
+  {
+    'name': 'birdidpv',
+    'demo_url': '/files/software/260115-002-birdidpv/report-js.html',
+    'bg_url': '/files/software/260115-002-showcase/valley-recording-site.webp',
+    'tags': ['identification', 'BirdNET', 'iNaturalist', 'species', 'machine-listening'],
+    'cta_label': 'Open interactive report',
+    'line1': 'Run BirdNET over a take, or over only the ranges lowdom left unflagged.',
+    'line2': 'Filter the model by position and week, then export detections, a species roll-up, and illustrated HTML reports.',
+    'line3': 'Take 002: 128 detections in 11 species; two of them survive scrutiny.',
+    'example': 'birdidpv 260115_002_Tr1.WAV --intervals 260115-002-lowdom/candidate-clean-intervals.csv \\\n  --lat 29.898 --lon 102.030 --week 3 --min-conf 0.25 \\\n  --photos --spectrograms --report both --output 260115-002-birdidpv',
+    'full_width': true,
+  }
+] %}
