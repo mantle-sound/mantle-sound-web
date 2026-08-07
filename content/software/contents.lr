@@ -16,7 +16,31 @@ Three CLI tools for long Zoom F3 takes: excerpt a timestamped range with *proven
 
 ### Prerequisites
 
-Python 3.11+; FFmpeg (`ffmpeg`, `ffprobe`) on `PATH`; NumPy with the package. Dev install: `pip install -e '.[test]'` from a checkout (no PyPI release yet). `birdidpv` additionally needs `pip install -e '.[birdnet]'`, which pulls in TensorFlow and downloads the BirdNET model on first run; the other two tools are unaffected. GPL-3.0-or-later; alpha until a stable public release.
+- Python 3.11 or newer
+- FFmpeg on `PATH`, both `ffmpeg` and `ffprobe`
+- NumPy, installed with the package
+
+There is no PyPI release yet. Install from a checkout:
+
+<pre class="software-example software-example--noprompt"><code>python -m venv .venv
+. .venv/bin/activate
+python -m pip install -e '.[test]'
+pytest</code></pre>
+
+A checkout on FAT or exFAT has no symbolic links, which `venv` needs for its
+`bin/`. Build the environment on a Linux filesystem instead and point it at the
+checkout:
+
+<pre class="software-example software-example--noprompt"><code>python -m venv ~/.venvs/field-audio-tools
+~/.venvs/field-audio-tools/bin/pip install -e '/path/to/field-audio-tools[test]'</code></pre>
+
+That is all `soundcite` and `lowdom` need. `birdidpv` takes one more extra:
+
+<pre class="software-example"><code>pip install -e '.[birdnet]'</code></pre>
+
+It pulls in TensorFlow, which is much heavier than the rest of the project, and
+downloads the BirdNET model files on first run. Without it `birdidpv` exits with
+an install hint. `soundcite` and `lowdom` are unaffected either way.
 
 ### This note
 
@@ -24,7 +48,7 @@ We ran all three commands on *Take 002*, a three-hour Zoom F3 recording. The not
 
 ### Field and recording setup
 
-The GPX trail to the recording site begins on highway S434 at Yagya Ge, Sichuan, at roughly 3,894 m elevation, with roadside access on the pass before the walk in. It ends at the dome tent at Yema Haizi, about 4,055 m, with Yema Haizi lake to the east of that camp. We were guided by Dong Sheng & Xiao Zhang (local mountain guides in Kangding) and made most of the recordings the next morning.
+The [GPX trail](/files/software/260115-002-showcase/garze-hiking-yema-haizi-mantle-sound.gpx) to the recording site begins on highway S434 at Yagya Ge, Sichuan, at roughly 3,894 m elevation, with roadside access on the pass before the walk in. It ends at the dome tent at Yema Haizi, about 4,055 m, with Yema Haizi lake to the east of that camp. We were guided by Dong Sheng & Xiao Zhang (local mountain guides in Kangding) and made most of the recordings the next morning.
 
 The recording files used in this report were captured at specific positions on Yema Haizi lake itself. The season was suitable and the lake had frozen over. On the northeast side, the ice thinned toward the deeper water shown in <a class="software-report__fig-link" href="#take002-photo-2">Fig. 2</a> and along the shelf leading into the area of <a class="software-report__fig-link" href="#take002-photo-3">Fig. 3</a>; that is, to the right of where I stood in <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a>, where thinning ice and open water were clearly visible. We treated that edge with caution when passing through. Other positions on the lake were safe for extended recording.
 
