@@ -1,0 +1,85 @@
+{
+  "schema": "https://mantle-sound.org/schemas/birdid/0.1",
+  "created_at": "2026-08-06T19:56:45.386035+00:00",
+  "created_by": {
+    "tool": "birdid",
+    "version": "0.1.0"
+  },
+  "model": {
+    "name": "BirdNET",
+    "developers": [
+      "K. Lisa Yang Center for Conservation Bioacoustics, Cornell Lab of Ornithology",
+      "Chemnitz University of Technology"
+    ],
+    "homepage": "https://birdnet.cornell.edu/",
+    "analyzer": "https://birdnet-team.github.io/BirdNET-Analyzer/",
+    "model_license": "CC BY-NC-SA 4.0",
+    "model_license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "source_license": "MIT",
+    "citation": "Kahl, S., Wood, C. M., Eibl, M., & Klinck, H. (2021). BirdNET: A deep learning solution for avian diversity monitoring. Ecological Informatics, 61, 101236.",
+    "note": "Model files are not redistributed with this tool; they are downloaded on first run. Their CC BY-NC-SA 4.0 terms apply to how results are used, including the non-commercial condition. The BirdNET authors state that educational and research purposes count as non-commercial.",
+    "model_name": "BirdNET-Analyzer",
+    "model_version": "2.4",
+    "label_count": 6522,
+    "runner": "birdnetlib",
+    "runner_version": "0.18.1",
+    "frame_seconds": 3.0,
+    "analysis_rate_hz": 48000
+  },
+  "sources": [
+    {
+      "name": "260115_002_Tr1.WAV",
+      "path_as_provided": "/run/media/xeanon/4A21-0000/260115_002_Tr1.WAV",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "codec": "pcm_f32le"
+    }
+  ],
+  "range_source": "lowdom intervals CSV: candidate-clean-intervals.csv",
+  "parameters": {
+    "min_confidence": 0.25,
+    "sensitivity": 1.0,
+    "overlap_seconds": 0.0,
+    "latitude": 29.898,
+    "longitude": 102.03,
+    "week_48": 3,
+    "location_filter_threshold": 0.03,
+    "custom_species_list": null,
+    "track_merge": "maximum confidence per frame and species"
+  },
+  "interpretation": "BirdNET confidence is a model score for a 3-second frame, not a probability and not a verified record. Listen before citing.",
+  "duration_seconds": 10944.0,
+  "duration_timecode": "03:02:24.000",
+  "analysed_range_count": 135,
+  "skipped_short_range_count": 0,
+  "analysed_seconds": 2610.0,
+  "analysed_timecode": "00:43:30.000",
+  "analysed_percent": 23.848684210526315,
+  "detection_count": 128,
+  "species_count": 11,
+  "spectrograms": {
+    "directory": "detection-spectrograms",
+    "source": "260115_002_Tr1.WAV",
+    "size": "560x260",
+    "format": "webp",
+    "minimum_confidence": 0.25,
+    "rendered": 126,
+    "failed": []
+  },
+  "photographs": {
+    "source": "iNaturalist",
+    "directory": "species-photos",
+    "size": "medium",
+    "allowed_licenses": [
+      "cc0",
+      "cc-by",
+      "cc-by-sa",
+      "cc-by-nc",
+      "cc-by-nc-sa",
+      "cc-by-nd",
+      "cc-by-nc-nd"
+    ],
+    "collected": 11,
+    "skipped": []
+  }
+}

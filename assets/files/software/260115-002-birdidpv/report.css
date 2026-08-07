@@ -1,0 +1,478 @@
+.birdidpv-page {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.birdidpv-report {
+  display: block;
+  width: 100%;
+  max-width: var(--content-max-width-wide);
+  margin: 0 auto;
+  padding: 0;
+  font-family: var(--font-m);
+}
+
+.report-breadcrumb {
+  margin: 2px 0 38px;
+  color: var(--fg-dim);
+  font-size: 0.68rem;
+}
+
+.birdidpv-report > h1 {
+  max-width: 800px;
+  margin: 0 0 28px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.birdidpv-report .notice {
+  max-width: 800px;
+  margin: 0 0 34px;
+  padding: 16px 20px;
+  border: 0;
+  border-left: 4px solid var(--link-hover);
+  background: var(--banner-bg);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.birdidpv-report .notice strong {
+  font-weight: 500;
+}
+
+.birdidpv-report dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.7fr) minmax(0, 2.3fr);
+  gap: 0;
+  width: 100%;
+  margin: 0 0 42px;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.birdidpv-report dt,
+.birdidpv-report dd {
+  margin: 0;
+  padding: 11px 0;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.birdidpv-report dt {
+  color: var(--fg-dim);
+  font-family: var(--font-d);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.birdidpv-report dd {
+  font-weight: 300;
+}
+
+.birdidpv-report canvas {
+  display: block;
+  width: 100%;
+  height: 20rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.birdidpv-report canvas[tabindex] {
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.birdidpv-report canvas:focus-visible {
+  outline: 3px solid var(--link-hover);
+  outline-offset: 3px;
+}
+
+.report-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 12px 0 30px;
+  color: var(--fg-dim);
+  font-size: 0.68rem;
+}
+
+.report-swatch {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.4rem;
+  vertical-align: -0.08rem;
+}
+
+.report-explainer {
+  max-width: var(--content-max-width);
+  margin: 0 0 22px;
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.report-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 30px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #d9d9d9;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 768px) {
+  .birdidpv-report > h1 {
+    font-size: 1.75rem;
+  }
+
+  .report-breadcrumb {
+    margin-bottom: 28px;
+  }
+
+  .birdidpv-report dl {
+    grid-template-columns: 104px minmax(0, 1fr);
+  }
+
+  .birdidpv-report canvas {
+    height: 15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .birdidpv-report dt,
+  .birdidpv-report dd {
+    font-size: 0.66rem;
+  }
+
+  .birdidpv-report canvas {
+    height: 12rem;
+  }
+}
+
+/* Detection colours: one hue, deepening with confidence. */
+.report-swatch--strong {
+  background: #144e3a;
+}
+
+.report-swatch--weak {
+  background: #9dc3b2;
+}
+
+.report-swatch--range {
+  background: #dfeee7;
+  border: 1px solid var(--border);
+}
+
+/* Species table.
+   Same language as the metadata list above it: hairline rules, no fills, DIN
+   micro-labels, 300-weight body. Selection is an accent rule, not a block of
+   colour. */
+.birdidpv-report .species-table {
+  width: 100%;
+  margin: 0 0 18px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.birdidpv-report .species-table th,
+.birdidpv-report .species-table td {
+  padding: 11px 14px 11px 0;
+  border-bottom: 1px solid #d9d9d9;
+  text-align: left;
+  font-weight: 300;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.birdidpv-report .species-table th {
+  color: var(--fg-dim);
+  font-family: var(--font-d);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.birdidpv-report .species-table .numeric {
+  text-align: right;
+  padding-right: 22px;
+}
+
+.birdidpv-report .species-table .scientific {
+  display: block;
+  color: var(--fg-dim);
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
+/* Rows are selectable. The cue is the site accent plus a rule in the left
+   margin, so nothing is filled in and no row shifts height. */
+.birdidpv-report .species-table tr.species-row {
+  cursor: pointer;
+}
+
+.birdidpv-report .species-table tr.species-row td:first-child {
+  box-shadow: inset 2px 0 0 transparent;
+  padding-left: 12px;
+}
+
+.birdidpv-report .species-table tr.species-row:hover td,
+.birdidpv-report .species-table tr.species-row.selected td {
+  color: var(--link-hover);
+}
+
+.birdidpv-report .species-table tr.species-row:hover .scientific,
+.birdidpv-report .species-table tr.species-row:hover .flagged-note,
+.birdidpv-report .species-table tr.species-row.selected .scientific,
+.birdidpv-report .species-table tr.species-row.selected .flagged-note {
+  color: inherit;
+}
+
+.birdidpv-report .species-table tr.species-row.selected td:first-child {
+  box-shadow: inset 2px 0 0 var(--link-hover);
+}
+
+.birdidpv-report .species-table tr.species-row:focus-visible {
+  outline: 2px solid var(--link-hover);
+  outline-offset: -2px;
+}
+
+/* Rows to verify by ear. A marginal note, not a badge. */
+.birdidpv-report .species-table .flagged-note {
+  display: block;
+  color: var(--fg-dim);
+  font-size: 0.64rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Reference photographs, unframed. */
+.birdidpv-report .species-table th.species-photo-head {
+  width: 108px;
+}
+
+.birdidpv-report .species-table td.species-photo {
+  padding-right: 18px;
+}
+
+.birdidpv-report .species-photo img {
+  display: block;
+  width: 92px;
+  height: 62px;
+  object-fit: cover;
+}
+
+.birdidpv-report .species-photo a:focus-visible img {
+  outline: 2px solid var(--link-hover);
+  outline-offset: 2px;
+}
+
+.birdidpv-report .species-photo__credit {
+  display: block;
+  width: 92px;
+  margin-top: 5px;
+  color: var(--fg-dim);
+  font-size: 0.58rem;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.birdidpv-report .species-photo__none {
+  display: block;
+  width: 92px;
+  height: 62px;
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  color: var(--fg-dim);
+  font-size: 0.58rem;
+  line-height: 62px;
+  text-align: center;
+}
+
+/* Band measurements. Same rules, narrower. */
+.birdidpv-report .band-table {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 0 24px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--border);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.birdidpv-report .band-table th,
+.birdidpv-report .band-table td {
+  padding: 9px 16px 9px 0;
+  border-bottom: 1px solid #d9d9d9;
+  text-align: right;
+  font-weight: 300;
+}
+
+.birdidpv-report .band-table th:first-child,
+.birdidpv-report .band-table td:first-child {
+  text-align: left;
+}
+
+.birdidpv-report .band-table th {
+  color: var(--fg-dim);
+  font-family: var(--font-d);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .birdidpv-report .species-table {
+    font-size: 0.72rem;
+  }
+
+  .birdidpv-report .species-table th,
+  .birdidpv-report .species-table td {
+    padding: 9px 8px 9px 0;
+  }
+
+  .birdidpv-report .species-table th.species-photo-head {
+    width: 64px;
+  }
+
+  .birdidpv-report .species-photo img,
+  .birdidpv-report .species-photo__none,
+  .birdidpv-report .species-photo__credit {
+    width: 56px;
+  }
+
+  .birdidpv-report .species-photo img,
+  .birdidpv-report .species-photo__none {
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+/* Spectrogram of the selected detection frame, pre-rendered by FFmpeg. */
+.birdidpv-report #spectrogram-panel {
+  margin: 0 0 22px;
+  padding: 12px;
+  background: var(--banner-bg);
+}
+
+.birdidpv-report #spectrogram-panel img {
+  display: block;
+  width: 100%;
+  max-width: 844px;
+  height: auto;
+  margin: 0 auto;
+  /* The spectrum itself is drawn on black; matching the frame avoids a seam. */
+  background: #000;
+  image-rendering: auto;
+}
+
+.birdidpv-report #spectrogram-caption {
+  display: block;
+  max-width: 844px;
+  margin: 8px auto 0;
+  color: var(--fg-dim);
+  font-size: 0.68rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .birdidpv-report #spectrogram-panel {
+    padding: 8px;
+  }
+
+  .birdidpv-report #spectrogram-caption {
+    font-size: 0.62rem;
+  }
+}
+
+/* BirdNET credit. A licence condition, so it is legible rather than fine print. */
+.birdidpv-report .report-credit {
+  max-width: var(--content-max-width);
+  margin: 26px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid #d9d9d9;
+  color: var(--fg-dim);
+  font-size: 0.68rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* The same marker referred to in the prose. */
+.birdidpv-report .report-explainer .flagged-note {
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+/* Bittern reference recordings, served from this package. Same hairline
+   language as the tables: no fills, DIN-free micro-credits under each player. */
+.birdidpv-report .reference-recordings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 26px;
+  max-width: 720px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.birdidpv-report .reference-recording audio {
+  display: block;
+  width: 100%;
+  height: 30px;
+  max-height: 30px;
+}
+
+.birdidpv-report .reference-recording__credit {
+  display: block;
+  margin-top: 5px;
+  color: var(--fg-dim);
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .birdidpv-report .reference-recordings {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.birdidpv-report .reference-recording img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 6px;
+  background: #000;
+}
+
+/* Taxon identifiers. Reuses the species-table rules; only the link row differs. */
+.birdidpv-report .taxon-ids td:first-child {
+  width: 34%;
+}
+
+.birdidpv-report .taxon-ids__links a {
+  display: inline-block;
+  margin: 0 14px 3px 0;
+  white-space: nowrap;
+}
+
+.birdidpv-report .taxon-ids .scientific {
+  margin-top: 1px;
+}

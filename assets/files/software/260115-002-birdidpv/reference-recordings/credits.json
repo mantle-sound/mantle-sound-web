@@ -1,0 +1,62 @@
+{
+  "source": "xeno-canto",
+  "note": "Stored in this package under each recordist's CC licence, not embedded from xeno-canto. Attribution and share-alike terms are the recordists'.",
+  "recordings": [
+    {
+      "id": 891071,
+      "file_name": "xc891071.mp3",
+      "spectrogram": "xc891071.webp",
+      "page": "https://xeno-canto.org/891071",
+      "scientific_name": "Botaurus stellaris",
+      "common_name": "Eurasian Bittern",
+      "type": "song",
+      "length": "0:16",
+      "quality": "A",
+      "location": "Vinderup, Holstebro Municipality, Central Denmark Region, Denmark",
+      "recordist": "Christian Bøggild",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    {
+      "id": 1000766,
+      "file_name": "xc1000766.mp3",
+      "spectrogram": "xc1000766.webp",
+      "page": "https://xeno-canto.org/1000766",
+      "scientific_name": "Botaurus stellaris",
+      "common_name": "Eurasian Bittern",
+      "type": "song",
+      "length": "0:12",
+      "quality": "A",
+      "location": "Fjerritslev, Jammerbugt Municipality, North Denmark Region, Denmark",
+      "recordist": "Christian Bøggild",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    {
+      "id": 832807,
+      "file_name": "xc832807.mp3",
+      "spectrogram": "xc832807.webp",
+      "page": "https://xeno-canto.org/832807",
+      "scientific_name": "Botaurus stellaris",
+      "common_name": "Eurasian Bittern",
+      "type": "song",
+      "length": "0:14",
+      "quality": "A",
+      "location": "Svalovychi, Lyubeshivs'kyi district, Volyn Oblast, Ukraine",
+      "recordist": "Cedric Mroczko",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    },
+    {
+      "id": 741523,
+      "file_name": "xc741523.mp3",
+      "spectrogram": "xc741523.webp",
+      "page": "https://xeno-canto.org/741523",
+      "scientific_name": "Botaurus stellaris",
+      "common_name": "Eurasian Bittern",
+      "type": "song",
+      "length": "0:18",
+      "quality": "A",
+      "location": "Gmina Lubasz (near  Krucz), Czarnków-Trzcianka County, Greater Poland Voivodeship, Poland",
+      "recordist": "Romuald Mikusek",
+      "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    }
+  ]
+}
