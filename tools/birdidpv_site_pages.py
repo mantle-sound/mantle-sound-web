@@ -194,6 +194,19 @@ def read_photos() -> dict[str, dict]:
     return {p["scientific_name"]: p for p in payload["photos"]}
 
 
+# The same map pin the location line uses, minus its width/height so it can be
+# sized in em against the small credit text. currentColor picks up --fg-dim.
+LOCATION_PIN = (
+    '<svg class="software-recording-location__icon"'
+    ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"'
+    ' stroke="currentColor" stroke-width="1.75" stroke-linecap="round"'
+    ' stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10z"/>'
+    '<circle cx="12" cy="11" r="2.25"/>'
+    "</svg>"
+)
+
+
 def read_reference_recordings() -> list[dict]:
     """The Bittern comparison recordings, stored in the package."""
     path = BIRDID_REFS / "credits.json"
@@ -227,8 +240,12 @@ def reference_players() -> str:
             "</audio>\n"
             '      <span class="reference-recording__credit">'
             f'<a href="{html.escape(r["page"], quote=True)}">XC{r["id"]}</a> · '
+            # xeno-canto's own player, where the recording sits with its
+            # sonogram, map and full metadata.
+            f'<a href="{html.escape(r["page"], quote=True)}/player">player</a> · '
             f'{html.escape(r["recordist"] or "unknown")} · '
-            f"{html.escape(country)} · CC {html.escape(licence)}</span>\n"
+            f"{LOCATION_PIN}{html.escape(country)} · CC {html.escape(licence)}"
+            "</span>\n"
             "    </li>"
         )
     return (
