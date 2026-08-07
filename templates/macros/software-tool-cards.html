@@ -22,44 +22,29 @@
 </div>
 {% endmacro %}
 
-{% macro render_tool_column(title, demo_url, bg_url, tags, cta_label, line1, line2, line3, example_cmd) %}
-<section class="software-tool-column" id="{{ title }}" aria-labelledby="software-tool-{{ title }}-heading">
+{% macro render_tool_column(title, demo_url, bg_url, tags, cta_label, line1, line2, line3, example_cmd, full_width=false) %}
+<section class="software-tool-column{% if full_width %} software-tool-column--full{% endif %}" id="{{ title }}" aria-labelledby="software-tool-{{ title }}-heading">
   {{ render_tool_card(title, demo_url, bg_url, tags, cta_label, line1, line2, line3) }}
   <pre class="software-example software-example--paired"><code>{{ example_cmd }}</code></pre>
 </section>
 {% endmacro %}
 
 {% macro render_software_tool_cards() %}
-{% set soundcite_example -%}
-soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
-  --start 01:00:00 --duration 20 --output 260115-002-soundcite
-{%- endset %}
-{% set lowdom_example -%}
-lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
-  --window 10 --threshold 0.95 --report both --output 260115-002-lowdom
-{%- endset %}
+{% import "macros/software-tools.html" as tools %}
 <div class="software-tools-grid">
+  {% for tool in tools.SOFTWARE_TOOLS %}
   {{ render_tool_column(
-    'soundcite',
-    '/files/software/260115-002-soundcite/index.html',
-    '/files/software/260115-002-soundcite/spectrogram.png',
-    ['citation', 'excerpt', 'provenance', 'manifest'],
-    'Open demo package',
-    'Extract a time range from long F3 tracks with lossless excerpts and a listening copy.',
-    'Writes a spectrogram, manifest.json, and checksums for provenance.',
-    'Take 002: audio, spectrogram, and manifest.',
-    soundcite_example
+    tool.name,
+    tool.demo_url,
+    tool.bg_url,
+    tool.tags,
+    tool.cta_label,
+    tool.line1,
+    tool.line2,
+    tool.line3,
+    tool.example,
+    tool.full_width
   ) }}
-  {{ render_tool_column(
-    'lowdom',
-    '/files/software/260115-002-lowdom/report-js.html',
-    '/files/software/260115-002-showcase/recording-rig-on-ice.webp',
-    ['screening', 'low-frequency', 'windows', 'heuristic'],
-    'Open interactive report',
-    'Score fixed windows for low-frequency dominance on long takes.',
-    'Export CSV, JSON, and static or multimedia HTML reports.',
-    'Heuristic screening only; not wind probability.',
-    lowdom_example
-  ) }}
+  {% endfor %}
 </div>
 {% endmacro %}

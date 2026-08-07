@@ -1,16 +1,20 @@
-{% macro software_sidebar(page) %}
+{% macro toc_entries(page, software_hub, intro_toc) %}
 {% from "macros/software-tool-mark.html" import software_tool_mark %}
-{% set software_hub = site.get('/software') %}
-{% set intro_toc = software_hub.intro.toc if software_hub and software_hub.intro else none %}
-{% set has_toc = page._path == '/software' or intro_toc or page.body.toc %}
-<nav class="toc" aria-label="Table of contents">
-  {% if has_toc %}
-  <h4>Table Of Contents</h4>
+{% import "macros/software-tools.html" as tools %}
   <ul>
     {% if page._path == '/software' %}
+    {# The hub is a landing page, so its contents are its sections rather than
+       headings: the case study, one entry per tool, and the research teaser.
+       The tools come from the shared list so this cannot fall behind the
+       cards again. #}
     <li class="toc-item-featured"><a href="/software/running-field-audio-tools-on-a-long-f3-take/">Case study with tools</a></li>
-    <li><a href="#soundcite">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>soundcite</code></a></li>
-    <li><a href="#lowdom">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>lowdom</code></a></li>
+    {% for tool in tools.SOFTWARE_TOOLS %}
+    <li><a href="#{{ tool.name }}">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>{{ tool.name }}</code></a></li>
+    {% endfor %}
+    {% set research_hub = site.get('/research') %}
+    {% if research_hub and research_hub.children|rejectattr('_hidden')|list %}
+    <li><a href="#software-research">Related research</a></li>
+    {% endif %}
     {% endif %}
     {% if page._path != '/software' and intro_toc %}
     {% for item in intro_toc recursive %}
@@ -25,30 +29,24 @@
     {% endfor %}
     {% endif %}
   </ul>
+{% endmacro %}
+
+{% macro software_sidebar(page) %}
+{% set software_hub = site.get('/software') %}
+{% set intro_toc = software_hub.intro.toc if software_hub and software_hub.intro else none %}
+{% set has_toc = page._path == '/software' or intro_toc or page.body.toc %}
+{# Desktop and mobile render the same entries. They were duplicated here, which
+   is the other half of why the tool list went stale. #}
+<nav class="toc" aria-label="Table of contents">
+  {% if has_toc %}
+  <h4>Table Of Contents</h4>
+  {{ toc_entries(page, software_hub, intro_toc) }}
   {% endif %}
 </nav>
 <nav class="toc software-project-nav-mobile" aria-label="Table of contents">
   {% if has_toc %}
   <h4>Table Of Contents</h4>
-  <ul>
-    {% if page._path == '/software' %}
-    <li class="toc-item-featured"><a href="/software/running-field-audio-tools-on-a-long-f3-take/">Case study with tools</a></li>
-    <li><a href="#soundcite">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>soundcite</code></a></li>
-    <li><a href="#lowdom">{{ software_tool_mark('software-tool-mark software-tool-mark--toc') }}<code>lowdom</code></a></li>
-    {% endif %}
-    {% if page._path != '/software' and intro_toc %}
-    {% for item in intro_toc recursive %}
-    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
-      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
-    {% endfor %}
-    {% endif %}
-    {% if page.body.toc %}
-    {% for item in page.body.toc recursive %}
-    <li><a href="#{{ item.anchor }}">{{ item.title }}</a>{%
-      if item.children %}<ul>{{ loop(item.children) }}</ul>{% endif %}</li>
-    {% endfor %}
-    {% endif %}
-  </ul>
+  {{ toc_entries(page, software_hub, intro_toc) }}
   {% endif %}
 </nav>
 {% endmacro %}
