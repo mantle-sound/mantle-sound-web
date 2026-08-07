@@ -3,3 +3,6 @@ _site
 
 # Firecrawl scrape cache
 .firecrawl
+# Python bytecode from tools/
+__pycache__/
+*.pyc
