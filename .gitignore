@@ -1,8 +1,10 @@
 _site
 .DS_Store
 
-# Firecrawl scrape cache
-.firecrawl
 # Python bytecode from tools/
 __pycache__/
 *.pyc
+
+# Hide every dot file. Tracked ones (.gitignore, .faircamp_cache) are
+# unaffected: ignore rules do not apply to files already in the index.
+.*
