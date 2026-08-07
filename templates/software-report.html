@@ -13,7 +13,7 @@
     {% from "macros/software-route-start.html" import render_take002_route_notes %}
     {{ render_take002_route_notes() }}
   </div>
-  <p class="meta">written by {{ this.author }} on {{ this.pub_date }}</p>
+  <p class="meta">written by {{ this.author }} on {{ this.pub_date }}{% if this.updated and this.updated != this.pub_date %}, last updated {{ this.updated }}{% endif %}</p>
   {% from "macros/software-showcase-gallery.html" import render_take002_showcase_gallery %}
   {{ render_take002_showcase_gallery() }}
   {% set software_hub = site.get('/software') %}
