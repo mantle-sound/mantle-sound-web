@@ -476,3 +476,13 @@
 .birdidpv-report .taxon-ids .scientific {
   margin-top: 1px;
 }
+
+/* Map pin before the recording locality. Sized in em so it tracks the small
+   credit text; currentColor takes the surrounding --fg-dim. */
+.birdidpv-report .reference-recording__credit .software-recording-location__icon {
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.15em;
+  vertical-align: -0.2em;
+}
