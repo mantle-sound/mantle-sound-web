@@ -1,45 +1,85 @@
+{#
+  Take 002 field photographs.
+
+  One markup, two presentations: a 2x2 grid on wide viewports, and the same
+  carousel the homepage uses on phones, driven by the same home-gallery.js.
+  The script needs only the viewport/track/slide structure and a
+  data-home-gallery root, so nothing here is homepage-specific.
+
+  Every slide carries the credit, not just the last one: in the carousel a
+  slide is seen on its own, so a single caption on the fourth photograph would
+  leave three of them unattributed.
+
+  The anchors the prose links to (Fig. 2, 3, 4) sit on the slide rather than on
+  the image, so they survive in both presentations; .software-report__gallery-cell[id]
+  already carries the scroll-margin and :target rules.
+#}
 {% macro render_take002_showcase_gallery(class_name='software-report__gallery') %}
-<div class="{{ class_name }}" aria-label="Take 002 field recording photographs">
-  <img
-    class="software-report__gallery-photo"
-    src="/files/software/260115-002-showcase/recording-rig-on-ice.webp"
-    width="1200"
-    height="677"
-    alt="Field recorder and microphones set up on a frozen alpine lake"
-    fetchpriority="high">
-  <img
-    class="software-report__gallery-photo"
-    id="take002-photo-2"
-    src="/files/software/260115-002-showcase/frozen-lake.webp"
-    width="1200"
-    height="677"
-    alt="Frozen alpine lake surrounded by steep mountain slopes"
-    loading="lazy">
-  <img
-    class="software-report__gallery-photo"
-    id="take002-photo-3"
-    src="/files/software/260115-002-showcase/valley-recording-site.webp"
-    width="1200"
-    height="677"
-    alt="Microphone stand at the recording site in a high mountain valley"
-    loading="lazy">
-  <div class="software-report__gallery-cell" id="take002-photo-4">
-    <img
-      class="software-report__gallery-photo"
-      src="/files/software/260115-002-showcase/recordist-by-lake.webp"
-      width="1200"
-      height="677"
-      alt="Recordist working beside a frozen alpine lake"
-      loading="lazy">
-    <div class="caption software-report__gallery-caption">
-      <span class="software-report__gallery-caption-text">MAN Network, CC BY-NC-SA 4.0</span>
-      <span class="cc-icons">
-        <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
-        <img src="/files/cc-icons/by.svg" alt="Attribution">
-        <img src="/files/cc-icons/nc.svg" alt="NonCommercial">
-        <img src="/files/cc-icons/sa.svg" alt="ShareAlike">
-      </span>
+{% set photos = [
+  {
+    'src': '/files/software/260115-002-showcase/recording-rig-on-ice.webp',
+    'alt': 'Field recorder and microphones set up on a frozen alpine lake',
+    'id': none,
+    'eager': true,
+  },
+  {
+    'src': '/files/software/260115-002-showcase/frozen-lake.webp',
+    'alt': 'Frozen alpine lake surrounded by steep mountain slopes',
+    'id': 'take002-photo-2',
+    'eager': false,
+  },
+  {
+    'src': '/files/software/260115-002-showcase/valley-recording-site.webp',
+    'alt': 'Microphone stand at the recording site in a high mountain valley',
+    'id': 'take002-photo-3',
+    'eager': false,
+  },
+  {
+    'src': '/files/software/260115-002-showcase/recordist-by-lake.webp',
+    'alt': 'Recordist working beside a frozen alpine lake',
+    'id': 'take002-photo-4',
+    'eager': false,
+  }
+] %}
+<div
+  class="{{ class_name }} home-gallery"
+  data-home-gallery
+  tabindex="0"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Take 002 field recording photographs">
+  <div class="home-gallery__stack">
+    <div class="home-gallery__viewport">
+      <div class="home-gallery__track">
+        {% for photo in photos %}
+        <figure class="home-gallery__slide software-report__gallery-cell"{% if photo.id %} id="{{ photo.id }}"{% endif %}>
+          <img
+            class="software-report__gallery-photo"
+            src="{{ photo.src }}"
+            width="1200"
+            height="677"
+            alt="{{ photo.alt }}"
+            {% if photo.eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+          <div class="caption software-report__gallery-caption">
+            <span class="software-report__gallery-caption-text">MAN Network, CC BY-NC-SA 4.0</span>
+            <span class="cc-icons">
+              <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
+              <img src="/files/cc-icons/by.svg" alt="Attribution">
+              <img src="/files/cc-icons/nc.svg" alt="NonCommercial">
+              <img src="/files/cc-icons/sa.svg" alt="ShareAlike">
+            </span>
+          </div>
+        </figure>
+        {% endfor %}
+      </div>
+      <button type="button" class="home-gallery__prev" aria-label="Previous photograph"><span aria-hidden="true">‹</span></button>
+      <button type="button" class="home-gallery__next" aria-label="Next photograph"><span aria-hidden="true">›</span></button>
     </div>
+  </div>
+  <div class="home-gallery__dots" role="tablist" aria-label="Gallery pagination">
+    {% for photo in photos %}
+    <button type="button" class="home-gallery__dot{% if loop.first %} is-active{% endif %}" role="tab" aria-label="Photograph {{ loop.index }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}"></button>
+    {% endfor %}
   </div>
 </div>
 {% endmacro %}

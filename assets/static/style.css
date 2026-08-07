@@ -2734,11 +2734,49 @@ body:has(.page-with-toc) .software-report {
   margin: 0 0 28px;
 }
 
+/* One markup, two presentations. Below 621px the home-gallery CSS and
+   home-gallery.js drive a carousel; above it the track becomes the 2x2 grid
+   and the carousel controls go away. The two !important declarations override
+   inline styles the script writes (a track transform and a measured viewport
+   height), which is the price of sharing one script. */
 .software-report__gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
   margin: 28px 0 22px;
+}
+
+.software-report__gallery .home-gallery__slide img {
+  filter: none;
+}
+
+@media (min-width: 621px) {
+  .software-report__gallery .home-gallery__viewport {
+    overflow: visible;
+    height: auto !important;
+  }
+
+  .software-report__gallery .home-gallery__track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    height: auto;
+    transition: none;
+    transform: none !important;
+  }
+
+  .software-report__gallery .home-gallery__slide {
+    flex: none;
+    height: auto;
+  }
+
+  .software-report__gallery .home-gallery__slide img {
+    height: auto;
+    aspect-ratio: 1200 / 677;
+  }
+
+  .software-report__gallery .home-gallery__prev,
+  .software-report__gallery .home-gallery__next,
+  .software-report__gallery .home-gallery__dots {
+    display: none;
+  }
 }
 
 .software-report__gallery > img.software-report__gallery-photo,
