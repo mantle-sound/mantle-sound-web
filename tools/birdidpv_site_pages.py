@@ -239,9 +239,12 @@ def reference_players() -> str:
         "their recordists' CC BY-NC-SA licences rather than embedded from "
         "xeno-canto, so the comparison survives archiving and no reader's "
         "address is disclosed to make it. The spectrograms are re-rendered here "
-        "with the same axes and scaling as the detection frames above, because "
-        "two pictures drawn to different rules cannot be set side by side; "
-        "xeno-canto's own sonograms use a different frequency axis.</p>"
+        "with the same axes and scaling as the detection frames above. "
+        "xeno-canto draws its own on a linear frequency axis, which suits the "
+        "wide scrubbing strip in its player but leaves the boom as a thin line "
+        "along the bottom while the background birds fill the frame. Put next "
+        "to a detection from this take, the same sound would look like a "
+        "different one.</p>"
     )
 
 
