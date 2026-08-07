@@ -294,6 +294,68 @@ frame. That is the next thing to do.
 <a href="/files/software/260115-002-birdidpv/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/detections.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download every detection</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/species.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the species roll-up</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
+### Using `soundcite` after `birdidpv`
+
+The excerpt at the [top of this test](#making-a-small-self-describing-excerpt-by-soundcite)
+starts at 01:00:00. We chose that time from the clock, before we had looked at
+the recording. It shows what the output format is, not what is in the take.
+
+After `birdidpv` there is a better time to cut. Sort `detections.csv` by time
+and the longest unbroken run in the take starts at 00:40:29: seven frames back
+to back, all *Pyrrhocorax pyrrhocorax*, scoring 0.9863 to 0.9998. The single
+highest frame in the whole take sits inside it, at 00:40:35. A run is better
+evidence than one frame, so cut from the start of the run rather than from its
+best frame. `detections.csv` stores that time as `start_timecode` in
+`HH:MM:SS.mmm`, which is one of the formats `--start` accepts, so the value can
+be copied straight across:
+
+<pre class="software-example"><code>soundcite 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
+  --start 00:40:29.000 \
+  --duration 21 \
+  --pad-start 3 \
+  --pad-end 4 \
+  --title "Take 002 - Red-billed Chough at 00:40:29" \
+  --recordist "Gewenxin Yu" \
+  --recorded-at "2026-01-15T12:59:54+08:00" \
+  --location "Yema Haizi, Kangding, Sichuan" \
+  --license "CC BY-NC-SA 4.0" \
+  --notes "Seven consecutive BirdNET frames identified Pyrrhocorax pyrrhocorax here, scoring 0.9863 to 0.9998. Recorded with two Primo EM273 omni-directional microphones (-37 dB +/- 3 dB at 1 kHz, 80 dB S/N ratio, 60 Hz ~ 20 kHz) connected to a Zoom F3." \
+  --output 260115-002-chough-004029</code></pre>
+
+`--duration 21` covers the seven frames. The two `--pad` values keep three
+seconds before them and four after, because 00:40:29 is a frame boundary, not
+the moment the bird began. BirdNET only says the call falls somewhere inside
+those three seconds, so cutting exactly on the line can clip the first call.
+
+The written excerpt therefore runs 00:40:26 to 00:40:54, starting at sample
+116448000. `manifest.json` keeps the two ranges apart: the top level describes
+the 28 seconds in the WAV, because that is what the checksums cover, while
+`clip.cited` records the 21 seconds being cited. The excerpt is lossless and
+links back to both source tracks.
+
+<div class="report-controls">
+  <audio controls preload="metadata" src="/files/software/260115-002-chough-004029/preview.ogg"></audio>
+</div>
+<p class="software-report__media-caption">
+    The 28 seconds this section keeps pointing at: the 21 seconds being cited,
+    plus three seconds before and four after. This player uses the lossy
+    preview; the two 32-bit float WAV excerpts in the package are what the
+    checksums and the spectrogram are taken from.
+</p>
+
+Set `--duration` to cover the last frame you want, then use `--pad` for
+listening room around it. `--pad` sets both ends at once; `--pad-start` and
+`--pad-end` override it when the two differ.
+
+This step is manual. Before citing a time you have to listen to it, and the
+[0.93 that was a person](#the-most-confident-bird-in-three-hours-is-a-person)
+shows why. A script that sent detections straight to `soundcite` would have
+built an evidence package for a shout.
+
+<p class="software-report-links">
+<a href="/files/software/260115-002-chough-004029/index.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/spectrogram.png">See its spectrogram</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/SHA256SUMS">Verify its checksums</a>
+</p>
+
 ## Outcome of this test
 
 `soundcite` did its job on this recording: it turned a timestamp into a small
@@ -303,10 +365,13 @@ a useful listening split on this take. `birdidpv` then turned that split into a
 listening queue with names attached, and the names are where the caution has to
 move next.
 
-The three tools now chain: a timestamp becomes a citable package, three hours
-become 135 ranges worth hearing, and those ranges become 128 frames worth
-checking. Each step narrows what a person has to listen to. None of them removes
-the listening, and the 01:41:05 frame is the clearest argument for why.
+The three tools now form a loop rather than a line. Three hours become 135
+ranges worth hearing, those ranges become 128 frames worth checking, and the
+frames that hold up go back to `soundcite` as times worth citing. Each step
+cuts down what a person has to listen to. Only the first step is automatic:
+`birdidpv` reads the CSV `lowdom` writes. The step back to `soundcite` is
+manual, by choice. None of this removes the listening, and the 01:41:05 frame
+shows why.
 
 Next, we need to report partial windows, repeat the listening test across other
 recordings, microphones, wind protection and environments, and run `birdidpv`
