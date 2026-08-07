@@ -6,6 +6,8 @@ author: Gewenxin Yu
 ---
 pub_date: 2026-07-24
 ---
+updated: 2026-08-07
+---
 _template: software-report.html
 ---
 body:
@@ -257,9 +259,22 @@ frame. That is the next thing to do.
 - `summary.json` records the source, the ranges analysed, the position and week
   used to filter, and every other setting of the run.
 - `detection-spectrograms/` holds 126 WebP images, one per detected frame.
-  FFmpeg made them from the source WAV, not from the lossy preview, on
-  logarithmic axes so the band below 400 Hz stays readable. Frames that start at
-  the same time share an image, so 128 detections need only 126 files.
+  FFmpeg made them from the source WAV, not from the lossy preview. Frames that
+  start at the same time share an image, so 128 detections need only 126 files.
+  Each one is a single call, here the Red-billed Chough frame at 00:40:35:
+
+<pre class="software-example"><code>ffmpeg -ss 2435 -t 3 -i 260115_002_Tr1.WAV \
+  -lavfi "[0:a:0]showspectrumpic=s=560x260:legend=1:scale=log:fscale=log:color=intensity" \
+  -frames:v 1 frame-002435000.webp</code></pre>
+
+  `fscale=log` is the part that decides what you see. On a linear frequency axis
+  the whole band below 500 Hz collapses into a line at the bottom of the image,
+  and that band is where the ice sits and where most of these detections are
+  argued about. `scale=log` does the same for amplitude, and `legend=1` prints
+  the frequency, time and dBFS axes. `s=560x260` sets the spectrum area; the
+  legend adds roughly 280x130 around it, so the files are 844x388. The four
+  xeno-canto recordings above are rendered with the same call, over their full
+  length instead of three seconds.
 - `species-photos/` holds one reference photograph per species from
   [iNaturalist](https://www.inaturalist.org/), kept in the package instead of
   hot-linked, so the page still works if it is saved and no one else learns who
