@@ -322,17 +322,14 @@ prompt to listen rather than a record.
 
 2. xeno-canto. Four Eurasian Bittern (*Botaurus stellaris*) recordings, used
    for the listening comparison in [What came back](#what-came-back):
-   <a href="https://xeno-canto.org/891071">XC891071</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/1000766">XC1000766</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/832807">XC832807</a> (Cedric Mroczko, Ukraine), <a href="https://xeno-canto.org/741523">XC741523</a> (Romuald Mikusek, Poland). All CC BY-NC-SA 4.0, and kept in the `birdidpv` package under those
-   terms rather than embedded from xeno-canto.
+   <a href="https://xeno-canto.org/891071">XC891071</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/1000766">XC1000766</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/832807">XC832807</a> (Cedric Mroczko, Ukraine), <a href="https://xeno-canto.org/741523">XC741523</a> (Romuald Mikusek, Poland).
 
 3. iNaturalist. Eleven reference photographs, one per detected species, by
-   Pavel Shukov (CC-BY-NC), egorbirder (CC-BY), Joe Bourget (CC-BY-NC), Tatyana Zarubo (CC-BY-NC), Анна Голубева (CC-BY-NC-ND), Frans Vandewalle (CC-BY-NC), Wei Li Jiang (CC-BY-NC), zametnya (CC-BY-NC), anonymous (CC-BY-SA), thegreatdodo (CC-BY-NC), Frank Sengpiel (CC-BY). Each file, its licence, and its source URL are recorded in
-   `species-photos/credits.json`.
+   Pavel Shukov, egorbirder, Joe Bourget, Tatyana Zarubo, Анна Голубева, Frans Vandewalle, Wei Li Jiang, zametnya, one anonymous, thegreatdodo and Frank Sengpiel. Licences and source URLs are in `species-photos/credits.json`.
 
 4. Wikidata. Taxon identifiers for the eleven species, matched on iNaturalist
    taxon ID and resolved to Avibase, eBird, GBIF, ITIS, IUCN, EOL and
-   iNaturalist. Wikidata content is CC0; the databases the identifiers point at
-   carry their own terms.
+   iNaturalist.
 
 <pre class="software-example software-example--noprompt"><code>@article{kahl2021birdnet,
   title={BirdNET: A deep learning solution for avian diversity monitoring},
