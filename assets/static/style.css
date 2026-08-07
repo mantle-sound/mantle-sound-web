@@ -79,13 +79,15 @@ html,body {
     font-family: var(--font-m);
     color: var(--fg);
     background: var(--bg);
+    /* Must stay on body, not on body's children. A filter on a child makes it
+       the containing block for position:fixed descendants and a stacking
+       context of its own — which put the fixed hamburger inside .nav-box
+       instead of the viewport, and trapped the report hover panels beneath the
+       navbar however high their z-index. */
+    filter: saturate(135%);
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-}
-
-body > :not(.header-mascot) {
-  filter: saturate(135%);
 }
 
 logo {
@@ -462,7 +464,9 @@ header {
     transition: opacity 0.22s ease, visibility 0.22s ease;
     transform: scaleX(-1);
     transform-origin: center bottom;
-    filter: invert(1);
+    /* saturate(0.741) cancels the 135% inherited from body, which is why the
+       mascot was excluded from it in the first place. */
+    filter: invert(1) saturate(0.741);
   }
 
   body.has-scroll-mascot .header-mascot {
@@ -2033,14 +2037,20 @@ blockquote::after {
       margin-bottom: 36px;
       align-items: stretch;
     }
-    .home-sections .home-intro__text {
+    /* Stacked, every section reads the same way: heading and text, then the
+       image. .home-intro--reverse is one class more specific and a media query
+       adds no specificity of its own, so it has to be named here or the
+       reversed section alone keeps its desktop image-first order. */
+    .home-sections .home-intro__text,
+    .home-sections .home-intro--reverse .home-intro__text {
       order: 1;
       flex: none;
       width: 100%;
       max-width: 100%;
       padding: 0;
     }
-    .home-sections .home-intro__image {
+    .home-sections .home-intro__image,
+    .home-sections .home-intro--reverse .home-intro__image {
       order: 2;
       flex: none;
       width: 100%;
@@ -2366,6 +2376,11 @@ body ul li img.social-media-icon {
   max-width: var(--content-max-width-wide);
   margin: 0 0 2rem;
   box-sizing: border-box;
+}
+
+/* An odd tool out spans the row rather than leaving a half-width gap. */
+.software-tool-column--full {
+  grid-column: 1 / -1;
 }
 
 @media (max-width: 1300px) {
@@ -2772,7 +2787,10 @@ body:has(.page-with-toc) .software-report {
   left: 50%;
   bottom: calc(100% + 0.45rem);
   transform: translateX(-50%);
-  z-index: 30;
+  /* These open upward, into the path of the sticky navbar (z-index 1000) and
+     its hamburger (1001). A popover has to sit above the chrome it overlaps,
+     and this one is only ever painted while hovered, focused, or open. */
+  z-index: 1100;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -2898,7 +2916,10 @@ body:has(.page-with-toc) .software-report {
   line-height: 1.45;
 }
 
-:is(.software-report-links, .lowdom-report .report-links) a {
+/* Any package report links row. Generalised from a per-package list so a
+   new package cannot silently lose the icon alignment. inline-flex is
+   what keeps an icon from wrapping away from its label. */
+:is(.software-report-links, .report-links) a {
   display: inline-flex;
   align-items: center;
   gap: 0.32em;
@@ -3274,4 +3295,26 @@ body:has(.page-with-toc) .software-report {
 
 .toc .toc-item-featured a:hover {
   color: var(--link-hover);
+}
+
+/* The tool mark on report section headings.
+   Drawn with ::before rather than an <img> in the markdown: the heading-anchor
+   plugin builds slugs from the raw heading source, so inline HTML there turns
+   #asking-what-is-in-the-clean-windows-by-birdidpv into forty characters of
+   escaped tag. h2 > code:last-child is the heading-named-after-a-tool shape;
+   a mid-sentence `code` span, as in "Two gaps in `lowdom` output", is not. */
+.software-report h2 > code:last-child::before {
+  content: "";
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.32em;
+  vertical-align: -0.18em;
+  background: url('/static/field-audio-tools-mark.svg') no-repeat center;
+  background-size: contain;
+}
+
+.software-report h2 > code:last-child {
+  font-family: inherit;
+  font-size: inherit;
 }
