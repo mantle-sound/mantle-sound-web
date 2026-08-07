@@ -2451,6 +2451,18 @@ body:has(.page-with-toc) .software-tools-grid {
   display: none;
 }
 
+/* No shell prompt. The $ is drawn with an absolutely positioned ::before, so
+   it can only ever mark the first line, which is wrong for a sequence of
+   separate commands and wrong for anything that is not a command at all.
+   Dropping it also means the block copies cleanly. */
+.software-example--noprompt code {
+  padding-left: 22px;
+}
+
+.software-example--noprompt code::before {
+  content: none;
+}
+
 .software-tool-card--bg {
   position: relative;
   overflow: hidden;
@@ -3326,7 +3338,10 @@ body:has(.page-with-toc) .software-report {
   color: var(--link-hover);
 }
 
-/* The tool mark on report section headings.
+/* The tool mark on report section headings. This replaced software-tool-mark.js,
+   which injected an <img> for a hardcoded list of tool names — a list that never
+   gained birdidpv, and that briefly produced two marks per heading once this
+   rule existed as well.
    Drawn with ::before rather than an <img> in the markdown: the heading-anchor
    plugin builds slugs from the raw heading source, so inline HTML there turns
    #asking-what-is-in-the-clean-windows-by-birdidpv into forty characters of
@@ -3346,4 +3361,15 @@ body:has(.page-with-toc) .software-report {
 .software-report h2 > code:last-child {
   font-family: inherit;
   font-size: inherit;
+}
+
+/* In-page links carry a small orange # so a reader can tell before clicking
+   that the link stays on this page. Scoped to the article body: the contents
+   block in the sidebar is twenty of these in a row, where the mark would be
+   noise rather than a signal. ::before keeps it out of copied text. */
+.software-report a[href^="#"]::before {
+  content: "#";
+  margin-right: 0.1em;
+  color: var(--link-hover);
+  font-weight: 500;
 }
