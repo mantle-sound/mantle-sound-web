@@ -10,11 +10,31 @@ intro:
 
 ## Background
 
-### Tools
+### Info about the selected recording file
+
+We ran all three commands on *Take 002*, a three-hour Zoom F3 recording. The notes below cover the input, the files written, and two gaps we found in `lowdom` reporting and threshold calibration.
+
+#### Field details
+
+The [GPX trail](/files/software/260115-002-showcase/garze-hiking-yema-haizi-mantle-sound.gpx) to the recording site begins on <a class="software-report__fig-link" href="/files/software/260115-002-showcase/highway-s434-yagya-ge.webp">highway S434<span class="software-report__fig-preview" aria-hidden="true"><img src="/files/software/260115-002-showcase/highway-s434-yagya-ge.webp" alt="" width="240" height="135" loading="lazy" decoding="async"></span></a> at Yagya Ge, Sichuan, at roughly 3,894 m elevation, with roadside access on <a class="software-report__fig-link" href="/files/software/260115-002-showcase/pass-roadside-gabions.webp">the pass<span class="software-report__fig-preview" aria-hidden="true"><img src="/files/software/260115-002-showcase/pass-roadside-gabions.webp" alt="" width="240" height="135" loading="lazy" decoding="async"></span></a> before <a class="software-report__fig-link" href="/files/software/260115-002-showcase/cloud-over-the-valley.webp">the walk in<span class="software-report__fig-preview" aria-hidden="true"><img src="/files/software/260115-002-showcase/cloud-over-the-valley.webp" alt="" width="240" height="135" loading="lazy" decoding="async"></span></a>. It ends at the dome tent at Yema Haizi, about 4,055 m, with Yema Haizi lake to the east of that camp. We were guided by <a class="software-report__fig-link" href="/files/software/260115-002-showcase/guide-on-horseback.webp">Dong Sheng<span class="software-report__fig-preview" aria-hidden="true"><img src="/files/software/260115-002-showcase/guide-on-horseback.webp" alt="" width="240" height="135" loading="lazy" decoding="async"></span></a> &amp; Xiao Zhang (local mountain guides in Kangding) and made most of the recordings the next morning.
+
+The recording files used in this report were captured at specific positions on Yema Haizi lake itself. The season was suitable and the lake had frozen over. On the northeast side, the ice thinned toward the deeper water shown in <a class="software-report__fig-link" href="#take002-photo-2">Fig. 2</a> and along the shelf leading into the area of <a class="software-report__fig-link" href="#take002-photo-3">Fig. 3</a>; that is, to the right of where I stood in <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a>, where thinning ice and open water were clearly visible. We treated that edge with caution when passing through. Other positions on the lake were safe for extended recording.
+
+In fact, melting ice that season produced especially vivid sounds. Our local guides call the phenomenon *long hou* (“dragon roar”); people who live in the area know it well. On the <a href="/files/software/260115-002-lowdom/report-js.html">multimedia report</a>, that signature is easy to find in green bar areas (it is of course not limited to them). It sits within the wider biological soundscape of the basin in a way that still feels astonishing.
+
+Those same green bars are what we handed to `birdidpv`. Running BirdNET over the 135 unflagged ranges, 43 minutes of the three-hour take, returned 128 detections in 11 species. Red-billed Chough and Large-billed Crow account for 99 of them and are unambiguous. The other nine are all deep-voiced waterbirds, on a lake that had frozen over, and we think most of them are the dragon roar being heard as birds.
+
+Not all of them, though. The second highest score any species reached in three hours, Ruddy Shelduck at 0.928, is Xiao Zhang calling across the lake to me. There is no bird in it. The <a href="/files/software/260115-002-birdidpv/report-js.html">identification report</a> renders every detected frame as a spectrogram so these readings can be checked rather than taken on trust, and that frame is the one to open first: it shows a voice, it shows how easily a voice reads as a call, and it shows why the only thing that settled the question was listening.
+
+This is worth more thought. We would like the toolkit to find human speech on its own and leave it out of what gets uploaded, so that an outdoor ecological recording can be shared without a voice riding along in it. This matters most on trips with a guide. We value the talk that happens along the way and would not want to lose it, but when the aim is the soundscape itself, or a soundscape captured while walking, every voice left in the take becomes work someone has to do by hand later.
+
+Our recording setups in the field vary; for this three-hour test take, the chain we used is described under <a href="#input">Input</a>. See <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a> for a field photograph of the session.
+
+### `field-audio-tools`
 
 Three CLI tools for long Zoom F3 takes: excerpt a timestamped range with *provenance*, screen fixed windows for *low-frequency dominance*, or ask *BirdNET* what it hears in the windows that screening left alone.
 
-### Prerequisites
+#### Prerequisites
 
 - Python 3.11 or newer
 - FFmpeg on `PATH`, both `ffmpeg` and `ffprobe`
@@ -42,25 +62,7 @@ It pulls in TensorFlow, which is much heavier than the rest of the project, and
 downloads the BirdNET model files on first run. Without it `birdidpv` exits with
 an install hint. `soundcite` and `lowdom` are unaffected either way.
 
-### This note
-
-We ran all three commands on *Take 002*, a three-hour Zoom F3 recording. The notes below cover the input, the files written, and two gaps we found in `lowdom` reporting and threshold calibration.
-
-### Field and recording setup
-
-The [GPX trail](/files/software/260115-002-showcase/garze-hiking-yema-haizi-mantle-sound.gpx) to the recording site begins on highway S434 at Yagya Ge, Sichuan, at roughly 3,894 m elevation, with roadside access on the pass before the walk in. It ends at the dome tent at Yema Haizi, about 4,055 m, with Yema Haizi lake to the east of that camp. We were guided by Dong Sheng & Xiao Zhang (local mountain guides in Kangding) and made most of the recordings the next morning.
-
-The recording files used in this report were captured at specific positions on Yema Haizi lake itself. The season was suitable and the lake had frozen over. On the northeast side, the ice thinned toward the deeper water shown in <a class="software-report__fig-link" href="#take002-photo-2">Fig. 2</a> and along the shelf leading into the area of <a class="software-report__fig-link" href="#take002-photo-3">Fig. 3</a>; that is, to the right of where I stood in <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a>, where thinning ice and open water were clearly visible. We treated that edge with caution when passing through. Other positions on the lake were safe for extended recording.
-
-In fact, melting ice that season produced especially vivid sounds. Our local guides call the phenomenon *long hou* (“dragon roar”); people who live in the area know it well. On the <a href="/files/software/260115-002-lowdom/report-js.html">multimedia report</a>, that signature is easy to find in green bar areas. It sits within the wider biological soundscape of the basin in a way that still feels astonishing.
-
-Those same green bars are what we handed to `birdidpv`. Running BirdNET over the 135 unflagged ranges — 43 minutes of the three-hour take — returned 128 detections in 11 species. Red-billed Chough and Large-billed Crow account for 99 of them and are unambiguous. The other nine are all deep-voiced waterbirds, on a lake that had frozen over, and we think most of them are the dragon roar being heard as birds.
-
-Not all of them, though. The model's second most confident detection in three hours — Ruddy Shelduck at 0.928 — is Xiao Zhang calling across the lake to me. There is no bird in it. The <a href="/files/software/260115-002-birdidpv/report-js.html">identification report</a> renders every detected frame as a spectrogram so these readings can be checked rather than taken on trust, and that frame is the one to open first: it shows a voice, it shows how easily a voice reads as a call, and it shows why the only thing that settled the question was listening.
-
-Our recording setups in the field vary; for this three-hour test take, the chain we used is described under <a href="#input-and-test-conditions">Input and test conditions</a>. See <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a> for a field photograph of the session.
-
-## Result formats
+#### Result formats
 
 *Bare* HTML from the CLI; demo packages linked here add site navigation and shared media styling.
 
