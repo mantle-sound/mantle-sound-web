@@ -12,12 +12,12 @@ _template: software-report.html
 ---
 body:
 
-## Input and test conditions
+## Input
 
 Both commands used the same pair of synchronized mono WAV exports from *Take 002*.
 They read the files in track order, in place, without creating a merged stereo
 intermediate. Site access, camp, and on-lake conditions are under
-[Field and recording setup](#field-and-recording-setup) above.
+[Field details](#field-details) above.
 
 - Files: `260115_002_Tr1.WAV` and `260115_002_Tr2.WAV`
 - Recordist: Gewenxin Yu
@@ -27,7 +27,7 @@ intermediate. Site access, camp, and on-lake conditions are under
 - Duration: 03:02:24 per track
 - Input size: 2,101,379,072 bytes per track
 
-## Arbitrarily cutting an excerpt with `soundcite`
+## `soundcite`: an arbitrary excerpt
 
 We cut a 20-second passage beginning one hour into the take. Because we launched
 the command from the recording directory, the manifest kept the source
@@ -65,7 +65,7 @@ filenames without exposing local absolute paths.
     from the two WAV excerpts, which preserve floating-point samples.
 </p>
 
-### What `soundcite` produced
+### `soundcite` output
 
 - The two mono F3 files can be treated as one paired take without first creating
   a multi-gigabyte stereo file. Before extraction, the tool verifies their
@@ -81,7 +81,7 @@ filenames without exposing local absolute paths.
 <a href="/files/software/260115-002-soundcite/index.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the generated package</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/index-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/SHA256SUMS">Verify its checksums</a>
 </p>
 
-## Screening the take with `lowdom`
+## `lowdom`: screening the take
 
 `lowdom` decoded both tracks to mono at 4 kHz and divided them into
 10-second windows. It measured those windows without writing a transformed
@@ -100,7 +100,7 @@ audio file.
 - Rows above threshold: 833 (76.14%)
 - Rows below threshold: 261 (23.86%)
 
-### Testing the threshold by ear
+### Testing the threshold by blind listening
 
 We tested 0.95 with two blinded listening rounds: each round contained ten randomly selected
 windows above the threshold and ten below it. Of the 20 windows above 0.95, 19
@@ -113,7 +113,7 @@ sample is small, it comes from one recording setup, and it was reviewed by one
 listener. The score remains a *low-frequency screening* heuristic rather than a
 *wind probability*.
 
-### What `lowdom` produced
+### `lowdom` output
 
 - `windows.csv` retains both tracks' score, RMS level, low-frequency ratio,
   spectral flatness, and peak for every interval.
@@ -137,22 +137,22 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 <a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-### Two gaps in the output
+### Known gaps
 
-1. **Unreported partial tail.** The source lasts 03:02:24 but analysis stopped at
+1. Unreported partial tail. The source lasts 03:02:24 but analysis stopped at
    03:02:20. The current code drops a final fragment shorter than half a window
    without recording the dropped duration in `summary.json` or the reports.
-2. **Threshold placeholder.** The initial 0.6 CLI default separated almost nothing
+2. Threshold placeholder. The initial 0.6 CLI default separated almost nothing
    on this take; it had not been checked on this recording before that exploratory
    run. We recalibrated with blind listening and adopted 0.95 for the run
    documented here.
 
-## Running `birdidpv` on the clean windows
+## `birdidpv`: the clean windows
 
 `lowdom` says where to listen. It does not say what is there. It has already
 found the stretches of this three-hour take where wind is low enough to work
 with, and `birdidpv` starts from that answer. The
-`candidate-clean-intervals.csv` file [above](#what-lowdom-produced) becomes the list
+`candidate-clean-intervals.csv` file [above](#lowdom-output) becomes the list
 of ranges we hand to [BirdNET](https://birdnet.cornell.edu/), as timestamps
 rather than as copied audio. The model then hears only the 23.86% of the take
 that screening left unflagged.
@@ -175,7 +175,7 @@ those seconds as recordings clean enough to send to a free archive like
   --output 260115-002-birdidpv</code></pre>
 
 - Track analysed: `260115_002_Tr1.WAV` only
-- Ranges: the [135 below-threshold intervals](#screening-the-take-with-lowdom), 00:43:30 of the
+- Ranges: the [135 below-threshold intervals](#lowdom-screening-the-take), 00:43:30 of the
   03:02:24 take
 - Frame length: 3 seconds, fixed by the model
 - Minimum confidence: 0.25
@@ -184,7 +184,7 @@ those seconds as recordings clean enough to send to a free archive like
   and about 25 seconds for 11 reference photographs
 - Detections: 128 frames across 11 species
 
-### The position filter is not optional
+### Position filter
 
 The coordinates come from the end of the GPX trace, at the camp on Yema Haizi.
 With them, BirdNET cuts its list of 6,522 species down to the 788 that could be
@@ -192,7 +192,7 @@ there in mid-January. Without them, the model offers birds from the wrong
 continent, and it sounds just as sure when it does. A three-hour take gives it
 many chances. Even the shorter list is long enough to hold every mistake below.
 
-### What came back
+### Detections
 
 Two corvids make up 99 of the 128 frames, and neither is in doubt: Red-billed
 Chough (82 frames, highest 0.9998) and Large-billed Crow (17 frames, highest
@@ -206,7 +206,7 @@ Eurasian Wigeon, Mallard, Common Shelduck, Gray Heron. The lake had frozen over.
 the clearest error: twelve detections, highest 0.9064, arriving in long runs
 with eight of them inside seventy seconds. Not one of their spectrograms shows
 a call above the low-frequency bed. That bed is the melting-ice resonance
-described under [Field and recording setup](#field-and-recording-setup). Our
+described under [Field details](#field-details). Our
 guides call it *long hou*, and the model hears it as the birds whose calls are
 booms.
 
@@ -220,7 +220,7 @@ What the bird does not have is the electronic quality the ice carries. That is
 the one thing that tells them apart. It is easy to hear, and none of the
 spectrogram numbers we worked out found it.
 
-### A high score with no bird in it
+### False positive at 01:41:05
 
 This one frame matters more than the pattern. The model calls the frame at
 01:41:05 Ruddy Shelduck at 0.928, the second highest score any species reached
@@ -243,16 +243,16 @@ sound has no label of its own, so it has to come out as some bird. Third, a
 spectrogram tells you that something is there. It does not tell you what. Only
 listening settled this one.
 
-### What one track leaves out
+### Single-track limits
 
-[`lowdom`](#screening-the-take-with-lowdom) screened both tracks and kept the higher score of the
+[`lowdom`](#lowdom-screening-the-take) screened both tracks and kept the higher score of the
 two. This
 `birdidpv` run read `Tr1` on its own. A call that came out better on the second
 microphone could be missed, and nothing here says anything about stereo or
 direction. The tool can read both tracks and keep the highest confidence per
 frame. That is the next thing to do.
 
-### What `birdidpv` produced
+### `birdidpv` output
 
 - `detections.csv` has every 3-second frame above the minimum confidence, with
   its timecodes, species, and score. `species.csv` totals them by species.
@@ -294,9 +294,9 @@ frame. That is the next thing to do.
 <a href="/files/software/260115-002-birdidpv/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/detections.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download every detection</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/species.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the species roll-up</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-birdidpv/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-## Citing a detection with `soundcite`
+## `soundcite`: citing a detection
 
-The excerpt at the [top of this test](#arbitrarily-cutting-an-excerpt-with-soundcite)
+The excerpt at the [top of this test](#soundcite-an-arbitrary-excerpt)
 starts at 01:00:00. We chose that time from the clock, before we had looked at
 the recording. It shows what the output format is, not what is in the take.
 
@@ -348,7 +348,7 @@ listening room around it. `--pad` sets both ends at once; `--pad-start` and
 `--pad-end` override it when the two differ.
 
 This step is manual. Before citing a time you have to listen to it, and the
-[0.93 that was a person](#a-high-score-with-no-bird-in-it)
+[0.93 that was a person](#false-positive-at-01-41-05)
 shows why. A script that sent detections straight to `soundcite` would have
 built an evidence package for a shout.
 
@@ -356,7 +356,7 @@ built an evidence package for a shout.
 <a href="/files/software/260115-002-chough-004029/index.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/spectrogram.png">See its spectrogram</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/SHA256SUMS">Verify its checksums</a>
 </p>
 
-## Outcome of this test
+## Outcome
 
 `soundcite` did its job on this recording: it turned a timestamp into a small
 package with enough information to trace the excerpt back to its sources.
@@ -386,7 +386,7 @@ prompt to listen rather than a record.
    61, 101236.
 
 2. xeno-canto. Four Eurasian Bittern (*Botaurus stellaris*) recordings, used
-   for the listening comparison in [What came back](#what-came-back):
+   for the listening comparison in [What came back](#detections):
    <a href="https://xeno-canto.org/891071">XC891071</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/1000766">XC1000766</a> (Christian Bøggild, Denmark), <a href="https://xeno-canto.org/832807">XC832807</a> (Cedric Mroczko, Ukraine), <a href="https://xeno-canto.org/741523">XC741523</a> (Romuald Mikusek, Poland).
 
 3. iNaturalist. Eleven reference photographs, one per detected species, by
