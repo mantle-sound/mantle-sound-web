@@ -116,7 +116,7 @@
   beside it. The machine-readable record is in
   <a href="species-photos/credits.json">credits.json</a>. A photograph shows
   what the species looks like. It is not evidence that the species was here.
-  Nine of these eleven rows are ones we ask you to doubt. One of those nine is a
+  Nine of these eleven rows are flagged for manual review. One of those nine is a
   photograph of a bird that was never there.</p>
   <h2 id="taxon-identifiers">Taxon identifiers</h2>
   <p class="report-explainer">These are the same eleven species in the databases a detection usually has to travel to. We matched them on iNaturalist taxon ID, not on name. A name search returns a congener often enough. Attaching an identifier to the wrong bird is a real risk. Wikidata holds dozens more per species. We keep those in <a href="taxon-ids.json">taxon-ids.json</a>.</p>
@@ -157,20 +157,20 @@
   <p class="report-explainer">The waterbird detections concentrate their energy
   below 400 Hz at a lower level. They mostly show none of the high-frequency
   structure the corvid detections do. That band is where the ice resonance sits.
-  Local guides call that sound <em>long hou</em>, “dragon roar”. A plausible
-  reading is that BirdNET maps ice onto birds whose calls are booms.
+  Local guides call that sound <em>long hou</em>, “dragon roar”. A likely
+  explanation is that BirdNET maps ice onto birds whose calls are booms.
   <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a> at
-  0.906 is the clearest case. Its twelve detections arrive in sustained runs.
+  0.906 is the strongest false positive. Its twelve detections arrive in sustained runs.
   Eight of them fall inside seventy seconds. Not one of their spectrograms shows a
   call above the ice.</p>
-  <p class="report-explainer">Listening to the species explains the mistake. It
-  does not excuse it. On the first page of xeno-canto recordings for
+  <p class="report-explainer">Compare the recordings to understand the mistake.
+  On the first page of xeno-canto recordings for
   <em>Botaurus stellaris</em>, try <a href="https://xeno-canto.org/891071">XC891071</a>,
   <a href="https://xeno-canto.org/1000766">XC1000766</a>,
   <a href="https://xeno-canto.org/832807">XC832807</a> and
-  <a href="https://xeno-canto.org/741523">XC741523</a>. The booms really are close
-  to the dragon roar. The confusion looks reasonable rather than absurd. Listen
-  to them here. Then listen to any green stretch of the timeline above:</p>
+  <a href="https://xeno-canto.org/741523">XC741523</a>. The booms sound similar
+  to the dragon roar. Listen to them here, then listen to any green stretch of
+  the timeline above:</p>
   <ul class="reference-recordings">
     <li class="reference-recording">
       <img src="reference-recordings/xc891071.webp" alt="Spectrogram of xeno-canto recording 891071" loading="lazy" decoding="async">
@@ -194,29 +194,29 @@
     </li>
   </ul>
   <p class="report-explainer">These recordings are stored in this package under their recordists' CC BY-NC-SA licences. We do not embed them from xeno-canto. The comparison survives archiving that way, and no reader's address is sent to a third party. We re-render the spectrograms here with the same axes and scaling as the detection frames above. xeno-canto draws its own spectrograms on a linear frequency axis. That axis suits the wide scrubbing strip in its player. It also leaves the boom as a thin line along the bottom while the background birds fill the frame. Put next to a detection from this take, the same sound would look like a different one.</p>
-  <p class="report-explainer">One thing separates them by ear. The ice carries an
-  electronic quality that the bird does not. That difference is the interesting
-  part of the error. It is plainly audible. None of the spectrogram statistics on
-  this page found it.</p>
-  <p class="report-explainer">Ice is not the only thing here that is not a bird.
-  The frame at 01:41:05 is a person. BirdNET calls it Ruddy Shelduck at 0.928.
-  That is the second highest confidence in the whole run. It is Xiao Zhang, one of
-  the guides. He was calling across the lake to the recordist. The recordist
-  identified it on listening. There is no bird in those three seconds at all.</p>
-  <p class="report-explainer">That frame is worth opening. It also shows how a
-  spectrogram can be misread. It carries harmonic stacks between 1 and 3 kHz. We
-  first took them for a call. Ice does not produce structure like that. We moved
-  the species out of the doubtful list. A voice does produce it. The stacks are a
-  pitch contour gliding through its harmonics. Formants sit around 1.2 and 2 kHz.
-  Four or five syllables appear in the last second. That is speech, not song. The
-  band average in the table above had hidden the voice under the low-frequency
-  bed. The picture that uncovered it was then read wrong. Only listening settled
-  it.</p>
-  <p class="report-explainer">The ledger runs three ways, not two. It includes
-  real calls, lake ice, and at least one human voice. Every row marked
-  <span class="flagged-note">check by ear</span> is one we would not cite without
-  going back to the source WAV. The loudest argument for that rule is simple. The
-  model's second most confident bird in three hours was a man shouting.</p>
+  <p class="report-explainer">In listening tests, the ice carries an electronic
+  quality that the bird does not. That difference is audible. None of the
+  spectrogram statistics on this page captured it.</p>
+  <p class="report-explainer">The frame at 01:41:05 is also not a bird. BirdNET
+  calls it Ruddy Shelduck at 0.928. That is the second highest confidence in the
+  whole run. It is Xiao Zhang, one of the guides. He was calling across the lake
+  to the recordist. The recordist identified it on listening. There is no bird
+  in those three seconds at all.</p>
+  <p class="report-explainer">Open that frame when reviewing the report. It also
+  illustrates how a spectrogram can be misread. It carries harmonic stacks between
+  1 and 3 kHz. We first took them for a call. Ice does not produce structure like
+  that. We moved the species out of the doubtful list. A voice does produce it.
+  The stacks are a pitch contour gliding through its harmonics. Formants sit
+  around 1.2 and 2 kHz. Four or five syllables appear in the last second. That is
+  speech, not song. The band average in the table above had hidden the voice under
+  the low-frequency bed. The picture that corrected the first reading was then
+  read incorrectly. Listening was required to resolve it.</p>
+  <p class="report-explainer">The detections fall into three groups: confirmed
+  calls, lake ice, and at least one human voice. Every row marked
+  <span class="flagged-note">check by ear</span> should be checked against the
+  source WAV before citation. The frame at 01:41:05 is the main reason: the
+  model's second most confident bird in three hours was a person calling across
+  the lake.</p>
   <p class="report-links">
     <a href="report.html"><img class="report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a>
     <a href="report-multimedia-bare.html"><img class="report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a>
