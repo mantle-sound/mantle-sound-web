@@ -2031,13 +2031,13 @@ blockquote::after {
       margin-bottom: 36px;
       align-items: stretch;
     }
-    /* Stacked, every section reads the same way: heading and text, then the
-       image. .home-intro--reverse is one class more specific and a media query
+    /* Stacked, every section reads the same way: image first, then heading
+       and text. .home-intro--reverse is one class more specific and a media query
        adds no specificity of its own, so it has to be named here or the
        reversed section alone keeps its desktop image-first order. */
     .home-sections .home-intro__text,
     .home-sections .home-intro--reverse .home-intro__text {
-      order: 1;
+      order: 2;
       flex: none;
       width: 100%;
       max-width: 100%;
@@ -2045,7 +2045,7 @@ blockquote::after {
     }
     .home-sections .home-intro__image,
     .home-sections .home-intro--reverse .home-intro__image {
-      order: 2;
+      order: 1;
       flex: none;
       width: 100%;
     }
@@ -2877,12 +2877,14 @@ body:has(.page-with-toc) .software-report {
   margin-bottom: 0;
 }
 
-.software-report__fig-link:hover .software-report__fig-preview,
-.software-report__fig-link:focus-visible .software-report__fig-preview,
-.software-route-details__summary:hover .software-route-details__body,
-.software-route-details__summary:focus-visible .software-route-details__body {
-  visibility: visible;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .software-report__fig-link:hover .software-report__fig-preview,
+  .software-report__fig-link:focus-visible .software-report__fig-preview,
+  .software-route-details__summary:hover .software-route-details__body,
+  .software-route-details__summary:focus-visible .software-route-details__body {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .software-route-details.is-open .software-route-details__body {

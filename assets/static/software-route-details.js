@@ -27,6 +27,9 @@
       var open = !root.classList.contains(OPEN_CLASS);
       root.classList.toggle(OPEN_CLASS, open);
       trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (!open) {
+        trigger.blur();
+      }
     });
   }
 
@@ -44,6 +47,7 @@
       var trigger = root.querySelector('.software-route-details__summary');
       if (trigger) {
         trigger.setAttribute('aria-expanded', 'false');
+        trigger.blur();
       }
     }
   }
