@@ -252,16 +252,16 @@ def reference_players() -> str:
         '  <ul class="reference-recordings">\n'
         + "\n".join(items)
         + "\n  </ul>\n"
-        '  <p class="report-explainer">These are stored in this package under '
-        "their recordists' CC BY-NC-SA licences rather than embedded from "
-        "xeno-canto, so the comparison survives archiving and no reader's "
-        "address is disclosed to make it. The spectrograms are re-rendered here "
-        "with the same axes and scaling as the detection frames above. "
-        "xeno-canto draws its own on a linear frequency axis, which suits the "
-        "wide scrubbing strip in its player but leaves the boom as a thin line "
-        "along the bottom while the background birds fill the frame. Put next "
-        "to a detection from this take, the same sound would look like a "
-        "different one.</p>"
+        '  <p class="report-explainer">These recordings are stored in this package '
+        "under their recordists' CC BY-NC-SA licences. We do not embed them from "
+        "xeno-canto. The comparison survives archiving that way, and no reader's "
+        "address is sent to a third party. We re-render the spectrograms here with "
+        "the same axes and scaling as the detection frames above. xeno-canto draws "
+        "its own spectrograms on a linear frequency axis. That axis suits the wide "
+        "scrubbing strip in its player. It also leaves the boom as a thin line "
+        "along the bottom while the background birds fill the frame. Put next to a "
+        "detection from this take, the same sound would look like a different "
+        "one.</p>"
     )
 
 
@@ -291,11 +291,11 @@ def taxon_id_table() -> str:
         )
     return (
         '  <h2 id="taxon-identifiers">Taxon identifiers</h2>\n'
-        '  <p class="report-explainer">The same eleven species in the databases a '
-        "detection usually has to travel to. Matched on iNaturalist taxon ID, not "
-        "on name — a name search returns a congener often enough that an "
-        "identifier attached to the wrong bird is a real risk. Wikidata holds "
-        "dozens more per species; those are kept in "
+        '  <p class="report-explainer">These are the same eleven species in the '
+        "databases a detection usually has to travel to. We matched them on "
+        "iNaturalist taxon ID, not on name. A name search returns a congener "
+        "often enough. Attaching an identifier to the wrong bird is a real risk. "
+        "Wikidata holds dozens more per species. We keep those in "
         '<a href="taxon-ids.json">taxon-ids.json</a>.</p>\n'
         '  <table class="species-table taxon-ids">\n'
         "    <thead><tr><th>Species</th><th>Elsewhere</th></tr></thead>\n"
@@ -365,15 +365,15 @@ def species_table(species, interactive: bool, photos: dict[str, dict]) -> str:
 
 
 PHOTO_NOTE = """  <p class="report-explainer">Reference photographs come from
-  <a href="https://www.inaturalist.org/">iNaturalist</a> and are stored in this
-  package rather than hot-linked, so it survives being archived and no reader's
-  address is disclosed to a third party. Each file is kept exactly as
-  iNaturalist served it and remains under its photographer's licence, credited
-  beside it; the machine-readable record is in
+  <a href="https://www.inaturalist.org/">iNaturalist</a>. We store them in this
+  package rather than hot-linking them. The package survives archiving that way,
+  and no reader's address is sent to a third party. Each file is kept exactly as
+  iNaturalist served it. It remains under its photographer's licence, credited
+  beside it. The machine-readable record is in
   <a href="species-photos/credits.json">credits.json</a>. A photograph shows
-  what the species looks like. It is not evidence that the species was here —
-  nine of these eleven are the rows we are asking you to doubt, and one of those
-  nine is a photograph of a bird that was never there.</p>"""
+  what the species looks like. It is not evidence that the species was here.
+  Nine of these eleven rows are ones we ask you to doubt. One of those nine is a
+  photograph of a bird that was never there.</p>"""
 
 
 def band_table() -> str:
@@ -393,58 +393,59 @@ def band_table() -> str:
 
 
 NOTICE = """  <p class="notice"><strong>Machine identification, not a verified
-  record:</strong> BirdNET scores each 3-second frame; it does not confirm that a
-  species was present. Confidence is not a probability, and a high score on one
+  record:</strong> BirdNET scores each 3-second frame. It does not confirm that a
+  species was present. Confidence is not a probability. A high score on one
   frame is not a record. Listen before citing any of this.</p>"""
 
 READING = """  <h2>Reading this against a frozen lake</h2>
-  <p class="report-explainer">Two corvids account for 99 of the 128 detections and
-  behave like real calls: they carry energy well above 2 kHz and sit 3–11 dB above
-  everything else. The other nine species are all deep-voiced waterbirds, on a lake
-  that had frozen over by mid-January at 4,055 m. Measuring the detected frames
-  after a 150 Hz high-pass shows where the two groups part:</p>
+  <p class="report-explainer">Two corvids account for 99 of the 128 detections.
+  They behave like real calls. They carry energy well above 2 kHz. They sit 3–11
+  dB above everything else. The other nine species are all deep-voiced waterbirds.
+  The lake had frozen over by mid-January at 4,055 m. We measured the detected
+  frames after a 150 Hz high-pass. That measurement shows where the two groups
+  part:</p>
 {band_table}
   <p class="report-explainer">The waterbird detections concentrate their energy
-  below 400 Hz at a lower level, and mostly show none of the high-frequency
-  structure the corvid detections do. That is the band the ice resonance occupies —
-  the sound the local guides call <em>long hou</em>, “dragon roar”. A plausible
-  reading is that BirdNET is mapping ice onto the birds whose calls are booms, and
+  below 400 Hz at a lower level. They mostly show none of the high-frequency
+  structure the corvid detections do. That band is where the ice resonance sits.
+  Local guides call that sound <em>long hou</em>, “dragon roar”. A plausible
+  reading is that BirdNET maps ice onto birds whose calls are booms.
   <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a> at
-  0.906 is the clearest case: its twelve detections arrive in sustained runs,
-  eight of them inside seventy seconds, and not one of their spectrograms shows a
+  0.906 is the clearest case. Its twelve detections arrive in sustained runs.
+  Eight of them fall inside seventy seconds. Not one of their spectrograms shows a
   call above the ice.</p>
-  <p class="report-explainer">Listening to the species explains the mistake
-  rather than excusing it. On the first page of xeno-canto recordings for
-  <em>Botaurus stellaris</em> — <a href="https://xeno-canto.org/891071">XC891071</a>,
+  <p class="report-explainer">Listening to the species explains the mistake. It
+  does not excuse it. On the first page of xeno-canto recordings for
+  <em>Botaurus stellaris</em>, try <a href="https://xeno-canto.org/891071">XC891071</a>,
   <a href="https://xeno-canto.org/1000766">XC1000766</a>,
   <a href="https://xeno-canto.org/832807">XC832807</a> and
-  <a href="https://xeno-canto.org/741523">XC741523</a> among them — the booms
-  really are close to the dragon roar. Close enough that the confusion looks
-  reasonable rather than absurd. Listen to them here, then to any green stretch
-  of the timeline above:</p>
+  <a href="https://xeno-canto.org/741523">XC741523</a>. The booms really are close
+  to the dragon roar. The confusion looks reasonable rather than absurd. Listen
+  to them here. Then listen to any green stretch of the timeline above:</p>
 {reference_players}
-  <p class="report-explainer">One thing separates them by ear: the ice carries an
+  <p class="report-explainer">One thing separates them by ear. The ice carries an
   electronic quality that the bird does not. That difference is the interesting
-  part of the error, it is plainly audible, and none of the spectrogram
-  statistics on this page found it.</p>
+  part of the error. It is plainly audible. None of the spectrogram statistics on
+  this page found it.</p>
   <p class="report-explainer">Ice is not the only thing here that is not a bird.
-  The frame at 01:41:05, which BirdNET calls Ruddy Shelduck at 0.928 — the second
-  highest confidence in the whole run — is a person. It is Xiao Zhang, one of the
-  guides, calling across the lake to the recordist, who identified it on
-  listening. There is no bird in those three seconds at all.</p>
-  <p class="report-explainer">That frame is worth opening, because it also shows
-  how a spectrogram can be misread. It does carry harmonic stacks between 1 and
-  3 kHz, and we first took them for a call: ice does not produce structure like
-  that, so we moved the species out of the doubtful list. But a voice does. Those
-  are a pitch contour gliding through its harmonics, formants around 1.2 and
-  2 kHz, and four or five syllables in the last second — speech, not song. The
-  band average in the table above had hidden it under the low-frequency bed, and
-  the picture that uncovered it was then read wrong. Only listening settled it.</p>
-  <p class="report-explainer">So the ledger runs three ways, not two: real calls,
-  lake ice, and at least one human voice. Every row marked
+  The frame at 01:41:05 is a person. BirdNET calls it Ruddy Shelduck at 0.928.
+  That is the second highest confidence in the whole run. It is Xiao Zhang, one of
+  the guides. He was calling across the lake to the recordist. The recordist
+  identified it on listening. There is no bird in those three seconds at all.</p>
+  <p class="report-explainer">That frame is worth opening. It also shows how a
+  spectrogram can be misread. It carries harmonic stacks between 1 and 3 kHz. We
+  first took them for a call. Ice does not produce structure like that. We moved
+  the species out of the doubtful list. A voice does produce it. The stacks are a
+  pitch contour gliding through its harmonics. Formants sit around 1.2 and 2 kHz.
+  Four or five syllables appear in the last second. That is speech, not song. The
+  band average in the table above had hidden the voice under the low-frequency
+  bed. The picture that uncovered it was then read wrong. Only listening settled
+  it.</p>
+  <p class="report-explainer">The ledger runs three ways, not two. It includes
+  real calls, lake ice, and at least one human voice. Every row marked
   <span class="flagged-note">check by ear</span> is one we would not cite without
-  going back to the source WAV — and the loudest argument for that rule is that
-  the model's second most confident bird in three hours was a man shouting.</p>"""
+  going back to the source WAV. The loudest argument for that rule is simple. The
+  model's second most confident bird in three hours was a man shouting.</p>"""
 
 
 def build_data_report(summary, detections, species, ranges, photos) -> str:
@@ -466,8 +467,9 @@ def build_data_report(summary, detections, species, ranges, photos) -> str:
     <span><i class="report-swatch report-swatch--weak"></i>low confidence</span>
   </div>
   <p class="report-explainer">The pale band marks the {summary["analysed_range_count"]}
-  ranges lowdom left below its threshold; the rest of the take was not analysed. Each
-  mark is one 3-second detection, taller and darker with higher confidence.</p>
+  ranges lowdom left below its threshold. The rest of the take was not analysed.
+  Each mark is one 3-second detection. Higher confidence makes the mark taller
+  and darker.</p>
   <h2>Species</h2>
 {species_table(species, False, photos)}
 {taxon_id_table()}
@@ -552,17 +554,17 @@ def build_multimedia_report(
       of its three seconds.</figcaption>
   </figure>
   <p class="report-explainer">The pale band marks the {summary["analysed_range_count"]}
-  ranges lowdom left below its threshold. Hover to select the nearest detection;
-  playback starts after a short pause and stops at the end of that frame. Click to
-  play immediately, which also copies the start timecode; the locked detection
+  ranges lowdom left below its threshold. Hover to select the nearest detection.
+  Playback starts after a short pause and stops at the end of that frame. Click to
+  play immediately. That also copies the start timecode. The locked detection
   keeps an orange marker so you can see where playback sits after the pointer
   moves on. Select a species below to show only its detections. The spectrogram
-  above is rendered ahead of time from the source WAV, not from the preview, on a
-  logarithmic frequency axis so the sub-400 Hz band stays readable: a real call
-  shows harmonic structure in the kilohertz bands, while broadband energy low down
-  with nothing above it is geophony whatever the model named it. The preview audio
-  is the same lossy 48 kbit/s Opus derivative the lowdom report uses; use the
-  source WAV files for verification.</p>
+  above is rendered ahead of time from the source WAV, not from the preview. It
+  uses a logarithmic frequency axis so the sub-400 Hz band stays readable. A real
+  call shows harmonic structure in the kilohertz bands. Broadband energy low down
+  with nothing above it is geophony, whatever the model named it. The preview
+  audio is the same lossy 48 kbit/s Opus derivative the lowdom report uses. Use
+  the source WAV files for verification.</p>
   <h2>Species</h2>
   <p class="report-explainer">Select a row to filter the timeline.</p>
 {species_table(species, True, photos)}
