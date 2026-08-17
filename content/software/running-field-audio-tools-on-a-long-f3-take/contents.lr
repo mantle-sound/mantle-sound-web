@@ -14,8 +14,8 @@ body:
 
 ## Input
 
-Both commands used the same pair of synchronized mono WAV exports from *Take 002*.
-They read the files in track order, in place, without creating a merged stereo
+Both commands used the same pair of synchronized mono WAV exports from *Take 002*,
+and they read the files in track order, in place, without creating a merged stereo
 intermediate. Site access, camp, and on-lake conditions are under
 [Field details](#field-details) above.
 
@@ -29,7 +29,7 @@ intermediate. Site access, camp, and on-lake conditions are under
 
 ## `soundcite`: an arbitrary excerpt
 
-We cut a 20-second passage beginning one hour into the take. Because we launched
+We cut a 20-second passage beginning one hour into the take, and because we launched
 the command from the recording directory, the manifest kept the source
 filenames without exposing local absolute paths.
 
@@ -61,19 +61,19 @@ filenames without exposing local absolute paths.
 </p>
 <p class="software-report__media-caption">
     Browser preview and two-channel logarithmic spectrogram generated in the
-    same run. The preview is convenient but lossy; the spectrogram is generated
+    same run. The preview is convenient but lossy, and the spectrogram is generated
     from the two WAV excerpts, which preserve floating-point samples.
 </p>
 
 ### `soundcite` output
 
 - The two mono F3 files can be treated as one paired take without first creating
-  a multi-gigabyte stereo file. Before extraction, the tool verifies their
+  a multi-gigabyte stereo file, and before extraction the tool verifies their
   sample rate, duration, channel count, recording time, and BWF time reference.
 - Embedded F3 fields such as scene, take, date, recording time, track name, and
   coding history survive into the manifest.
 - `SHA256SUMS` covers both excerpts, the preview, spectrogram, manifest, and
-  static page. We did not ask it to hash the complete source files in this run.
+  static page, but we did not ask it to hash the complete source files in this run.
 - The package labels the lossy listening copy separately from the
   preservation-oriented excerpts.
 
@@ -83,8 +83,8 @@ filenames without exposing local absolute paths.
 
 ## `lowdom`: screening the take
 
-`lowdom` decoded both tracks to mono at 4 kHz and divided them into
-10-second windows. It measured those windows without writing a transformed
+`lowdom` decoded both tracks to mono at 4 kHz, divided them into
+10-second windows, and measured those windows without writing a transformed
 audio file.
 
 <pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
@@ -102,12 +102,12 @@ audio file.
 
 ### Testing the threshold by blind listening
 
-We tested 0.95 with two blinded listening rounds: each round contained ten randomly selected
+We tested 0.95 with two blinded listening rounds, and each round contained ten randomly selected
 windows above the threshold and ten below it. Of the 20 windows above 0.95, 19
-were judged to contain obvious wind noise. Of the 20 below it, 17 were judged
+were judged to contain obvious wind noise, and of the 20 below it, 17 were judged
 not to contain obvious wind noise.
 
-The threshold and listening judgement agreed on 36 of 40 samples. This is useful
+The threshold and listening judgement agreed on 36 of 40 samples, so this is useful
 for prioritising listening on this take, but it is not a validation study: the
 sample is small, it comes from one recording setup, and it was reviewed by one
 listener. The score remains a *low-frequency screening* heuristic rather than a
@@ -122,15 +122,15 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 - `summary.json` records the frequency bands, sample rate, threshold, merge
   rule, source metadata, and totals.
 - The static report allows a quick overview without Python, a notebook, or a
-  server. The Mantle site report adds navigation and styling; the *bare* HTML 4.01
+  server, and the Mantle site report adds navigation and styling. The *bare* HTML 4.01
   page that `lowdom` writes to `report.html` is also kept in the package as
   `report-bare.html`.
-- The multimedia report adds a lossy 48 kbit/s stereo preview. After enabling
+- The multimedia report adds a lossy 48 kbit/s stereo preview, and after enabling
   audio once, hovering over the timeline plays the corresponding ten seconds.
-  The Mantle site report adds navigation and styling; the bare HTML 4.01 page
+  The Mantle site report adds navigation and styling, and the bare HTML 4.01 page
   the CLI writes as `report-multimedia.html` is also kept here as
   `report-multimedia-bare.html` (same `recording-preview-48k/` segments).
-- No interval is silently removed from the source audio; the *candidate clean*
+- No interval is silently removed from the source audio, and the *candidate clean*
   file is only a list of timestamps.
 
 <p class="software-report-links">
@@ -140,24 +140,24 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 ### Known gaps
 
 1. Unreported partial tail. The source lasts 03:02:24 but analysis stopped at
-   03:02:20. The current code drops a final fragment shorter than half a window
+   03:02:20, and the current code drops a final fragment shorter than half a window
    without recording the dropped duration in `summary.json` or the reports.
 2. Threshold placeholder. The initial 0.6 CLI default separated almost nothing
-   on this take; it had not been checked on this recording before that exploratory
-   run. We recalibrated with blind listening and adopted 0.95 for the run
+   on this take because it had not been checked on this recording before that exploratory
+   run, so we recalibrated with blind listening and adopted 0.95 for the run
    documented here.
 
 ## `birdidpv`: the clean windows
 
 `lowdom` produces a list of time ranges where wind is low enough for further
-work. It does not identify species. `birdidpv` runs BirdNET on those ranges.
+work, but it does not identify species, so `birdidpv` runs BirdNET on those ranges.
 The `candidate-clean-intervals.csv` file [above](#lowdom-output) supplies the
-timestamps; we do not copy audio out of the source files. The model then hears
+timestamps, and we do not copy audio out of the source files. The model then hears
 only the 23.86% of the take that screening left unflagged.
 
-We are not treating the windows at or above 0.95 as empty. Plenty of birds call
-through wind, and the orange stretches of the timeline hold some of them. Try
-the orange bars next to a green one first; they often contain calls. The goal
+We are not treating the windows at or above 0.95 as empty, because plenty of birds call
+through wind and the orange stretches of the timeline hold some of them. Try
+the orange bars next to a green one first, because they often contain calls. The goal
 here is narrower: **find which species turn up where wind is low**, and collect
 those seconds as recordings clean enough to send to a free archive like
 [xeno-canto](https://xeno-canto.org/).
@@ -185,9 +185,9 @@ those seconds as recordings clean enough to send to a free archive like
 
 The coordinates come from the end of the GPX trace, at the camp on Yema Haizi.
 With them, BirdNET cuts its list of 6,522 species down to the 788 that could be
-there in mid-January. Without them, the model still returns species from other
+there in mid-January, but without them the model still returns species from other
 regions at similarly high confidence. A three-hour take gives many chances for
-that to happen. Even the shorter list still contains species absent from the
+that to happen, and even the shorter list still contains species absent from the
 site.
 
 ### Detections
@@ -197,13 +197,13 @@ Red-billed Chough (82 frames, highest 0.9998) and Large-billed Crow (17 frames,
 highest 0.9118). Both have harmonic structure well above 2 kHz, and both sit
 3–11 dB louder than everything else in the run.
 
-The other nine species share 29 frames. All of them are deep-voiced waterbirds:
+The other nine species share 29 frames, and all of them are deep-voiced waterbirds:
 Great Bittern, Ruddy Shelduck, Eurasian Coot, Graylag Goose, Eurasian Curlew,
-Eurasian Wigeon, Mallard, Common Shelduck, Gray Heron. The lake had frozen over.
+Eurasian Wigeon, Mallard, Common Shelduck, Gray Heron. The lake had frozen over, and
 <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a> is
 the strongest false positive: twelve detections, highest 0.9064, arriving in
 sustained runs with eight of them inside seventy seconds. Not one of their
-spectrograms shows a call above the low-frequency bed. That bed is the
+spectrograms shows a call above the low-frequency bed, and that bed is the
 melting-ice resonance described under [Field details](#field-details). Our
 guides call it *long hou*, and the model often labels it as deep-voiced
 waterbirds with booming calls.
@@ -212,45 +212,45 @@ Compare the two by ear. The first page of xeno-canto for
 *Botaurus stellaris* has <a href="https://xeno-canto.org/891071">XC891071</a>,
 <a href="https://xeno-canto.org/1000766">XC1000766</a>,
 <a href="https://xeno-canto.org/832807">XC832807</a> and
-<a href="https://xeno-canto.org/741523">XC741523</a>. The booms sound similar
+<a href="https://xeno-canto.org/741523">XC741523</a>, and the booms sound similar
 to the dragon roar, which helps explain the misidentifications. What the bird
-does not have is the electronic quality the ice carries. That quality
-distinguishes them in listening tests. None of the spectrogram numbers we
+does not have is the electronic quality the ice carries, and that quality
+distinguishes them in listening tests, but none of the spectrogram numbers we
 worked out captured it.
 
 ### False positive at 01:41:05
 
-This frame is a clearer example than the general pattern. The model calls the
+This frame is a clearer example than the general pattern, because the model calls the
 frame at 01:41:05 Ruddy Shelduck at 0.928, the second highest score any species
-reached in the run. There is no bird in it. It is Xiao Zhang calling across the
+reached in the run, but there is no bird in it. It is Xiao Zhang calling across the
 lake to the recordist, who recognized the voice on listening.
 
 We reached that conclusion only after two incorrect readings. The band
-measurements grouped the frame with the ice, but for the wrong reason. Then its
+measurements grouped the frame with the ice, but for the wrong reason, and then its
 spectrogram showed clear harmonic stacks between 1 and 3 kHz. Ice does not
 produce structure like that, so we read it as a real call and took the species
-off the doubtful list. Both readings were wrong, in opposite directions, and
+off the doubtful list, but both readings were wrong in opposite directions, and
 the picture that corrected the first reading led us into the second. Human
 speech can produce a similar spectrogram: a pitch contour sliding through its
-harmonics, formants near 1.2 and 2 kHz, four syllables in the last second.
+harmonics, formants near 1.2 and 2 kHz, four syllables in the last second, so
+listening was required to resolve this frame.
 
 Three points follow from this frame. First, confidence scores on this take do
-not separate true detections from false ones. At every threshold from 0.25 to
-0.9, the false positives match or beat the real detections, so raising the
+not separate true detections from false ones, and at every threshold from 0.25 to
+0.9 the false positives match or beat the real detections, so raising the
 threshold removes lower-confidence errors but keeps the high-confidence false
-positives. Second, anthropophony is not in a filtered species list. Human
-sound has no label of its own, so it has to come out as some bird. Third, a
-spectrogram shows that energy is present, but not what produced it. Listening
-was required to resolve this frame.
+positives. Second, anthropophony is not in a filtered species list, so human
+sound has no label of its own and has to come out as some bird. Third, a
+spectrogram shows that energy is present, but not what produced it.
 
 ### Single-track limits
 
 [`lowdom`](#lowdom-screening-the-take) screened both tracks and kept the higher score of the
-two. This
-`birdidpv` run read `Tr1` on its own. A call that came out better on the second
+two, but this
+`birdidpv` run read `Tr1` on its own, so a call that came out better on the second
 microphone could be missed. This run does not report stereo placement or
-direction. The tool can read both tracks and keep the highest confidence per
-frame. We plan to run that configuration next.
+direction, but the tool can read both tracks and keep the highest confidence per
+frame, and we plan to run that configuration next.
 
 ### `birdidpv` output
 
@@ -259,7 +259,7 @@ frame. We plan to run that configuration next.
 - `summary.json` records the source, the ranges analysed, the position and week
   used to filter, and every other setting of the run.
 - `detection-spectrograms/` holds 126 WebP images, one per detected frame.
-  FFmpeg made them from the source WAV, not from the lossy preview. Frames that
+  FFmpeg made them from the source WAV, not from the lossy preview, and frames that
   start at the same time share an image, so 128 detections need only 126 files.
   Each one is a single call, here the Red-billed Chough frame at 00:40:35:
 
@@ -267,11 +267,11 @@ frame. We plan to run that configuration next.
   -lavfi "[0:a:0]showspectrumpic=s=560x260:legend=1:scale=log:fscale=log:color=intensity" \
   -frames:v 1 frame-002435000.webp</code></pre>
 
-  `fscale=log` is the part that decides what you see. On a linear frequency axis
+  `fscale=log` sets the frequency scale on the spectrogram. On a linear frequency axis
   the whole band below 500 Hz collapses into a line at the bottom of the image,
   and that band is where the ice sits and where most of these detections are
   argued about. `scale=log` does the same for amplitude, and `legend=1` prints
-  the frequency, time and dBFS axes. `s=560x260` sets the spectrum area; the
+  the frequency, time and dBFS axes. `s=560x260` sets the spectrum area, and the
   legend adds roughly 280x130 around it, so the files are 844x388. The four
   xeno-canto recordings above are rendered with the same call, over their full
   length instead of three seconds.
@@ -279,14 +279,14 @@ frame. We plan to run that configuration next.
   [iNaturalist](https://www.inaturalist.org/), kept in the package instead of
   hot-linked, so the page still works if it is saved and no one else learns who
   read it. `credits.json` records each photographer, licence, and source. A
-  photograph shows what a species looks like. It is not proof that the bird was
+  photograph shows what a species looks like, but it is not proof that the bird was
   there, and nine of these eleven rows are flagged for manual review.
 - The multimedia report reuses `lowdom`'s `recording-preview-48k/` segments
-  instead of copying 62 MB of audio. Click a detection to play its three seconds
-  and see its spectrogram. Click a species to show only that species on the
+  instead of copying 62 MB of audio, so click a detection to play its three seconds
+  and see its spectrogram, or click a species to show only that species on the
   timeline.
 - As with [`lowdom`](#result-formats), the site reports add navigation and
-  styling. The bare
+  styling, and the bare
   HTML 4.01 pages the CLI writes are kept next to them as `report-bare.html`
   and `report-multimedia-bare.html`.
 
@@ -297,14 +297,14 @@ frame. We plan to run that configuration next.
 ## `soundcite`: citing a detection
 
 The excerpt at the [top of this test](#soundcite-an-arbitrary-excerpt)
-starts at 01:00:00. We chose that time from the clock, before we had looked at
-the recording. That excerpt illustrates the output format, not the content of
+starts at 01:00:00. We chose that time from the clock before we had looked at
+the recording, so that excerpt illustrates the output format, not the content of
 the take.
 
-After `birdidpv`, a more suitable excerpt is available. Sort `detections.csv`
+After `birdidpv`, a more suitable excerpt is available, so sort `detections.csv`
 by time and the longest unbroken run in the take starts at 00:40:29: seven
 frames back to back, all *Pyrrhocorax pyrrhocorax*, scoring 0.9863 to 0.9998.
-The single highest frame in the whole take sits inside it, at 00:40:35. A run
+The single highest frame in the whole take sits inside it, at 00:40:35, and a run
 is stronger evidence than one frame, so cut from the start of the run rather
 than from its best frame. `detections.csv` stores that time as `start_timecode` in
 `HH:MM:SS.mmm`, which is one of the formats `--start` accepts, so the value can
@@ -326,12 +326,12 @@ be copied straight across:
 `--duration 21` covers the seven frames. The two `--pad` values keep three
 seconds before them and four after, because 00:40:29 is a frame boundary, not
 the moment the bird began. BirdNET assigns each detection to a three-second
-frame, so the call may start anywhere inside those three seconds. Cutting
+frame, so the call may start anywhere inside those three seconds, and cutting
 exactly on the line can clip the first call.
 
 The written excerpt therefore runs 00:40:26 to 00:40:54, starting at sample
 116448000. `manifest.json` keeps the two ranges apart: the top level describes
-the 28 seconds in the WAV, because that is what the checksums cover, while
+the 28 seconds in the WAV because that is what the checksums cover, and
 `clip.cited` records the 21 seconds being cited. The excerpt is lossless and
 links back to both source tracks.
 
@@ -340,17 +340,17 @@ links back to both source tracks.
 </div>
 <p class="software-report__media-caption">
     The excerpt shown above: 21 seconds being cited, plus three seconds before
-    and four after. This player uses the lossy preview; the two 32-bit float
+    and four after. This player uses the lossy preview, but the two 32-bit float
     WAV excerpts in the package are what the checksums and the spectrogram are
     taken from.
 </p>
 
 Set `--duration` to cover the last frame you want, then use `--pad` for
-listening room around it. `--pad` sets both ends at once; `--pad-start` and
+listening room around it. `--pad` sets both ends at once, but `--pad-start` and
 `--pad-end` override it when the two differ.
 
-This step is manual. Before citing a time you have to listen to it. The
-[0.93 that was a person](#false-positive-at-01-41-05) is a reminder: a script
+This step is manual, so before citing a time you have to listen to it. The
+[0.93 that was a person](#false-positive-at-01-41-05) is a reminder, because a script
 that sent detections straight to `soundcite` would have created a citation
 package for a shout.
 
@@ -363,16 +363,16 @@ package for a shout.
 On this recording, `soundcite` turned a timestamp into a small package with
 enough information to trace the excerpt back to its sources. `lowdom` finished
 the screening pass, and the *provisional* 0.95 threshold produced a useful
-listening split. `birdidpv` added species names to that split. Those names
+listening split, so `birdidpv` added species names to that split, but those names
 still need to be checked by ear.
 
-The three tools work in sequence. Screening reduced the three-hour take to 135
+The three tools work in sequence, so screening reduced the three-hour take to 135
 ranges, identification produced 128 frames to review, and the frames that hold
 up can return to `soundcite` as cited excerpts. Each step reduces how much a
 person has to listen to. Only the hand-off from `lowdom` to `birdidpv` is
-automatic, because `birdidpv` reads the CSV `lowdom` writes. The return to
-`soundcite` is manual. Listening remains necessary, as the 01:41:05 frame
-demonstrates.
+automatic, because `birdidpv` reads the CSV `lowdom` writes, but the return to
+`soundcite` is manual, and listening remains necessary, as the 01:41:05 frame
+shows.
 
 Next, we need to report partial windows, repeat the listening test across other
 recordings, microphones, wind protection and environments, and run `birdidpv`
