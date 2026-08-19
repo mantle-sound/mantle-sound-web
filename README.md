@@ -10,6 +10,40 @@
 
 - https://www.getlektor.com/docs/
 
+## Footnotes become margin notes
+
+Write an ordinary markdown footnote in any content field:
+
+```
+…people who live in the area know it well.[^1]
+
+[^1]: The note itself.
+```
+
+`assets/static/sidenotes.js`, loaded from every `templates/layout*.html`, lifts
+each note out of the list at the foot of the page into an `<aside class="sidenote">`
+placed after the block that cites it. From 1280px up the note sits in a strip
+reserved inside the text column's own right padding; narrower than that it stays
+in flow as a framed block under the paragraph. The strip is reserved rather than
+taken from whatever space happens to be free beside the column, so the note lands
+in the same place on a laptop and on a wide display, and can never push the page
+sideways. Styling is at the end of `assets/static/style.css`.
+
+Two things to know before writing one:
+
+- **Numbering is per field, so the script renumbers the page.** `software-report.html`
+  renders `/software`'s `intro` above the post's own `body`, and mistune numbers each
+  field from 1, so such a page restarts at 1 halfway down and emits a second
+  `fnref-1` — invalid HTML, and two markers both reading "1". The script renumbers
+  across the whole document, so do not expect the numbers in the `.lr` source to
+  match the numbers on the page.
+- **A reference inside a list item anchors to the whole list.** `<aside>` cannot sit
+  between two `<li>`, so below 1280px that note drops to the end of the list instead
+  of under its own line. Fine for one note; three references in one list put three
+  notes together at the bottom.
+
+With JavaScript off the footnotes simply stay where mistune put them.
+
 ## Demonstration packages
 
 `assets/files/software/260115-002-birdidpv/` is entirely derived — no file in it
