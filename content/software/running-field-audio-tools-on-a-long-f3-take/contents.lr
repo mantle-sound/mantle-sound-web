@@ -329,10 +329,7 @@ links back to both source tracks.
   <audio controls preload="metadata" src="/files/software/260115-002-chough-004029/preview.ogg"></audio>
 </div>
 <p class="software-report__media-caption">
-    The excerpt shown above: 21 seconds being cited, plus three seconds before
-    and four after. This player uses the lossy preview, but the two 32-bit float
-    WAV excerpts in the package are what the checksums and the spectrogram are
-    taken from.
+    21 cited seconds, plus three before and four after.
 </p>
 
 Set `--duration` to cover the last frame you want, then use `--pad` for
