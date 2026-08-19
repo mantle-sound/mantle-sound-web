@@ -3375,3 +3375,144 @@ body:has(.page-with-toc) .software-report {
   color: var(--link-hover);
   font-weight: 500;
 }
+
+/* --- Footnotes as margin notes ------------------------------------------
+   sidenotes.js moves each footnote out of the list at the foot of the page
+   into an <aside class="sidenote"> beside the sentence that cites it, and
+   marks the surrounding text column .sidenote-host.
+
+   Two presentations, one markup. In flow the note is a framed block under its
+   paragraph; wide enough, and .has-margin-sidenotes (set by the script from
+   --sidenote-margin below) moves it into a strip reserved inside the column's
+   right padding. The strip is reserved rather than borrowed from whatever
+   happens to be free beside the column, so the note lands in the same place on
+   a 1280px laptop and a 2560px display, and can never overflow the page.
+
+   Bauhaus: a 2px black rectangle, no radius, no shadow, and a solid orange
+   square of DIN numerals sitting on its top-left corner. */
+:root {
+  --sidenote-width: 220px;
+  --sidenote-gap: 24px;
+  /* Top padding clears the number block on the corner; the :target rule has to
+     restate this, so it lives in one place. */
+  --sidenote-pad: 38px 18px 18px;
+  --sidenote-margin: 0;
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --sidenote-margin: 1;
+  }
+}
+
+.sidenote {
+  position: relative;
+  box-sizing: border-box;
+  margin: 20px 0 24px;
+  padding: var(--sidenote-pad);
+  border: 2px solid #000;
+  background: var(--bg);
+  font-family: var(--font-m);
+  font-weight: 300;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+.sidenote__num {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--link-hover);
+  color: #fff;
+  font-family: var(--font-d);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sidenote__body > :first-child {
+  margin-top: 0;
+}
+
+.sidenote__body > :last-child {
+  margin-bottom: 0;
+}
+
+/* The marker keeps the frame's geometry: a square, not a raised numeral. */
+sup.footnote-ref {
+  top: 0;
+  font-size: inherit;
+  vertical-align: baseline;
+}
+
+/* .page only to outrank the prose-link underline rule above, which names four
+   article classes and so carries more specificity than a bare element chain.
+   Naming .page instead of those four keeps this working on a fifth. */
+.page sup.footnote-ref > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.15em;
+  height: 1.15em;
+  margin: 0 0.12em;
+  padding: 0 0.2em;
+  box-sizing: border-box;
+  background: var(--link-hover);
+  color: #fff;
+  font-family: var(--font-d);
+  font-size: 0.72em;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: 0.35em;
+}
+
+.page sup.footnote-ref > a:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* Two site-wide [id]:target rules reach the note and both damage it: one
+   paints a banner background with a 4px orange bar and a radius, the other
+   zeroes padding — which collapses the frame and slides the number block over
+   the first line. Reset the pair here and give the note its own selected
+   state: the whole rectangle inverts to orange, the number block to black.
+   Named through .page so the reset outranks the four-class rule above. */
+.page .sidenote:target,
+.page .sidenote[id]:target:not(.blog-post-card) {
+  padding: var(--sidenote-pad);
+  border: 2px solid var(--link-hover);
+  border-radius: 0;
+  background: var(--link-hover);
+  color: #fff;
+}
+
+.page .sidenote:target .sidenote__num {
+  background: #000;
+  color: #fff;
+}
+
+.page .sidenote:target a {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+
+/* Both hosts are named: the column is usually a wrapper inside .page, but on
+   layouts whose prose sits directly in .page the column is .page itself. */
+body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) {
+  position: relative;
+  padding-right: calc(var(--sidenote-width) + var(--sidenote-gap));
+}
+
+body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) > .sidenote,
+body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sidenote {
+  position: absolute;
+  right: 0;
+  left: auto;
+  width: var(--sidenote-width);
+  margin: 0;
+}
