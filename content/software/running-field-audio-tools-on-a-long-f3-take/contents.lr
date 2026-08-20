@@ -183,29 +183,30 @@ as recordings clean enough to send to a free archive like
 
 ### Position filter
 
-The coordinates come from the end of the GPX trace, at the camp on Yema Haizi.
-With them, BirdNET cuts its list of 6,522 species down to the 788 that could be
-there in mid-January, but without them the model still returns species from other
-regions at similarly high confidence, and even the shorter list still contains
-species absent from the site.
+We use coordinate data from the end of the GPX trace, at the camp on Yema Haizi.
+BirdNET uses these to restrict its global list of 6,522 species to the 788 that
+could occur there in mid-January. Without the filter, the model still returns
+species from other regions at similarly high confidence. Even the filtered list
+still contains species absent from the site.
 
-### Detections
+### Detections at a glance
 
-Two corvids make up 99 of the 128 frames, and both match the audio clearly:
-Red-billed Chough (82 frames, highest 0.9998) and Large-billed Crow (17 frames,
-highest 0.9118). Both have harmonic structure well above 2 kHz, and both sit
-3–11 dB louder than everything else in the run.
+The 128 frames above bear out the limit of the position filter. Most of the
+eleven species labels still need scrutiny. Ninety-nine are corvids and verified
+against the audio, Red-billed Chough (82, 0.9998) and Large-billed Crow (17,
+0.9118). Their harmonics extend above 2 kHz, and each outlevels the rest by
+3–11 dB.
 
-The other nine species share 29 frames, and all of them are deep-voiced waterbirds:
-Great Bittern, Ruddy Shelduck, Eurasian Coot, Graylag Goose, Eurasian Curlew,
-Eurasian Wigeon, Mallard, Common Shelduck, Gray Heron. The lake had frozen over, and
-<a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a> is
-the strongest false positive: twelve detections, highest 0.9064, arriving in
-sustained runs with eight of them inside seventy seconds. Not one of their
-spectrograms shows a call above the low-frequency bed, and that bed is the
-melting-ice resonance described under [Field details](#field-details). Our
-guides call it *long hou*, and the model often labels it as deep-voiced
-waterbirds with booming calls.
+The remaining twenty-nine frames carry nine deep-voiced waterbird labels,
+including Great Bittern, Ruddy Shelduck, Eurasian Coot, Graylag Goose, Eurasian
+Curlew, Eurasian Wigeon, Mallard, Common Shelduck, and Gray Heron. The lake
+was frozen during recording, so these should be treated as false positives tied
+to the melting-ice bed described under [Field details](#field-details).
+
+The worst offender is <a href="https://xeno-canto.org/species/Botaurus-stellaris">Great Bittern</a>,
+with 12 detections, peak 0.9064, and eight within 70 seconds. None of the
+spectrograms show a call band above that LF bed. BirdNET assigns booming
+waterbirds because the ice boom (*long hou*) matches that acoustic template.
 
 Compare the two by ear. The first page of xeno-canto for
 *Botaurus stellaris* has <a href="https://xeno-canto.org/891071">XC891071</a>,
@@ -218,35 +219,31 @@ apart by ear. None of the spectrogram measurements we tried put a number on it.
 
 ### False positive at 01:41:05
 
-The model calls the frame at 01:41:05 Ruddy Shelduck at 0.928, the second highest
-score any species reached in the run, but there is no bird in it. It is Xiao Zhang calling across the
-lake to the recordist, who recognized the voice on listening.
+At 01:41:05 BirdNET returns Ruddy Shelduck (0.928) and this is the second-highest
+score in the run. The actual situation at 01:41:05 was that Xiao Zhang called
+across Yema Haizi lake to the recordist. For this frame, we can only confirm
+this by listening to the original recording.
 
-We reached that conclusion only after two incorrect readings. The band
-measurements grouped the frame with the ice, but for the wrong reason, and then its
-spectrogram showed clear harmonic stacks between 1 and 3 kHz. Ice does not
-produce structure like that, so we read it as a real call and took the species
-off the doubtful list, but both readings were wrong in opposite directions, and
-the picture that corrected the first reading led us into the second. Human
-speech can produce a similar spectrogram: a pitch contour sliding through its
-harmonics, formants near 1.2 and 2 kHz, four syllables in the last second, so
-listening was required to resolve this frame.
+<!--
+Band analysis grouped the frame with ice. The spectrogram shows harmonic stacks
+at 1–3 kHz. Ice does not produce that structure. Neither reading identifies the
+source. Human speech matches the spectrogram, with a sliding pitch contour,
+formants at 1.2 and 2 kHz, and four syllables in the final second.
 
-Confidence scores on this take do not separate true detections from false ones,
-and at every threshold from 0.25 to 0.9 the false positives match or beat the real
-detections, so raising the threshold removes lower-confidence errors but keeps the
-high-confidence false positives. Anthropophony is not in a filtered species list,
-so human sound has no label of its own and has to come out as some bird. And a
-spectrogram shows that energy is present, but not what produced it.
+Confidence on this take does not rank true detections above false ones. From
+0.25 to 0.9, false positives match or exceed real hits. Raising the threshold
+removes low-confidence errors only. Anthropophony is not in the species filter,
+so human sound receives a bird label. A spectrogram shows energy, not source
+type. Output from `birdidpv` requires listening before hand-off to `soundcite`.
+-->
 
 ### Single-track limits
 
-[`lowdom`](#lowdom-screening-the-take) screened both tracks and kept the higher score of the
-two, but this
-`birdidpv` run read `Tr1` on its own, so a call that came out better on the second
-microphone could be missed. This run does not report stereo placement or
-direction, but the tool can read both tracks and keep the highest confidence per
-frame, and we plan to run that configuration next.
+This `birdidpv` run read `Tr1` only. [`lowdom`](#lowdom-screening-the-take) had
+already screened both tracks and kept the higher score per window, so a call
+clearer on the second microphone may be missed. The run reports no stereo
+placement or direction. Both-track input with the highest confidence per frame
+is supported and planned for the next run.
 
 ### `birdidpv` output
 

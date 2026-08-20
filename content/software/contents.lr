@@ -24,9 +24,9 @@ Melting ice that season produced especially vivid sounds, and our local guides c
 
 The consistent green-bar range data was passed to `birdidpv` for processing. The returned species list included instances where dragon roars were misclassified as avian calls. The <a href="/files/software/260115-002-birdidpv/report-js.html">identification report</a> generates a spectrogram for each detected frame, enabling visual verification of results rather than relying exclusively on confidence scores. In the case of the frame at 01:41:05, BirdNET identified a waterbird, whereas the actual source was a human voice (Xiao Zhang) calling from across the lake. Confirmation required auditory inspection.
 
-A desired feature for the toolkit is the automatic detection and exclusion of human speech from uploads intended for ecological data sharing. This requirement is particularly critical during guided excursions. While spontaneous conversations during recordings may hold anthropological or ethnographic value, they must be manually removed in post-processing if the objective is to isolate the soundscape or capture a dynamic moving soundscape during transit. This practice is standard and expected to persist in future MAN network research.
+In future developments of the toolkit, we wish to develop a feature to automatically detect and exclude human speech from our recording segments (which are intended for sharing on bioacoustics platforms). This is useful for guided excursions in outdoor areas. While casual chats during recordings might have some anthropological or ethnographic value, we still need to remove them in post-processing if our goal is to isolate the soundscape or capture a dynamic, moving soundscape during expeditions.[^2]
 
-Field recording configurations vary by deployment. For the three-hour test recording discussed in this document, the signal chain is detailed under the <a href="#input">Input</a> section. Refer to <a class="software-report__fig-link" href="#take002-photo-4">Fig. 4</a> for a field photograph of the session setup.
+Field recording setups are varied. For the audio file used in this article, the specific setup is introduced under the <a href="#input">Input</a> section.
 
 ### `field-audio-tools`
 
@@ -34,23 +34,14 @@ Three CLI tools handle long Zoom F3 takes: excerpt a timestamped range with *pro
 
 #### Prerequisites
 
-- Python 3.11 or newer
-- FFmpeg on `PATH`, both `ffmpeg` and `ffprobe`
-- NumPy, installed with the package
+Requires Python 3.11+, FFmpeg on `PATH` (`ffmpeg`, `ffprobe`), and NumPy (installed with the package).
 
-There is no PyPI release yet. Install from a checkout:
+Install from a checkout:
 
 <pre class="software-example software-example--noprompt"><code>python -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[test]'
 pytest</code></pre>
-
-A checkout on FAT or exFAT has no symbolic links, which `venv` needs for its
-`bin/`, so build the environment on a Linux filesystem instead and point it at
-the checkout:
-
-<pre class="software-example software-example--noprompt"><code>python -m venv ~/.venvs/field-audio-tools
-~/.venvs/field-audio-tools/bin/pip install -e '/path/to/field-audio-tools[test]'</code></pre>
 
 That is all `soundcite` and `lowdom` need, but `birdidpv` takes one more extra:
 
@@ -60,11 +51,22 @@ It pulls in TensorFlow, which is much heavier than the rest of the project, and
 downloads the BirdNET model files on first run. Without it `birdidpv` exits with
 an install hint, but `soundcite` and `lowdom` are unaffected either way.
 
+#### Troubleshooting
+
+##### Checkout on FAT or exFAT
+
+If you keep the checkout on an external drive, as we do for field archives, a local `.venv` beside the tree may fail silently or behave oddly. FAT32 and exFAT do not implement POSIX symbolic links, which `venv` uses under `bin/` (e.g. `python` → `python3.x`). Keep the checkout on the removable volume and create the virtualenv on a Linux-native mount (ext4, btrfs, xfs). Install in editable mode from the checkout path:
+
+<pre class="software-example software-example--noprompt"><code>python -m venv ~/.venvs/field-audio-tools
+~/.venvs/field-audio-tools/bin/pip install -e '/path/to/field-audio-tools[test]'</code></pre>
+
 #### Result formats
 
 *Bare* HTML comes from the CLI, and the demo packages linked here add site navigation and shared media styling.
 
 [^1]: From a night camping there, the dragon roar is far more striking after dark when a strong wind comes up. Perhaps the wind sharpens the sound of the bubbles under the ice and drives it more aggressively toward my ears.
+
+[^2]: This intention is expected to persist in future MAN network research.
 
 ---
 body:
