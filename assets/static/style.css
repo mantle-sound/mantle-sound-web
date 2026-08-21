@@ -1200,15 +1200,6 @@ main {
   width: fit-content;
 }
 
-#subfooterlogo {
-  margin-bottom: 15px;
-  margin-left: 0px;
-  display: inline-block;
-  width: fit-content;
-  height: auto;
-  object-fit: contain;
-}
-
 #mainbox {
   display: flex;
   flex-direction: column;
@@ -2240,13 +2231,6 @@ blockquote::after {
     }
     h1.intro-h {
       padding-top: 13px;
-    }
-    
-    /* 移动端 footer logo 优化 */
-    #subfooterlogo {
-        max-width: 80%;
-        height: auto;
-        margin-bottom: 10px;
     }
     
     #mainbox {
