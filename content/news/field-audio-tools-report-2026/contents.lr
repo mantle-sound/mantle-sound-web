@@ -1,0 +1,16 @@
+_model: news-post
+---
+title: Sound report published: field-audio-tools on a three-hour F3 take
+---
+pub_date: 2026-08-07
+---
+body:
+
+A new sound report is online: [Running field-audio-tools on a long dual-mic F3 take](/software/running-field-audio-tools-on-a-long-f3-take/).
+
+It puts a three-hour dual-mic Zoom F3 recording, made on the frozen lake at Yema Haizi in January 2026, through the three [field-audio-tools](/software/) commands: `soundcite` for a timestamped excerpt with provenance, `lowdom` for low-frequency dominance screening, and `birdidpv` for BirdNET identification on the windows screening left alone. The report links the demonstration package each run produced, and notes two gaps we found on the way, in `lowdom` reporting and in threshold calibration.
+
+One thing the run surfaced: the *long hou* ("dragon roar") of melting lake ice is loud and constant enough that `birdidpv` repeatedly filed it as bird calls, and one detection turned out to be a human voice carrying across the lake.
+
+---
+_hidden: yes
