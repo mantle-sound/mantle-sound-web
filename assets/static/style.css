@@ -809,6 +809,11 @@ header {
   transition: filter 0.3s ease;
 }
 
+/* Landscape frame in a portrait slot: keep the geophone (low in the frame) visible. */
+.home-gallery__slide img[src$="/index/geophone.webp"] {
+  object-position: center bottom;
+}
+
 .home-gallery__slide img:hover {
   filter: grayscale(0%);
 }
