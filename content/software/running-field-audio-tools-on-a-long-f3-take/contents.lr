@@ -138,15 +138,6 @@ listener. The score remains a *low-frequency screening* heuristic rather than a
 <a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-### Known gaps
-
-1. Unreported partial tail. The source lasts 03:02:24 but analysis stopped at
-   03:02:20, and the current code drops a final fragment shorter than half a window
-   without recording the dropped duration in `summary.json` or the reports.
-2. Threshold placeholder. The initial 0.6 CLI default separated almost nothing
-   on this take,[^1] so we recalibrated with blind listening and adopted 0.95 for
-   the run documented here.
-
 ## `birdidpv`: the clean windows
 
 `lowdom` produces a list of time ranges where wind is low enough for further
@@ -340,24 +331,6 @@ package for a shout.
 <p class="software-report-links">
 <a href="/files/software/260115-002-chough-004029/index.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/spectrogram.png">See its spectrogram</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/SHA256SUMS">Verify its checksums</a>
 </p>
-
-## Outcome
-
-On this recording, `soundcite` turned a timestamp into a small package with
-enough information to trace the excerpt back to its sources. `lowdom` finished
-the screening pass, and the *provisional* 0.95 threshold produced a useful
-listening split, so `birdidpv` added species names to that split, but those names
-still need to be checked by ear.
-
-Only the hand-off from `lowdom` to `birdidpv` is automatic, because `birdidpv`
-reads the CSV `lowdom` writes. The return to `soundcite` is manual, and listening
-remains necessary, as the 01:41:05 frame shows.
-
-Next, we need to report partial windows, repeat the listening test across other
-recordings, microphones, wind protection and environments, and run `birdidpv`
-across both tracks rather than one. *Low-frequency screening* is more accurate
-than *wind detection*, and *machine identification* should be treated as a
-starting point for listening, not as a verified record.
 
 ## References
 
