@@ -13,6 +13,12 @@
   The anchors the prose links to (Fig. 2, 3, 4) sit on the slide rather than on
   the image, so they survive in both presentations; .software-report__gallery-cell[id]
   already carries the scroll-margin and :target rules.
+
+  data-figure-lightbox opts this gallery into software-report-figure-lightbox.js:
+  a cited figure opens over the page instead of scrolling the reader away from
+  the sentence that cited it. data-fig-label is what the viewer prints, so the
+  number follows the slide if the photographs are ever reordered. The homepage
+  galleries carry neither attribute and are unaffected.
 #}
 {% macro render_take002_showcase_gallery(class_name='software-report__gallery') %}
 {% set photos = [
@@ -44,6 +50,7 @@
 <div
   class="{{ class_name }} home-gallery"
   data-home-gallery
+  data-figure-lightbox
   tabindex="0"
   role="region"
   aria-roledescription="carousel"
@@ -52,7 +59,7 @@
     <div class="home-gallery__viewport">
       <div class="home-gallery__track">
         {% for photo in photos %}
-        <figure class="home-gallery__slide software-report__gallery-cell"{% if photo.id %} id="{{ photo.id }}"{% endif %}>
+        <figure class="home-gallery__slide software-report__gallery-cell" data-fig-label="Fig. {{ loop.index }}"{% if photo.id %} id="{{ photo.id }}"{% endif %}>
           <img
             class="software-report__gallery-photo"
             src="{{ photo.src }}"

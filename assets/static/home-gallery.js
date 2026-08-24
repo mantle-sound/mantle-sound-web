@@ -229,18 +229,6 @@
       }
     });
 
-    // Deep links such as "#take002-photo-2" point at a slide the carousel has
-    // translated out of view, so a plain anchor jump leaves the wrong photo on
-    // screen. Let outside code ask the carousel to show a slide instead.
-    root.addEventListener('home-gallery:goto', function (event) {
-      var next = event.detail && event.detail.index;
-      if (typeof next !== 'number' || next < 0 || next >= count) {
-        return;
-      }
-      setIndex(next);
-      stopAuto();
-    });
-
     setIndex(0);
     startAuto();
     root.dataset.homeGalleryReady = 'true';

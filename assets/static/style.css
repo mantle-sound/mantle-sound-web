@@ -3671,3 +3671,183 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
 .scramble-ch--v2 { color: var(--bauhaus-v2); }
 .scramble-ch--v3 { color: var(--bauhaus-v3); }
 .scramble-ch--v4 { color: var(--bauhaus-v4); }
+
+/* Figure viewer for the cited photographs (software-report-figure-lightbox.js).
+   Deliberately dark in both themes: it is a full-bleed image viewer, so it
+   borrows the convention of one rather than the page palette. z-index clears
+   the sticky navbar (1000), its hamburger (1001) and the fig hover preview
+   (1100). */
+.fig-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+/* An author `display` beats the UA stylesheet's [hidden] { display: none },
+   so without this the closed viewer stays laid out over the whole page,
+   invisible at opacity 0 but still swallowing every click. */
+.fig-lightbox[hidden] {
+  display: none;
+}
+
+.fig-lightbox.is-open {
+  opacity: 1;
+}
+
+.fig-lightbox--no-motion {
+  transition: none;
+}
+
+.fig-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.fig-lightbox__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: min(1200px, 100%);
+  max-height: 100%;
+  touch-action: pan-y;
+}
+
+.fig-lightbox__figure {
+  margin: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fig-lightbox__image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  /* Reserve room for the caption and the pager. Not a percentage: the figure
+     is auto-height, so a percentage max-height resolves to none there and the
+     photograph pushes the pager off the bottom of short viewports. dvh second
+     so it wins where supported, and mobile chrome does not eat the pager. */
+  max-height: calc(100vh - 200px);
+  max-height: calc(100dvh - 200px);
+  margin: 0;
+  object-fit: contain;
+  filter: none;
+  aspect-ratio: auto;
+}
+
+.fig-lightbox__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 60ch;
+  padding: 0 4px;
+  font-family: var(--font-m);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.fig-lightbox__label {
+  font-weight: 500;
+  color: #fff;
+}
+
+.fig-lightbox__credit {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* The credit is cloned out of the slide, where it is absolutely positioned
+   over the photograph. Nothing anchors it here. */
+.fig-lightbox__credit .software-report__gallery-caption {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.fig-lightbox__credit .cc-icons img {
+  filter: invert(1);
+  opacity: 0.7;
+}
+
+.fig-lightbox__nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-m);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.fig-lightbox__close,
+.fig-lightbox__prev,
+.fig-lightbox__next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 44px is the smallest comfortable touch target. */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Pinned to the viewport corner, not to the panel; see the note in the script
+   where it is built outside .fig-lightbox__panel. */
+.fig-lightbox__close {
+  position: absolute;
+  top: max(8px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+  z-index: 2;
+}
+
+.fig-lightbox__close:hover,
+.fig-lightbox__prev:hover,
+.fig-lightbox__next:hover {
+  background: var(--link-hover);
+}
+
+.fig-lightbox__close:focus-visible,
+.fig-lightbox__prev:focus-visible,
+.fig-lightbox__next:focus-visible {
+  outline: 2px solid var(--link-hover);
+  outline-offset: 2px;
+}
+
+/* Only upgraded once the script has wired the click handler. */
+[data-figure-lightbox] .software-report__gallery-photo[role="button"] {
+  cursor: zoom-in;
+}
+
+[data-figure-lightbox] .software-report__gallery-photo[role="button"]:focus-visible {
+  outline: 2px solid var(--link-hover);
+  outline-offset: -2px;
+}
+
+@media (max-width: 620px) {
+  .fig-lightbox__caption {
+    font-size: 0.68rem;
+  }
+}
