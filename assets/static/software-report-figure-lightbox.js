@@ -201,6 +201,19 @@
   // about. Nothing is lost visually: the page behind sits under a 92% black
   // scrim, and the photograph is better off un-boosted anyway.
   var savedFilter = '';
+  var savedScrollRestoration = null;
+
+  function restoreScrollRestoration() {
+    if (savedScrollRestoration === null) {
+      return;
+    }
+    try {
+      history.scrollRestoration = savedScrollRestoration;
+    } catch (err) {
+      /* nothing to hand back */
+    }
+    savedScrollRestoration = null;
+  }
 
   function lockScroll() {
     scrollY = window.scrollY || window.pageYOffset || 0;
@@ -227,9 +240,41 @@
 
   function open(list, at, trigger) {
     build();
+    // Re-entering while open would run lockScroll a second time and record
+    // scrollY as 0, because a fixed body reports no scroll offset.
+    if (isOpen) {
+      items = list;
+      show(at);
+      return;
+    }
     items = list;
     opener = trigger || null;
     show(at);
+
+    // Both of these must happen before the scroll lock.
+    //
+    // The browser stamps the outgoing history entry with the document's
+    // current scroll offset, and a position: fixed body reports 0. Pushing
+    // after the lock therefore recorded the entry as "top of page", and the
+    // history.back() on close scrolled the reader there — the whole article
+    // snapping to the top the moment they tapped outside the photograph.
+    //
+    // Turning scroll restoration off is the belt to that braces: even with a
+    // correctly stamped entry, the browser's own restore races the scrollTo in
+    // unlockScroll, and this viewer is the one deciding where the reader lands.
+    try {
+      if ('scrollRestoration' in history) {
+        savedScrollRestoration = history.scrollRestoration;
+        history.scrollRestoration = 'manual';
+      }
+      // Gives Android's back gesture something to pop, so the first back
+      // closes the viewer instead of leaving the article.
+      history.pushState({ figLightbox: true }, '');
+      pushedState = true;
+    } catch (err) {
+      pushedState = false;
+    }
+
     lockScroll();
     overlay.hidden = false;
     // Read a layout property to flush the display: none -> flex change before
@@ -241,15 +286,6 @@
     isOpen = true;
     document.addEventListener('keydown', onKeydown, true);
     els.close.focus();
-
-    // Gives Android's back gesture something to pop, so the first back closes
-    // the viewer instead of leaving the article.
-    try {
-      history.pushState({ figLightbox: true }, '');
-      pushedState = true;
-    } catch (err) {
-      pushedState = false;
-    }
   }
 
   function close(fromPopstate) {
@@ -278,9 +314,11 @@
 
     if (pushedState && !fromPopstate) {
       pushedState = false;
+      // Scroll restoration is handed back in the popstate this triggers.
       history.back();
     } else {
       pushedState = false;
+      restoreScrollRestoration();
     }
   }
 
@@ -288,6 +326,7 @@
     if (isOpen) {
       close(true);
     }
+    restoreScrollRestoration();
   });
 
   function indexOfSlide(list, slide) {
