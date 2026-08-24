@@ -39,4 +39,7 @@
   <script src="{{ '/static/software-report-fig-preview.js'|url }}"></script>
   <script src="{{ '/static/software-route-details.js'|url }}"></script>
   <script src="{{ '/static/sidenotes.js'|url }}"></script>
+  {# Sidenotes are built by sidenotes.js on DOMContentLoaded, so the scramble
+     must be registered after it or there is nothing to observe yet. #}
+  <script src="{{ '/static/scramble.js'|url }}"></script>
 </body>
