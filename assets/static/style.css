@@ -11,11 +11,11 @@
     --link-hover: #ff5400;
     --bg-footer: #F6F9FE;
     --bg-footer-darker: #73889b4a;
-    --font-d: "DIN";
     --font-tt-m: "TT Modernoir Medium";
     --font-m: "MuseoSans";
     --font-estre: "Estre";
     --font-mono: "Fira Code", monospace;
+    --font-menu: "Josefin Sans";
     --bg-btn: #000;
     --fg-btn: #fff;
     --fg-logo: #d3ebf3;
@@ -51,17 +51,26 @@
     --admon-info-line: #007bff; --admon-info-bg: #e7f3ff; --admon-info-fg: #0056b3;
     --admon-tip-line:  #28a745; --admon-tip-bg:  #d4edda; --admon-tip-fg:  #155724;
     --admon-warn-line: #ffc107; --admon-warn-bg: #fff3cd; --admon-warn-fg: #856404;
+    /* Bauhaus primaries for the scramble noise on the software index: the
+       Kandinsky triad plus black. The yellow is deepened from the poster
+       value so a single glyph still reads against white. */
+    --bauhaus-1: #d92d20;   /* red */
+    --bauhaus-2: #1b4ea0;   /* blue */
+    --bauhaus-3: #e8a800;   /* yellow */
+    --bauhaus-4: #111111;   /* black */
+    /* Vivid variant for the homepage headings: the poster primaries at full
+       chroma, without the deepening the software index needed for legibility
+       at a single glyph. */
+    --bauhaus-v1: #e8112d;  /* red */
+    --bauhaus-v2: #0050e6;  /* blue */
+    --bauhaus-v3: #ffd400;  /* yellow */
+    --bauhaus-v4: #000000;  /* black */
 }
 
 /* Self-hosted fonts only (served from /font/ via assets/font/). No third-party font CDNs. */
 @font-face {
   font-family: 'TT Modernoir Medium';
-  src: url('/font/TT_Modernoir_Trial_Medium.woff') format('woff');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'DIN';
-  src: url('/font/DIN Alternate Bold.woff') format('woff');
+  src: url('/font/TT_Modernoir_Trial_Medium.woff2') format('woff2');
   font-display: swap;
 }
 @font-face {
@@ -79,6 +88,14 @@
 @font-face {
   font-family: 'Estre';
   src: url('/font/estre.woff2') format('woff2');
+  font-display: swap;
+}
+/* Instanced at wght=600 from the Josefin Sans variable font (OFL-1.1), so it
+   is self-hosted like every other face here — no third-party CDN. */
+@font-face {
+  font-family: 'Josefin Sans';
+  src: url('/font/JosefinSans-SemiBold.woff2') format('woff2');
+  font-weight: 600;
   font-display: swap;
 }
 @font-face {
@@ -136,9 +153,9 @@ logo {
   top: 0;
   z-index: 2;
   text-align: left;
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin: 0 0 14px;
@@ -263,7 +280,7 @@ logo {
 }
 
 din {
-    font-family: var(--font-d);
+    font-family: var(--font-menu);
 }
 
 a {
@@ -296,7 +313,7 @@ a:hover {
 }
 
 em {
-	font-family: var(--font-d);
+	font-family: var(--font-menu);
 }
 img {
   max-width: 300px;
@@ -338,10 +355,11 @@ figcaption {
   padding: 10px;
 }
 .button--primary, a.button--primary.button {
+	font-family: var(--font-menu);
 	font-size: 13px;
 	text-transform: uppercase;
 	padding: 5px 30px;
-	font-weight: 700;
+	font-weight: 600;
 	transition: all .18s ease-out;
 	position: relative;
 	overflow: hidden;
@@ -606,9 +624,9 @@ header {
 
 .nav-menu a {
   color: var(--fg);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 400;
+  font-family: var(--font-menu);
+  font-size: 14px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   transition: color 0.3s ease;
@@ -1074,9 +1092,9 @@ margin-right: 20px;
 
 .partners-label {
   margin: 0 0 16px;
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-dim);
@@ -1506,7 +1524,7 @@ body:has(.page-with-toc) .blog-post-bare {
 }
 
 .news-card-date {
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 0.9rem;
   color: var(--bg);
   text-transform: uppercase;
@@ -1515,7 +1533,7 @@ body:has(.page-with-toc) .blog-post-bare {
   background: var(--fg);
   padding: 6px 12px;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* The chip paints itself with background:var(--fg)/color:var(--bg), so the
@@ -1601,7 +1619,7 @@ body:has(.page-with-toc) .blog-post-bare {
 }
 
 .post-date {
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 0.9rem;
   color: var(--fg-dim);
   text-transform: uppercase;
@@ -1922,12 +1940,12 @@ blockquote::after {
         justify-content: space-between;
         padding: 8px 20px;
         width: 100%;
-        font-family: var(--font-mono);
-        font-size: 11px;
+        font-family: var(--font-menu);
+        font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         text-align: left;
-        font-weight: 400;
+        font-weight: 600;
         transition: all 0.18s ease-out;
         color: var(--fg);
         background: transparent;
@@ -2306,7 +2324,7 @@ blockquote::after {
         text-align: left;
     }
     
-    #rightside { order: 3; width: 100%; padding: 24px 0; margin-top: 24px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; font-family: var(--font-d); }
+    #rightside { order: 3; width: 100%; padding: 24px 0; margin-top: 24px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; font-family: var(--font-menu); }
     #rightside a { display: block; padding: 12px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--fg); }
     #rightside a:active, #rightside a:focus { background: transparent; color: var(--fg); transform: none; padding-left: 0; }
 }
@@ -3470,7 +3488,7 @@ body:has(.page-with-toc) .software-report {
   height: 32px;
   background: var(--link-hover);
   color: #fff;
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 16px;
   line-height: 1;
 }
@@ -3504,7 +3522,7 @@ sup.footnote-ref {
   box-sizing: border-box;
   background: var(--link-hover);
   color: #fff;
-  font-family: var(--font-d);
+  font-family: var(--font-menu);
   font-size: 0.72em;
   line-height: 1;
   text-decoration: none;
@@ -3610,6 +3628,16 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
     --admon-info-line: #4a9eff; --admon-info-bg: #12212e; --admon-info-fg: #a8cfff;
     --admon-tip-line:  #3fbf63; --admon-tip-bg:  #12241a; --admon-tip-fg:  #9fe0b2;
     --admon-warn-line: #e0a92b; --admon-warn-bg: #2a2110; --admon-warn-fg: #f0d08a;
+    /* Lifted so each stays legible on a near-black ground; the fourth flips
+       from black to near-white, since black noise would be invisible. */
+    --bauhaus-1: #ff6a5c;
+    --bauhaus-2: #6c9bf0;
+    --bauhaus-3: #ffc93c;
+    --bauhaus-4: #f2f2f2;
+    --bauhaus-v1: #ff5a3c;
+    --bauhaus-v2: #4d86ff;
+    --bauhaus-v3: #ffe14d;
+    --bauhaus-v4: #ffffff;
   }
 }
 
@@ -3629,3 +3657,17 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
     filter: invert(1);
   }
 }
+
+/* Per-character colour for the scramble noise. Only the characters inside the
+   noise band are wrapped and coloured; settled text stays plain, so the title
+   arrives in its normal colour. */
+.scramble-ch--1 { color: var(--bauhaus-1); }
+.scramble-ch--2 { color: var(--bauhaus-2); }
+.scramble-ch--3 { color: var(--bauhaus-3); }
+.scramble-ch--4 { color: var(--bauhaus-4); }
+
+/* Vivid variant, homepage headings. */
+.scramble-ch--v1 { color: var(--bauhaus-v1); }
+.scramble-ch--v2 { color: var(--bauhaus-v2); }
+.scramble-ch--v3 { color: var(--bauhaus-v3); }
+.scramble-ch--v4 { color: var(--bauhaus-v4); }

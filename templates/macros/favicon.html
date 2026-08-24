@@ -4,13 +4,17 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ 'static/favicon-16x16.png'|asseturl }}">
 <link rel="icon" type="image/x-icon" href="{{ 'static/favicon.ico'|asseturl }}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ 'static/apple-touch-icon.png'|asseturl }}">
-{# Preload critical fonts for faster first paint and better caching. #}
-<link rel="preload" href="/font/TT_Modernoir_Trial_Medium.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="/font/DIN Alternate Bold.woff" as="font" type="font/woff" crossorigin>
+{# Preload the faces that paint above the fold: logo, slogan, body text and
+   the menu. These URLs must stay byte-identical to the src in style.css or the
+   browser treats them as two resources and downloads each font twice — which
+   is why they are not run through |url, since the stylesheet cannot be
+   templated to match the hash. Fira Code is deliberately absent: it is the
+   heaviest face and only paints captions and code, which swap in fine. #}
+<link rel="preload" href="/font/TT_Modernoir_Trial_Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/MuseoSans_500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/MuseoSans-300.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/font/estre.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/font/FiraCode-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/font/JosefinSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 {# Preload banner for current viewport only (desktop vs mobile) so preload is used. #}
 <link rel="preload" href="{{ '/static/banner.png'|url }}" as="image" media="(min-width: 1301px)">
 <link rel="preload" href="{{ '/static/banner-mobile.png'|url }}" as="image" media="(max-width: 1300px)">

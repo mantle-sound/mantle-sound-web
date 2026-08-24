@@ -17,7 +17,7 @@
  */
 (function () {
   var NOISE = '—~±§|[].+$^@*()•x%!?#';
-  var SETTLE = 0.35; // chance a rewrite lands the real character
+  var SETTLE = 0.35; // default chance a rewrite lands the real character
 
   /* Homepage headings sit near the top and fire on load. Report sidenotes are
      scattered down a very long page, so they wait until they scroll into view
@@ -26,9 +26,22 @@
      heading; a 34-character band on 200 characters reads as a slow wipe. */
   var GROUPS = [
     { selector: '.home-sections h2.intro-h',
-      duration: 1400, band: 34, stagger: 180, observe: false },
+      duration: 1400, band: 34, stagger: 180, observe: false,
+      colour: true, palette: 'v' },
+    /* The section descriptions trail their heading by a beat, so each block
+       resolves top-down rather than everything moving at once. Their band is
+       wider because a description is four times the length of its heading. */
+    { selector: '.home-sections .home-intro__text p',
+      duration: 1600, band: 70, stagger: 180, delay: 260, observe: false,
+      colour: true, palette: 'v', settle: 0.16 },
     { selector: '.sidenote .sidenote__body',
-      duration: 1800, band: 90, stagger: 0, observe: true }
+      duration: 1800, band: 90, stagger: 0, observe: true },
+    /* Software index cards. Observed rather than fired on load for the same
+       reason as the sidenotes: the tool cards sit below the fold. The tool
+       headings wrap their name in <code> next to an <img> mark — the walker
+       only collects text nodes, so the mark is left alone. */
+    { selector: '.software-test-note-promo__title, .software-tool-column-heading',
+      duration: 1400, band: 34, stagger: 0, observe: true, colour: true }
   ];
 
   function prefersReducedMotion() {
@@ -62,7 +75,7 @@
     return str.substring(0, at) + ch + str.substring(at + 1);
   }
 
-  function run(el, duration, band) {
+  function run(el, duration, band, colour, palette, settle) {
     var nodes = textNodes(el);
     if (!nodes.length) return;
 
@@ -77,7 +90,22 @@
     var blank = new Array(target.length + 1).join(' ');
     var buffer = blank;
 
-    function paint(str) {
+    /* Colouring a single character means wrapping it, and a text node cannot
+       carry a colour. So each text node is swapped for a shell <span> that the
+       per-character spans live in, and swapped back on restore. Only text
+       nodes are touched, so the <img> mark and the <code> element around a
+       tool name survive the animation untouched. */
+    var shells = null;
+    if (colour) {
+      shells = [];
+      for (var n = 0; n < nodes.length; n++) {
+        var shell = document.createElement('span');
+        nodes[n].parentNode.replaceChild(shell, nodes[n]);
+        shells.push(shell);
+      }
+    }
+
+    function paintPlain(str) {
       var cursor = 0;
       for (var i = 0; i < nodes.length; i++) {
         nodes[i].nodeValue = str.slice(cursor, cursor + lengths[i]);
@@ -85,8 +113,52 @@
       }
     }
 
+    function paintColour(str, from, to) {
+      var cursor = 0;
+      for (var i = 0; i < shells.length; i++) {
+        var frag = document.createDocumentFragment();
+        var run_ = '';
+        for (var j = 0; j < lengths[i]; j++) {
+          var at = cursor + j;
+          var ch = str.charAt(at);
+          if (at >= from && at < to && ch !== ' ') {
+            if (run_) { frag.appendChild(document.createTextNode(run_)); run_ = ''; }
+            var sp = document.createElement('span');
+            sp.className =
+              'scramble-ch scramble-ch--' + palette + (1 + ((Math.random() * 4) | 0));
+            sp.textContent = ch;
+            frag.appendChild(sp);
+          } else {
+            run_ += ch;
+          }
+        }
+        if (run_) frag.appendChild(document.createTextNode(run_));
+        shells[i].textContent = '';
+        shells[i].appendChild(frag);
+        cursor += lengths[i];
+      }
+    }
+
+    function paint(str, from, to) {
+      if (colour) paintColour(str, from, to || 0);
+      else paintPlain(str);
+    }
+
     function restore() {
-      paint(target);
+      if (colour && shells) {
+        for (var i = 0; i < shells.length; i++) {
+          nodes[i].nodeValue = target.slice(
+            lengths.slice(0, i).reduce(function (a, b) { return a + b; }, 0),
+            lengths.slice(0, i + 1).reduce(function (a, b) { return a + b; }, 0)
+          );
+          if (shells[i].parentNode) {
+            shells[i].parentNode.replaceChild(nodes[i], shells[i]);
+          }
+        }
+        shells = null;
+      } else {
+        paintPlain(target);
+      }
       el.style.minHeight = '';
     }
 
@@ -113,7 +185,7 @@
               buffer = overwrite(
                 buffer,
                 at,
-                Math.random() < SETTLE ? target.charAt(at) : noiseChar()
+                Math.random() < settle ? target.charAt(at) : noiseChar()
               );
             }
           }
@@ -122,7 +194,9 @@
         paint(
           target.slice(0, front) +
             buffer.slice(front, front + width) +
-            blank.slice(front + width)
+            blank.slice(front + width),
+          front,
+          front + width
         );
 
         if (raw < 1) {
@@ -142,17 +216,19 @@
 
   function fire(el, group) {
     try {
-      run(el, group.duration, group.band);
+      run(el, group.duration, group.band, group.colour, group.palette || '',
+          typeof group.settle === 'number' ? group.settle : SETTLE);
     } catch (err) {
       /* element keeps its server-rendered text */
     }
   }
 
   function onLoadGroup(els, group) {
+    var base = group.delay || 0;
     for (var i = 0; i < els.length; i++) {
       (function (el, delay) {
         window.setTimeout(function () { fire(el, group); }, delay);
-      })(els[i], i * group.stagger);
+      })(els[i], base + i * group.stagger);
     }
   }
 
