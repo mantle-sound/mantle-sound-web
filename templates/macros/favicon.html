@@ -18,3 +18,12 @@
 {# Preload banner for current viewport only (desktop vs mobile) so preload is used. #}
 <link rel="preload" href="{{ '/static/banner.png'|url }}" as="image" media="(min-width: 1301px)">
 <link rel="preload" href="{{ '/static/banner-mobile.png'|url }}" as="image" media="(max-width: 1300px)">
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('mantle-theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch (err) {}
+})();
+</script>

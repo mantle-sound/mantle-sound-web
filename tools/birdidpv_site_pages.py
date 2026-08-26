@@ -2,7 +2,7 @@
 
 Run through tools/build_birdidpv_package.py rather than directly.
 
-The CLI writes bare HTML 4.01. These are the styled pages the site serves:
+The CLI writes result pages. These are the styled pages the site serves:
 report.html (static) and report-js.html (interactive). Site chrome — header,
 nav, subfooter, footer, navbar script — is lifted verbatim from the neighbouring
 lowdom package at build time, so the two tools' reports cannot drift apart.

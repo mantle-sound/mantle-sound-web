@@ -26,7 +26,7 @@ are under [Field details](#field-details) above.
 - Duration: 03:02:24 per track
 - Input size: 2,101,379,072 bytes per track
 
-## `soundcite`: an arbitrary excerpt
+## `soundcite`
 
 We cut a 20-second passage beginning one hour into the take.
 
@@ -64,28 +64,21 @@ We cut a 20-second passage beginning one hour into the take.
     from the two WAV excerpts, which preserve floating-point samples.
 </p>
 
-### `soundcite` output
+We treat the two mono audio files as a pair here. Before any information
+extraction, the tool first verifies their sample rate, duration, channel count,
+recording time, and BWF time reference.
 
-- The two mono F3 files can be treated as one paired take without first creating
-  a multi-gigabyte stereo file, and before extraction the tool verifies their
-  sample rate, duration, channel count, recording time, and BWF time reference.
-- Embedded F3 fields such as scene, take, date, recording time, track name, and
-  coding history are copied into the manifest.
-- `SHA256SUMS` covers both excerpts, the preview, spectrogram, manifest, and
-  static page, but we did not ask it to hash the complete source files in this run.
-- The manifest marks `preview.ogg` as lossy and lists the two WAV excerpts
-  apart from it, so the listening copy cannot be mistaken for the audio the
-  checksums are there to protect.
+There is more information in the original recording files, including scene, take,
+date, recording time, track name, and coding history. These fields are then copied
+into the manifest.
 
 <p class="software-report-links">
-<a href="/files/software/260115-002-soundcite/index.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the generated package</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/index-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/SHA256SUMS">Verify its checksums</a>
+<a href="/files/software/260115-002-soundcite/index.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the generated package</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/index-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-soundcite/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a>
 </p>
 
-## `lowdom`: screening the take
+## `lowdom`
 
-`lowdom` decoded both tracks to mono at 4 kHz, divided them into
-10-second windows, and measured those windows without writing a transformed
-audio file.
+`lowdom` decoded both tracks to mono at 4 kHz, divided them into 10-second windows:
 
 <pre class="software-example"><code>lowdom 260115_002_Tr1.WAV 260115_002_Tr2.WAV \
   --window 10 \
@@ -100,49 +93,26 @@ audio file.
 - Rows above threshold: 833 (76.14%)
 - Rows below threshold: 261 (23.86%)
 
-### Testing the threshold by blind listening
+In an effort to gain more confidence in the threshold, we ran two blinded listening
+rounds using a cutoff of 0.95. In each round, ten windows above the threshold and
+ten below it were selected at random. Of the 20 windows scoring above 0.95, 19
+were judged to exhibit obvious wind noise, and of the 20 scoring below it, 17 were
+judged not to exhibit obvious wind noise.
 
-We tested 0.95 with two blinded listening rounds, and each round contained ten randomly selected
-windows above the threshold and ten below it. Of the 20 windows above 0.95, 19
-were judged to contain obvious wind noise, and of the 20 below it, 17 were judged
-not to contain obvious wind noise.
-
-The threshold and listening judgement agreed on 36 of 40 samples, so this is useful
-for prioritising listening on this take, but it is not a validation study: the
-sample is small, it comes from one recording setup, and it was reviewed by one
-listener. The score remains a *low-frequency screening* heuristic rather than a
-*wind probability*.
-
-### `lowdom` output
-
-- `windows.csv` retains both tracks' score, RMS level, low-frequency ratio,
-  spectral flatness, and peak for every interval.
-- `candidate-clean-intervals.csv` lists contiguous below-threshold ranges for
-  listening queues (135 intervals on this take).
-- `summary.json` records the frequency bands, sample rate, threshold, merge
-  rule, source metadata, and totals.
-- The static report allows a quick overview without Python, a notebook, or a
-  server, and the Mantle site report adds navigation and styling. The *bare* HTML 4.01
-  page that `lowdom` writes to `report.html` is also kept in the package as
-  `report-bare.html`.
-- The multimedia report adds a lossy 48 kbit/s stereo preview, and after enabling
-  audio once, hovering over the timeline plays the corresponding ten seconds.
-  The Mantle site report adds navigation and styling, and the bare HTML 4.01 page
-  the CLI writes as `report-multimedia.html` is also kept here as
-  `report-multimedia-bare.html` (same `recording-preview-48k/` segments).
-- `lowdom` never writes a modified copy of the audio and never deletes anything
-  from the source files. `candidate-clean-intervals.csv` is a list of timestamps
-  and nothing else.
+The threshold and the human listening judgement agreed on 36 of the 40 samples, and
+we therefore provisionally adopted this value. It should be acknowledged that this
+threshold is not a universal one, consistent with common sense, given that the
+sample was small and derived from a single recording setup.
 
 <p class="software-report-links">
 <a href="/files/software/260115-002-lowdom/report-js.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-multimedia-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI multimedia report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report.html"><img class="software-report-link-icon" src="/static/software-output-polished.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the site data report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/report-bare.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI timeline report</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/windows.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download the window data</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/candidate-clean-intervals.csv"><img class="software-report-link-icon" src="/static/software-format-csv.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Download candidate clean intervals</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-lowdom/summary.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read the summary</a>
 </p>
 
-## `birdidpv`: the clean windows
+## `birdidpv`
 
 `lowdom` produces a list of time ranges where wind is low enough for further
 work, so `birdidpv` runs BirdNET on those ranges.
-The `candidate-clean-intervals.csv` file [above](#lowdom-output) supplies the
+The `candidate-clean-intervals.csv` file supplies the
 timestamps, and we do not copy audio out of the source files. The model then hears
 only the 23.86% of the take that screening left unflagged.
 
@@ -163,7 +133,7 @@ as recordings clean enough to send to a free archive like
   --output 260115-002-birdidpv</code></pre>
 
 - Track analysed: `260115_002_Tr1.WAV` only
-- Ranges: the [135 below-threshold intervals](#lowdom-screening-the-take), 00:43:30 of the
+- Ranges: the [135 below-threshold intervals](#lowdom), 00:43:30 of the
   03:02:24 take
 - Frame length: 3 seconds, fixed by the model
 - Minimum confidence: 0.25
@@ -230,7 +200,7 @@ type. Output from `birdidpv` requires listening before hand-off to `soundcite`.
 
 ### Single-track limits
 
-This `birdidpv` run read `Tr1` only. [`lowdom`](#lowdom-screening-the-take) had
+This `birdidpv` run read `Tr1` only. [`lowdom`](#lowdom) had
 already screened both tracks and kept the higher score per window, so a call
 clearer on the second microphone may be missed. The run reports no stereo
 placement or direction. Both-track input with the highest confidence per frame
@@ -257,15 +227,14 @@ is supported and planned for the next run.
   the frequency, time and dBFS axes.[^3]
 - `species-photos/` holds one reference photograph per species from
   [iNaturalist](https://www.inaturalist.org/), kept in the package instead of
-  hot-linked.[^4] `credits.json` records each photographer, licence, and source,
+  hot-linked. `credits.json` records each photographer, licence, and source,
   and nine of these eleven rows are flagged for manual review.
 - The multimedia report reuses `lowdom`'s `recording-preview-48k/` segments
   instead of copying 62 MB of audio, so click a detection to play its three seconds
   and see its spectrogram, or click a species to show only that species on the
   timeline.
 - As with [`lowdom`](#result-formats), the site reports add navigation and
-  styling, and the bare
-  HTML 4.01 pages the CLI writes are kept next to them as `report-bare.html`
+  styling, and the result pages the CLI writes are kept next to them as `report-bare.html`
   and `report-multimedia-bare.html`.
 
 <p class="software-report-links">
@@ -274,7 +243,7 @@ is supported and planned for the next run.
 
 ## `soundcite`: citing a detection
 
-The excerpt at the [top of this test](#soundcite-an-arbitrary-excerpt)
+The excerpt at the [top of this test](#soundcite)
 starts at 01:00:00. We chose that time from the clock before we had looked at
 the recording, so that excerpt illustrates the output format, not the content of
 the take.
@@ -321,15 +290,10 @@ links back to both source tracks.
 </p>
 
 Set `--duration` to cover the last frame you want, then use `--pad` for
-listening room around it.[^5]
-
-This step is manual. The
-[0.93 that was a person](#false-positive-at-01-41-05) is a reminder, because a script
-that sent detections straight to `soundcite` would have created a citation
-package for a shout.
+listening room around it.
 
 <p class="software-report-links">
-<a href="/files/software/260115-002-chough-004029/index.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/spectrogram.png">See its spectrogram</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/SHA256SUMS">Verify its checksums</a>
+<a href="/files/software/260115-002-chough-004029/index.html"><img class="software-report-link-icon" src="/static/software-output-bare.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Open the bare CLI package page (tool-generated HTML)</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/manifest.json"><img class="software-report-link-icon" src="/static/software-format-json.svg" alt="" width="16" height="16" decoding="async" aria-hidden="true">Read its manifest</a><span class="software-report-links__sep" aria-hidden="true">|</span><a href="/files/software/260115-002-chough-004029/spectrogram.png">See its spectrogram</a>
 </p>
 
 ## References
@@ -353,8 +317,4 @@ package for a shout.
 
 [^2]: Frames that start at the same time share an image, so 128 detections need only 126 files.
 
-[^3]: `s=560x260` sets the spectrum area and the legend adds roughly 280x130 around it, so the files are 844x388. The four xeno-canto recordings above are rendered with the same call, over their full length instead of three seconds.
-
-[^4]: A hot-linked image is fetched from the other site every time someone opens the page, which breaks the moment that site moves or deletes the file, and tells its server the reader's address and which page they are on. The copies here are served from this package, so neither happens.
-
-[^5]: `--pad` sets both ends at once, but `--pad-start` and `--pad-end` override it when the two differ.
+[^3]: The spectrogram itself is specified at 560×260 pixels (s = 560×260), and the legend adds roughly 280×130 pixels around it, giving a final file size of 844×388. We generated the spectrograms for the four xeno-canto recordings cited above with the same set of parameters.

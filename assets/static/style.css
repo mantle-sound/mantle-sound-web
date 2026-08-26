@@ -1,8 +1,6 @@
 :root {
-    /* Native UI — the <audio> player, scrollbars, form controls — is painted
-       by the browser, not by these tokens. Declaring both schemes is what
-       makes it follow the OS preference along with everything else. */
-    color-scheme: light dark;
+    /* Native UI follows the chosen theme, not the OS preference. */
+    color-scheme: light;
     --fg: #333333;
     --fg-dim: grey;
     --bg: #fff;
@@ -613,6 +611,63 @@ header {
 
 .hamburger-menu.menu-open .hamburger-icon span:nth-child(3) {
     transform: translate(0, -11px) rotate(-45deg);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1002;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--fg-btn);
+  color: var(--bg-btn);
+  cursor: pointer;
+  transition: background 0.18s ease-out, color 0.18s ease-out;
+}
+
+.theme-toggle__icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.theme-toggle__icon--sun {
+  display: none;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--moon {
+  display: none;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--sun {
+  display: block;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-alt);
+  color: var(--bg-btn);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--link-hover);
+  outline-offset: 2px;
+}
+
+.theme-toggle[aria-pressed="true"] {
+  background: var(--bg-btn);
+  color: var(--fg-btn);
+}
+
+.theme-toggle[aria-pressed="true"]:hover {
+  background: var(--surface-alt);
+  color: var(--fg-btn);
 }
 
 .nav-menu {
@@ -1538,7 +1593,7 @@ body:has(.page-with-toc) .blog-post-bare {
 
 /* The chip paints itself with background:var(--fg)/color:var(--bg), so the
    link inside has to follow the same pair. Hard-coding white worked only
-   while --fg was guaranteed dark; under prefers-color-scheme:dark --fg is
+   while --fg was guaranteed dark; in dark mode --fg is
    near-white and the link disappeared into its own chip. */
 .news-card-date a,
 .news-card-date a:hover {
@@ -1859,6 +1914,13 @@ blockquote::after {
         right: 15px;
         z-index: 1001;
         transition: all 0.3s ease;
+    }
+
+    .theme-toggle {
+        top: 15px;
+        right: 64px;
+        width: 44px;
+        height: 44px;
     }
     
 
@@ -3576,10 +3638,7 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
 }
 
 /* ---------------------------------------------------------------------------
-   Automatic dark mode.
-
-   Media-query only, by request: the site follows the browser/OS preference and
-   offers no toggle, so there is no stored state and no flash-of-wrong-theme.
+   Dark mode (manual toggle via data-theme on <html>).
 
    Every value below is a redefinition of a token declared in :root at the top
    of this file. Nothing here selects an element, which is what keeps the dark
@@ -3593,52 +3652,51 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
    - the orange accent, which already reads on light and dark, only lifted a
      little so it holds against a near-black ground.
 --------------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fg: #e4e4e4;
-    --fg-dim: #9b9b9b;
-    --bg: #121212;
-    --border: #4a4a4a;
-    --link: #e4e4e4;
-    --link-hover: #ff6a2a;
-    --bg-footer: #181818;
-    --bg-footer-darker: #ffffff1f;
-    --bg-btn: #e4e4e4;
-    --fg-btn: #121212;
-    --fg-logo-mobile: #e4e4e4;
-    --banner-bg: #1e1e1e;
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --fg: #e4e4e4;
+  --fg-dim: #9b9b9b;
+  --bg: #121212;
+  --border: #4a4a4a;
+  --link: #e4e4e4;
+  --link-hover: #ff6a2a;
+  --bg-footer: #181818;
+  --bg-footer-darker: #ffffff1f;
+  --bg-btn: #e4e4e4;
+  --fg-btn: #121212;
+  --fg-logo-mobile: #e4e4e4;
+  --banner-bg: #1e1e1e;
 
-    --research-paper: #16150f;
-    --research-surface: #1e1c17;
-    --research-ink: #e0ddd6;
-    --research-muted: #a29c91;
-    --research-line: #37342c;
-    --research-accent: #e2703a;
+  --research-paper: #16150f;
+  --research-surface: #1e1c17;
+  --research-ink: #e0ddd6;
+  --research-muted: #a29c91;
+  --research-line: #37342c;
+  --research-accent: #e2703a;
 
-    --veil: 20, 20, 20;
-    --surface: #1b1b1b;
-    --surface-card: #191919;
-    --surface-alt: #202020;
-    --surface-line: #3c3c3c;
-    --surface-fg: #b3b3b3;
-    --ink: #e4e4e4;
-    --on-ink: #121212;
-    --hover-wash: rgba(255, 255, 255, 0.07);
+  --veil: 20, 20, 20;
+  --surface: #1b1b1b;
+  --surface-card: #191919;
+  --surface-alt: #202020;
+  --surface-line: #3c3c3c;
+  --surface-fg: #b3b3b3;
+  --ink: #e4e4e4;
+  --on-ink: #121212;
+  --hover-wash: rgba(255, 255, 255, 0.07);
 
-    --admon-info-line: #4a9eff; --admon-info-bg: #12212e; --admon-info-fg: #a8cfff;
-    --admon-tip-line:  #3fbf63; --admon-tip-bg:  #12241a; --admon-tip-fg:  #9fe0b2;
-    --admon-warn-line: #e0a92b; --admon-warn-bg: #2a2110; --admon-warn-fg: #f0d08a;
-    /* Lifted so each stays legible on a near-black ground; the fourth flips
-       from black to near-white, since black noise would be invisible. */
-    --bauhaus-1: #ff6a5c;
-    --bauhaus-2: #6c9bf0;
-    --bauhaus-3: #ffc93c;
-    --bauhaus-4: #f2f2f2;
-    --bauhaus-v1: #ff5a3c;
-    --bauhaus-v2: #4d86ff;
-    --bauhaus-v3: #ffe14d;
-    --bauhaus-v4: #ffffff;
-  }
+  --admon-info-line: #4a9eff; --admon-info-bg: #12212e; --admon-info-fg: #a8cfff;
+  --admon-tip-line:  #3fbf63; --admon-tip-bg:  #12241a; --admon-tip-fg:  #9fe0b2;
+  --admon-warn-line: #e0a92b; --admon-warn-bg: #2a2110; --admon-warn-fg: #f0d08a;
+  /* Lifted so each stays legible on a near-black ground; the fourth flips
+     from black to near-white, since black noise would be invisible. */
+  --bauhaus-1: #ff6a5c;
+  --bauhaus-2: #6c9bf0;
+  --bauhaus-3: #ffc93c;
+  --bauhaus-4: #f2f2f2;
+  --bauhaus-v1: #ff5a3c;
+  --bauhaus-v2: #4d86ff;
+  --bauhaus-v3: #ffe14d;
+  --bauhaus-v4: #ffffff;
 }
 
 /* Footer social icons in dark mode.
@@ -3651,11 +3709,9 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
    would turn the logo orange.
    This is the one place the dark theme selects elements rather than
    redefining tokens; the comment above is the justification. */
-@media (prefers-color-scheme: dark) {
-  .social-media-icon[src*="rss"],
-  .social-media-icon[src*="trails"] {
-    filter: invert(1);
-  }
+:root[data-theme="dark"] .social-media-icon[src*="rss"],
+:root[data-theme="dark"] .social-media-icon[src*="trails"] {
+  filter: invert(1);
 }
 
 /* Per-character colour for the scramble noise. Only the characters inside the

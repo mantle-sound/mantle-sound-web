@@ -69,3 +69,22 @@ toolkit for anyone holding a recording, and produces bare HTML and CSV that owe
 nothing to this site. Everything site-shaped — the styled pages, the
 `-bare` filenames, the reuse of lowdom's preview audio — is decided here, in
 `tools/`, and never pushed back into the tool.
+
+## AI content check (Pangram)
+
+Before publishing prose, you can scan Lektor content fields through [Pangram
+Labs](https://www.pangram.com/solutions/api) AI detection:
+
+```sh
+pip install -r requirements-dev.txt
+export PANGRAM_API_KEY=...
+python3 tools/check_ai_content.py
+python3 tools/check_ai_content.py content/news/man-field-update-feb-2026
+python3 tools/check_ai_content.py --json
+```
+
+The script reads `body`, `intro`, `description`, and `subtitle` from
+`contents.lr` files, strips HTML and code blocks, and submits the remainder via
+Pangram's bulk API. Pages marked `_hidden: yes` are skipped unless you pass
+`--include-hidden`. By default the command exits with status 1 when any field is
+classified as `AI` or `Mixed` (`--fail-on ai,mixed`).
