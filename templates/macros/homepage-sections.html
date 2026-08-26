@@ -19,7 +19,7 @@
   {% set gallery_images = [image] %}
   {% endif %}
 
-  <div class="home-intro{% if reverse %} home-intro--reverse{% endif %}" id="home-section-{{ section_num }}">
+  <div class="home-intro{% if reverse %} home-intro--reverse{% endif %}" id="home-section-{{ section_num }}" data-home-reveal>
     <div
       class="home-intro__image home-gallery"
       data-home-gallery
@@ -35,7 +35,11 @@
             {% if src_trim %}
             <figure class="home-gallery__slide">
               <a href="{{ link_href }}"{% if link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
-                <img src="{{ src_trim }}" alt="{{ title }}" decoding="async">
+                {% if loop.first %}
+                <img src="{{ src_trim }}" alt="{{ title }}" decoding="async" fetchpriority="high">
+                {% else %}
+                <img src="{{ src_trim }}" alt="{{ title }}" decoding="async" loading="lazy">
+                {% endif %}
               </a>
             </figure>
             {% endif %}

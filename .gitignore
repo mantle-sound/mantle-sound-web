@@ -1,6 +1,10 @@
 _site
 .DS_Store
 
+# Camera originals dropped at repo root during image prep.
+/IMG_*.JPG
+/IMG_*.jpg
+
 # Python bytecode from tools/
 __pycache__/
 *.pyc

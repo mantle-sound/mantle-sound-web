@@ -877,6 +877,34 @@ body.is-homepage {
   margin-bottom: 0;
 }
 
+/* Scroll reveal: image column leads, text follows. */
+.home-intro[data-home-reveal] .home-intro__image {
+  opacity: 0.001;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.home-intro[data-home-reveal] .home-intro__text {
+  opacity: 0.001;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 0.75s ease 0.12s, transform 0.75s ease 0.12s;
+}
+
+.home-intro[data-home-reveal].is-revealed .home-intro__image,
+.home-intro[data-home-reveal].is-revealed .home-intro__text {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro[data-home-reveal] .home-intro__image,
+  .home-intro[data-home-reveal] .home-intro__text {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .home-sections .home-intro__image {
   flex: 1 1 52%;
   min-width: 0;
@@ -954,12 +982,14 @@ body.is-homepage {
   padding: 0;
   min-width: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 .home-gallery__slide a {
   display: block;
   line-height: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 .home-gallery__slide img {
@@ -971,16 +1001,38 @@ body.is-homepage {
   object-fit: cover;
   object-position: center;
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
+  transform: scale(1);
+  transition: transform 0.8s cubic-bezier(0.19, 0.61, 0.15, 0.82), filter 0.3s ease;
+}
+
+.home-gallery__slide img.is-zooming {
+  animation: homeGalleryZoomOut 0.9s cubic-bezier(0.25, 0.6, 0.5, 0.95) forwards;
+}
+
+@keyframes homeGalleryZoomOut {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-gallery__slide img.is-zooming {
+    animation: none;
+  }
+}
+
+.home-gallery__slide.is-active a:hover img,
+.home-gallery__slide.is-active a:focus-visible img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.home-gallery__slide img:hover {
+  filter: grayscale(0%);
 }
 
 /* Landscape frame in a portrait slot: keep the geophone (low in the frame) visible. */
 .home-gallery__slide img[src$="/index/geophone.webp"] {
   object-position: center bottom;
-}
-
-.home-gallery__slide img:hover {
-  filter: grayscale(0%);
 }
 
 .home-gallery__prev,
@@ -1107,6 +1159,35 @@ body.is-homepage .home-gallery img {
 .home-sections .intro-more {
   margin-top: 12px;
   align-self: flex-start;
+  position: relative;
+  overflow: visible;
+  text-decoration: none;
+}
+
+.home-sections .intro-more::after {
+  content: "";
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 7px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.home-sections .intro-more:hover::after,
+.home-sections .intro-more:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@supports (text-box-trim: trim-both) {
+  .home-sections .intro-more::after {
+    bottom: 6px;
+  }
 }
 
 .home-index .partners-section {
@@ -1134,49 +1215,6 @@ body.is-homepage .caption {
 	letter-spacing: 0.5px;
 	padding: 6px 10px;
 }
-/* 主页头部：intro-f 与 s-banner 上下分块，不挤在一起 */
-.homepage-header-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    margin: 40px 0;
-}
-
-.homepage-header-wrap .intro-f {
-    margin: 0;
-}
-
-.homepage-header-wrap .s-banner {
-    margin: 0;
-    max-width: 100%;
-    align-self: center;
-}
-
-.intro-f {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #685E47;
-    color: var(--bg);
-        padding: 10px;
-        margin: 40px 0;
-}
-
-.intro-f img {
-    max-width: 200px;
-    height: auto;
-}
-
-.intro-logo {
-    flex: 1;
-    order: 1;
-margin-right: 20px;
-}
-
-.intro-p{
-  order: 2;
-}
-
 /* Partners: minimal list */
 .partners-section {
   margin: 48px 0 0;
@@ -2400,20 +2438,6 @@ blockquote::after {
     }
     .about {
         padding: 20px;
-    }
-    .homepage-header-wrap {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .homepage-header-wrap .s-banner {
-        max-width: 100%;
-    }
-    .intro-f {
-        display: block;
-    }
-    .intro-p {
-        text-align: center;
-        font-weight: 300;
     }
     #mainbox {
         align-items: flex-start;

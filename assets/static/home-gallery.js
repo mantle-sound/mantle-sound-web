@@ -75,6 +75,9 @@
         dots[i].classList.toggle('is-active', i === index);
         dots[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
       }
+      for (var s = 0; s < slides.length; s++) {
+        slides[s].classList.toggle('is-active', s === index);
+      }
       if (prevBtn) {
         prevBtn.disabled = count <= 1;
       }

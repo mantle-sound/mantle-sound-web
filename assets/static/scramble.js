@@ -26,13 +26,13 @@
      heading; a 34-character band on 200 characters reads as a slow wipe. */
   var GROUPS = [
     { selector: '.home-sections h2.intro-h',
-      duration: 1400, band: 34, stagger: 180, observe: false,
+      duration: 1400, band: 34, stagger: 0, observe: true,
       colour: true, palette: 'v' },
     /* The section descriptions trail their heading by a beat, so each block
        resolves top-down rather than everything moving at once. Their band is
        wider because a description is four times the length of its heading. */
     { selector: '.home-sections .home-intro__text p',
-      duration: 1600, band: 70, stagger: 180, delay: 260, observe: false,
+      duration: 1600, band: 70, stagger: 0, delay: 260, observe: true,
       colour: true, palette: 'm', settle: 0.16 },
     { selector: '.sidenote .sidenote__body',
       duration: 1800, band: 90, stagger: 0, observe: true },
@@ -269,11 +269,14 @@
     // Without IntersectionObserver the text simply stays as rendered, which
     // is the correct fallback for a decorative reveal.
     if (!window.IntersectionObserver) return;
+    var base = group.delay || 0;
     var seen = new window.IntersectionObserver(function (entries, obs) {
       for (var i = 0; i < entries.length; i++) {
         if (!entries[i].isIntersecting) continue;
         obs.unobserve(entries[i].target); // once only
-        fire(entries[i].target, group);
+        (function (el) {
+          window.setTimeout(function () { fire(el, group); }, base);
+        })(entries[i].target);
       }
     }, { rootMargin: '0px 0px -15% 0px' });
     for (var j = 0; j < els.length; j++) seen.observe(els[j]);
