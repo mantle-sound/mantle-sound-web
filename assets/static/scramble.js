@@ -33,7 +33,7 @@
        wider because a description is four times the length of its heading. */
     { selector: '.home-sections .home-intro__text p',
       duration: 1600, band: 70, stagger: 180, delay: 260, observe: false,
-      colour: true, palette: 'v', settle: 0.16 },
+      colour: true, palette: 'm', settle: 0.16 },
     { selector: '.sidenote .sidenote__body',
       duration: 1800, band: 90, stagger: 0, observe: true },
     /* Software index cards. Observed rather than fired on load for the same
@@ -41,7 +41,11 @@
        headings wrap their name in <code> next to an <img> mark — the walker
        only collects text nodes, so the mark is left alone. */
     { selector: '.software-test-note-promo__title, .software-tool-column-heading',
-      duration: 1400, band: 34, stagger: 0, observe: true, colour: true }
+      duration: 1400, band: 34, stagger: 0, observe: true, colour: true,
+      pinColumn: true },
+    { selector: '.software-tool-card .blog-post-card-info p',
+      duration: 1600, band: 70, stagger: 0, delay: 260, observe: true,
+      colour: true, palette: 'm', settle: 0.16, pinColumn: true }
   ];
 
   function prefersReducedMotion() {
@@ -75,9 +79,36 @@
     return str.substring(0, at) + ch + str.substring(at + 1);
   }
 
-  function run(el, duration, band, colour, palette, settle) {
+  function pinSoftwareColumn(el) {
+    var column = el.closest('.software-tool-column');
+    if (!column) return null;
+    var count = Number(column.dataset.scramblePin || 0);
+    if (!count) {
+      var columnWidth = column.getBoundingClientRect().width;
+      column.style.minWidth = columnWidth + 'px';
+      column.style.maxWidth = columnWidth + 'px';
+    }
+    column.dataset.scramblePin = String(count + 1);
+    return column;
+  }
+
+  function unpinSoftwareColumn(column) {
+    if (!column) return;
+    var count = Math.max(0, Number(column.dataset.scramblePin || 0) - 1);
+    if (!count) {
+      column.style.minWidth = '';
+      column.style.maxWidth = '';
+      delete column.dataset.scramblePin;
+    } else {
+      column.dataset.scramblePin = String(count);
+    }
+  }
+
+  function run(el, duration, band, colour, palette, settle, pinColumn) {
     var nodes = textNodes(el);
     if (!nodes.length) return;
+
+    var column = pinColumn ? pinSoftwareColumn(el) : null;
 
     var lengths = [];
     var target = '';
@@ -160,6 +191,7 @@
         paintPlain(target);
       }
       el.style.minHeight = '';
+      unpinSoftwareColumn(column);
     }
 
     // Blanking the text would collapse the heading box and shove the page
@@ -217,7 +249,8 @@
   function fire(el, group) {
     try {
       run(el, group.duration, group.band, group.colour, group.palette || '',
-          typeof group.settle === 'number' ? group.settle : SETTLE);
+          typeof group.settle === 'number' ? group.settle : SETTLE,
+          !!group.pinColumn);
     } catch (err) {
       /* element keeps its server-rendered text */
     }

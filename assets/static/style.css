@@ -45,6 +45,33 @@
     --surface-fg: #555;         /* muted text inside quotes and notes */
     --ink: #000;                /* strong ink: sidenote frame, marker hover */
     --on-ink: #fff;
+    /* Theme toggle: one pair per theme; aria-pressed only swaps the icon. */
+    --theme-toggle-bg: var(--ink);
+    --theme-toggle-fg: var(--on-ink);
+    --theme-toggle-hover-bg: var(--surface-alt);
+    --theme-toggle-hover-fg: var(--link-hover);
+    --footer-divider: var(--surface-line);
+    /* Software index: photo cards and promo. Ground/scrim tokens flip in dark
+       mode; gradient stop layout for the map promo stays a per-theme override. */
+    --software-card-ground: #000;
+    --software-card-ink: #fff;
+    --software-card-ink-muted: rgba(255, 255, 255, 0.82);
+    --software-card-ink-dim: rgba(255, 255, 255, 0.62);
+    --software-card-cta: #f2f2f2;
+    --software-card-cta-line: rgba(255, 255, 255, 0.35);
+    --software-card-scrim-0: rgba(0, 0, 0, 0.12);
+    --software-card-scrim-1: rgba(0, 0, 0, 0.58);
+    --software-card-scrim-2: rgba(0, 0, 0, 0.94);
+    --software-card-scrim-end: #000;
+    --software-card-scrim-v-edge: transparent;
+    --software-card-scrim-opacity: 0.92;
+    --software-card-scrim-hover-opacity: 0.98;
+    --software-card-scrim-grayscale: 20%;
+    --software-card-scrim-hover-grayscale: 5%;
+    --software-promo-ground: var(--bg-footer);
+    --software-promo-accent: var(--link-hover);
+    --mascot-filter: invert(1) saturate(0.741);
+    --mascot-opacity: 0.88;
     --hover-wash: rgba(0, 0, 0, 0.03);
     --admon-info-line: #007bff; --admon-info-bg: #e7f3ff; --admon-info-fg: #0056b3;
     --admon-tip-line:  #28a745; --admon-tip-bg:  #d4edda; --admon-tip-fg:  #155724;
@@ -63,6 +90,11 @@
     --bauhaus-v2: #0050e6;  /* blue */
     --bauhaus-v3: #ffd400;  /* yellow */
     --bauhaus-v4: #000000;  /* black */
+    /* Neutral scramble noise for body copy: black, white, and grays only. */
+    --scramble-m1: #111111;
+    --scramble-m2: #555555;
+    --scramble-m3: #888888;
+    --scramble-m4: #cccccc;
 }
 
 /* Self-hosted fonts only (served from /font/ via assets/font/). No third-party font CDNs. */
@@ -356,12 +388,29 @@ figcaption {
 	font-family: var(--font-menu);
 	font-size: 13px;
 	text-transform: uppercase;
-	padding: 5px 30px;
+	display: inline-block;
+	line-height: 1;
+	padding: 7px 30px;
+	text-align: center;
 	font-weight: 600;
 	transition: all .18s ease-out;
 	position: relative;
 	overflow: hidden;
 	z-index: 0;
+}
+
+@supports (text-box-trim: trim-both) {
+	.button--primary, a.button--primary.button {
+		text-box-trim: trim-both;
+		text-box-edge: cap alphabetic;
+	}
+}
+
+@supports not (text-box-trim: trim-both) {
+	.button--primary, a.button--primary.button {
+		/* Fallback when half-leading cannot be trimmed. */
+		padding: 8px 30px 6px;
+	}
 }
 .button--primary, .button--primary:link, .button--primary:visited, a.button--primary.button, a.button--primary.button:link, a.button--primary.button:visited {
 	color: var(--fg-btn);
@@ -489,11 +538,11 @@ header {
     transform-origin: center bottom;
     /* saturate(0.741) cancels the 135% inherited from body, which is why the
        mascot was excluded from it in the first place. */
-    filter: invert(1) saturate(0.741);
+    filter: var(--mascot-filter);
   }
 
   body.has-scroll-mascot .header-mascot {
-    opacity: 0.88;
+    opacity: var(--mascot-opacity);
     visibility: visible;
   }
 }
@@ -626,8 +675,8 @@ header {
   margin: 0;
   padding: 0;
   border: 0;
-  background: var(--fg-btn);
-  color: var(--bg-btn);
+  background: var(--theme-toggle-bg);
+  color: var(--theme-toggle-fg);
   cursor: pointer;
   transition: background 0.18s ease-out, color 0.18s ease-out;
 }
@@ -651,23 +700,13 @@ header {
 }
 
 .theme-toggle:hover {
-  background: var(--surface-alt);
-  color: var(--bg-btn);
+  background: var(--theme-toggle-hover-bg);
+  color: var(--theme-toggle-hover-fg);
 }
 
 .theme-toggle:focus-visible {
   outline: 2px solid var(--link-hover);
   outline-offset: 2px;
-}
-
-.theme-toggle[aria-pressed="true"] {
-  background: var(--bg-btn);
-  color: var(--fg-btn);
-}
-
-.theme-toggle[aria-pressed="true"]:hover {
-  background: var(--surface-alt);
-  color: var(--fg-btn);
 }
 
 .nav-menu {
@@ -1067,7 +1106,6 @@ body.is-homepage .home-gallery img {
 
 .home-sections .intro-more {
   margin-top: 12px;
-  display: inline-block;
   align-self: flex-start;
 }
 
@@ -1341,6 +1379,19 @@ main {
   align-items: flex-end;
   letter-spacing: 1px;
   flex-shrink: 0;
+}
+
+.footer-menu__divider {
+  width: 50px;
+  border: none;
+  border-top: 1px solid var(--footer-divider);
+  margin: 10px 0;
+}
+
+.footer-menu__social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .meta {
@@ -2432,6 +2483,12 @@ blockquote::after {
     color: var(--link-hover);
 }
 
+.social-media-icon--footer {
+    width: 16px;
+    height: 16px;
+    margin-right: 0;
+}
+
 /* Markdown list social media icons */
 body ul li img.social-media-icon {
     display: inline-block;
@@ -2484,9 +2541,11 @@ body ul li img.social-media-icon {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem 1.25rem;
+  width: 100%;
   max-width: var(--content-max-width-wide);
   margin: 0 0 2rem;
   box-sizing: border-box;
+  min-width: 0;
 }
 
 /* An odd tool out spans the row rather than leaving a half-width gap. */
@@ -2559,12 +2618,18 @@ body:has(.page-with-toc) .software-tools-grid {
   flex-direction: column;
   gap: 0.65rem;
   min-width: 0;
+  max-width: 100%;
+  overflow: clip;
 }
 
 .software-tool-column .software-tool-card.rs {
+  display: block;
   flex: 1 1 auto;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .software-example--paired {
@@ -2586,7 +2651,7 @@ body:has(.page-with-toc) .software-tools-grid {
 .software-tool-card--bg {
   position: relative;
   overflow: hidden;
-  background: #000 !important;
+  background: var(--software-card-ground) !important;
 }
 
 .software-tool-card--bg.blog-post-card::after {
@@ -2601,35 +2666,51 @@ body:has(.page-with-toc) .software-tools-grid {
   z-index: 0;
   background-image: linear-gradient(
       to right,
-      rgba(0, 0, 0, 0.12) 0%,
-      rgba(0, 0, 0, 0.58) 46%,
-      rgba(0, 0, 0, 0.94) 70%,
-      #000 100%
+      var(--software-card-scrim-0) 0%,
+      var(--software-card-scrim-1) 46%,
+      var(--software-card-scrim-2) 70%,
+      var(--software-card-scrim-end) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--software-card-scrim-v-edge) 0%,
+      transparent 42%,
+      transparent 58%,
+      var(--software-card-scrim-v-edge) 100%
     ),
     var(--software-tool-card-bg);
-  background-size: cover, cover;
-  background-position: left center, left center;
+  background-size: cover, cover, cover;
+  background-position: left center, left center, left center;
   background-repeat: no-repeat;
-  opacity: 0.92;
-  filter: grayscale(20%);
+  opacity: var(--software-card-scrim-opacity);
+  filter: grayscale(var(--software-card-scrim-grayscale));
   transition: opacity 0.2s ease, filter 0.2s ease;
   pointer-events: none;
 }
 
 .software-tool-card--bg:has(.software-tool-card-hit:hover)::before,
 .software-tool-card--bg:has(.software-tool-card-hit:focus-visible)::before {
-  opacity: 0.98;
-  filter: grayscale(5%);
+  opacity: var(--software-card-scrim-hover-opacity);
+  filter: grayscale(var(--software-card-scrim-hover-grayscale));
 }
 
-.software-tool-card--bg .software-tool-card-hit,
-.software-tool-card--bg .card-post {
+.software-tool-card--bg .software-tool-card-hit {
   position: relative;
   z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.software-tool-card--bg .card-post {
+  position: static;
+  z-index: auto;
+  padding-top: 12px;
+  min-height: 11.5rem;
 }
 
 .software-tool-card-hit {
   display: block;
+  position: relative;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -2676,8 +2757,8 @@ body:has(.page-with-toc) .software-tools-grid {
 }
 
 .software-tool-card--bg .software-tool-card-cta {
-  color: #f2f2f2;
-  text-decoration-color: rgba(255, 255, 255, 0.35);
+  color: var(--software-card-cta);
+  text-decoration-color: var(--software-card-cta-line);
 }
 
 .software-tool-card--bg .software-tool-card-hit:hover .software-tool-card-cta,
@@ -2694,7 +2775,7 @@ body:has(.page-with-toc) .software-tools-grid {
   font-size: 0.62rem;
   font-weight: 400;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--software-card-ink-dim);
   pointer-events: none;
 }
 
@@ -2708,7 +2789,7 @@ body:has(.page-with-toc) .software-tools-grid {
 }
 
 .software-tool-card--bg .blog-post-card-info h2 {
-  color: #fff;
+  color: var(--software-card-ink);
 }
 
 .software-tool-column-heading code {
@@ -2758,23 +2839,33 @@ body:has(.page-with-toc) .software-tools-grid {
   font-size: 0.95rem;
   line-height: 1.45;
   color: var(--fg);
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .software-tool-card--bg .blog-post-card-info p {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--software-card-ink-muted);
 }
 
 .software-tool-card-tags {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  left: auto;
+  z-index: 4;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 4px 6px;
-  margin: 0 0 12px;
+  margin: 0;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  pointer-events: none;
 }
 
-.software-tool-card--bg .card-post {
-  padding-top: 12px;
-  min-height: 11.5rem;
+.software-tool-card--bg .blog-post-card-info {
+  padding-top: 2.75rem;
 }
 
 .software-tool-card--bg .software-tool-card-tags .card-type-rs {
@@ -3128,7 +3219,7 @@ body:has(.page-with-toc) .software-report {
   overflow: visible;
   padding: 0;
   border-left: 0;
-  background: var(--bg-footer);
+  background: var(--software-promo-ground);
 }
 
 .software-test-note-promo--map::before {
@@ -3161,7 +3252,7 @@ body:has(.page-with-toc) .software-report {
   position: relative;
   z-index: 1;
   padding: 18px 20px 16px;
-  border-left: 3px solid var(--link-orange, var(--link-hover));
+  border-left: 3px solid var(--software-promo-accent);
 }
 
 .software-test-note-promo--map .software-test-note-promo__eyebrow {
@@ -3683,6 +3774,21 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
   --ink: #e4e4e4;
   --on-ink: #121212;
   --hover-wash: rgba(255, 255, 255, 0.07);
+  --software-card-ground: var(--bg);
+  --software-card-scrim-0: rgba(0, 0, 0, 0.06);
+  --software-card-scrim-1: rgba(18, 18, 18, 0.36);
+  --software-card-scrim-2: rgba(18, 18, 18, 0.68);
+  --software-card-scrim-end: var(--bg);
+  --software-card-scrim-v-edge: rgba(18, 18, 18, 0.1);
+  --software-card-scrim-opacity: 0.9;
+  --software-card-scrim-hover-opacity: 0.94;
+  --mascot-filter: brightness(0) saturate(100%) invert(52%) sepia(74%) saturate(2475%)
+    hue-rotate(346deg) brightness(101%) contrast(101%) saturate(0.741);
+  --social-rss-filter: brightness(0) saturate(100%) invert(52%) sepia(74%) saturate(2475%)
+    hue-rotate(346deg) brightness(101%) contrast(101%);
+  --social-rss-filter-hover: brightness(0) saturate(100%) invert(58%) sepia(90%) saturate(3200%)
+    hue-rotate(346deg) brightness(108%) contrast(101%);
+  --social-trails-filter: invert(1);
 
   --admon-info-line: #4a9eff; --admon-info-bg: #12212e; --admon-info-fg: #a8cfff;
   --admon-tip-line:  #3fbf63; --admon-tip-bg:  #12241a; --admon-tip-fg:  #9fe0b2;
@@ -3697,21 +3803,49 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
   --bauhaus-v2: #4d86ff;
   --bauhaus-v3: #ffe14d;
   --bauhaus-v4: #ffffff;
+  --scramble-m1: #f2f2f2;
+  --scramble-m2: #b3b3b3;
+  --scramble-m3: #808080;
+  --scramble-m4: #555555;
 }
 
 /* Footer social icons in dark mode.
-   These three are external files loaded through <img>, so they are isolated
-   documents: a token cannot reach inside them and currentColor resolves
-   against the SVG's own root, not the page. rss.svg carries fill="#333333"
-   and trails.png is a dark-navy raster, so both sink into a near-black
-   ground; they have to be lifted with a filter instead. Mastodon is left
-   alone — its brand blue already reads on both grounds, and inverting it
-   would turn the logo orange.
-   This is the one place the dark theme selects elements rather than
-   redefining tokens; the comment above is the justification. */
-:root[data-theme="dark"] .social-media-icon[src*="rss"],
+   These are external files loaded through <img>, so a token cannot reach
+   inside them. rss.svg carries fill="#333333" and trails.png is a dark-navy
+   raster, so both sink into a near-black ground without a filter. RSS is
+   tinted to --link-hover instead of inverted white so it matches the site's
+   orange accent; trails stays inverted. Mastodon is left alone — its brand
+   blue already reads on both grounds, and inverting it would turn the logo
+   orange. */
+:root[data-theme="dark"] .social-media-icon[src*="rss"] {
+  filter: var(--social-rss-filter);
+}
+
+:root[data-theme="dark"] a:hover .social-media-icon[src*="rss"] {
+  filter: var(--social-rss-filter-hover);
+}
+
 :root[data-theme="dark"] .social-media-icon[src*="trails"] {
-  filter: invert(1);
+  filter: var(--social-trails-filter);
+}
+
+/* Software index: map promo scrim shape (colours use --veil above). */
+:root[data-theme="dark"] .software-test-note-promo--map::before {
+  background-image: linear-gradient(
+      to right,
+      rgba(var(--veil), 0.82) 0%,
+      rgba(var(--veil), 0.44) 36%,
+      rgba(var(--veil), 0.14) 56%,
+      rgba(var(--veil), 0.04) 72%,
+      transparent 88%
+    ),
+    linear-gradient(
+      to top,
+      rgba(var(--veil), 0.58) 0%,
+      rgba(var(--veil), 0.12) 46%,
+      transparent 68%
+    ),
+    var(--software-test-note-promo-bg);
 }
 
 /* Per-character colour for the scramble noise. Only the characters inside the
@@ -3727,6 +3861,11 @@ body.has-margin-sidenotes :is(.page .sidenote-host, .page.sidenote-host) .sideno
 .scramble-ch--v2 { color: var(--bauhaus-v2); }
 .scramble-ch--v3 { color: var(--bauhaus-v3); }
 .scramble-ch--v4 { color: var(--bauhaus-v4); }
+
+.scramble-ch--m1 { color: var(--scramble-m1); }
+.scramble-ch--m2 { color: var(--scramble-m2); }
+.scramble-ch--m3 { color: var(--scramble-m3); }
+.scramble-ch--m4 { color: var(--scramble-m4); }
 
 /* Figure viewer for the cited photographs (software-report-figure-lightbox.js).
    Deliberately dark in both themes: it is a full-bleed image viewer, so it
