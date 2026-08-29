@@ -1,0 +1,44 @@
+{# Canonical site naming — import macros or use site_* variables in templates. #}
+{% set site_short = 'MAN' %}
+{% set site_full = 'Mountaineering Acoustics Network' %}
+{% set site_formal = 'Mountaineering Acoustics Network (MAN)' %}
+{% set site_slogan = 'Mountaineering Acoustics at the Summit of Discovery' %}
+{% set site_tagline = 'Acoustic research at the summit of discovery.' %}
+{% set mantle_sound = 'Mantle Sound' %}
+{% set mantle_sound_url = 'https://mantle-sound.org/' %}
+
+{% macro site_short_name() -%}
+MAN
+{%- endmacro %}
+
+{% macro site_nav_label() -%}
+MAN Network
+{%- endmacro %}
+
+{% macro site_full_name() -%}
+Mountaineering Acoustics Network
+{%- endmacro %}
+
+{% macro site_formal_name() -%}
+Mountaineering Acoustics Network (MAN)
+{%- endmacro %}
+
+{% macro site_slogan_text() -%}
+Mountaineering Acoustics at the Summit of Discovery
+{%- endmacro %}
+
+{% macro site_tagline_text() -%}
+Acoustic research at the summit of discovery.
+{%- endmacro %}
+
+{% macro mantle_sound_name() -%}
+Mantle Sound
+{%- endmacro %}
+
+{% macro mantle_sound_href() -%}
+https://mantle-sound.org/
+{%- endmacro %}
+
+{% macro site_brand() -%}
+MAN | Mountaineering Acoustics at the Summit of Discovery
+{%- endmacro %}

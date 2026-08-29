@@ -5,7 +5,8 @@
 {% include "macros/favicon.html" %}
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
 <link rel="stylesheet" href="{{ '/static/software-package-media.css'|url }}">
-<title>{% block title %}{% endblock %} - Mountaineering Acoustics Network (MAN)</title>
+{% from "macros/site-brand.html" import site_brand %}
+<title>{% block title %}{% endblock %} | {{ site_brand() }}</title>
 {% from "macros/structured-data-nav.html" import structured_data_nav %}
 {{ structured_data_nav(this) }}
 <body>

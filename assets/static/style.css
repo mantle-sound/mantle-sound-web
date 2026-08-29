@@ -45,11 +45,12 @@
     --surface-fg: #555;         /* muted text inside quotes and notes */
     --ink: #000;                /* strong ink: sidenote frame, marker hover */
     --on-ink: #fff;
-    /* Theme toggle: one pair per theme; aria-pressed only swaps the icon. */
-    --theme-toggle-bg: var(--ink);
-    --theme-toggle-fg: var(--on-ink);
-    --theme-toggle-hover-bg: var(--surface-alt);
-    --theme-toggle-hover-fg: var(--link-hover);
+    /* Theme toggle: sidenote frame — 2px ink border, square, no shadow. */
+    --theme-toggle-bg: var(--bg);
+    --theme-toggle-fg: var(--ink);
+    --theme-toggle-hover-bg: var(--ink);
+    --theme-toggle-hover-fg: var(--on-ink);
+    --theme-toggle-border: var(--ink);
     --footer-divider: var(--surface-line);
     /* Software index: photo cards and promo. Ground/scrim tokens flip in dark
        mode; gradient stop layout for the map promo stays a per-theme override. */
@@ -670,15 +671,18 @@ header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 46px;
   height: 46px;
   margin: 0;
   padding: 0;
-  border: 0;
+  border: 2px solid var(--theme-toggle-border);
+  border-radius: 0;
   background: var(--theme-toggle-bg);
   color: var(--theme-toggle-fg);
+  box-shadow: none;
   cursor: pointer;
-  transition: background 0.18s ease-out, color 0.18s ease-out;
+  transition: background 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out;
 }
 
 .theme-toggle__icon {
@@ -702,6 +706,7 @@ header {
 .theme-toggle:hover {
   background: var(--theme-toggle-hover-bg);
   color: var(--theme-toggle-hover-fg);
+  border-color: var(--theme-toggle-hover-bg);
 }
 
 .theme-toggle:focus-visible {
@@ -1164,30 +1169,15 @@ body.is-homepage .home-gallery img {
   text-decoration: none;
 }
 
-.home-sections .intro-more::after {
-  content: "";
-  position: absolute;
-  left: 30px;
-  right: 30px;
-  bottom: 7px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.55s cubic-bezier(0.19, 1, 0.22, 1);
-  pointer-events: none;
-  opacity: 0.55;
+.home-sections .intro-more:hover,
+.home-sections .intro-more:focus-visible {
+  text-decoration: none;
 }
 
-.home-sections .intro-more:hover::after,
-.home-sections .intro-more:focus-visible::after {
-  transform: scaleX(1);
-}
-
-@supports (text-box-trim: trim-both) {
-  .home-sections .intro-more::after {
-    bottom: 6px;
-  }
+body.is-homepage :is(.button--primary, a.button--primary.button),
+body.is-homepage :is(.button--primary, a.button--primary.button):hover,
+body.is-homepage :is(.button--primary, a.button--primary.button):focus-visible {
+  text-decoration: none;
 }
 
 .home-index .partners-section {

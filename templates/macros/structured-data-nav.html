@@ -1,15 +1,14 @@
-{# 为搜索引擎输出站点与主导航的结构化数据，便于搜索 "mantle sound" 时展示 menu 中的 section #}
+{# Site + main nav structured data for search engines. #}
+{% from "macros/site-brand.html" import site_nav_label, site_full_name, site_tagline_text, mantle_sound_name, site_short_name %}
 {% macro structured_data_nav(page) %}
 {% set nav_items = [
-  {'name': 'MAN Network', 'path': '/'},
+  {'name': site_nav_label(), 'path': '/'},
   {'name': 'Home', 'path': '/'},
   {'name': 'Software', 'path': '/software'},
   {'name': 'News', 'path': '/news'},
   {'name': 'About', 'path': '/about'},
   {'name': 'Contact', 'path': '/contact'}
 ] %}
-{% set site_name = 'Mountaineering Acoustics Network (MAN)' %}
-{% set site_desc = 'Mountaineering Acoustics Network: acoustic research at the summit of discovery.' %}
 {% set root_path = '/' %}
 {% set root_page = site.get(root_path) %}
 {% set site_url = root_page|url(absolute=True) if root_page else 'https://mantle-sound.org/' %}
@@ -19,14 +18,15 @@
   "@graph": [
     {
       "@type": "WebSite",
-      "name": "{{ site_name }}",
-      "alternateName": "Mantle Sound",
+      "name": "{{ site_full_name() }}",
+      "alternateName": ["{{ site_short_name() }}", "{{ mantle_sound_name() }}"],
       "url": "{{ site_url }}",
-      "description": "{{ site_desc }}",
+      "description": "{{ site_tagline_text() }}",
       "inLanguage": "en",
       "publisher": {
         "@type": "Organization",
-        "name": "Mountaineering Acoustics Network"
+        "name": "{{ site_full_name() }}",
+        "alternateName": "{{ site_short_name() }}"
       }
     },
     {

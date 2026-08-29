@@ -1,6 +1,7 @@
+{% from "macros/site-brand.html" import site_full_name, site_slogan_text %}
 {% macro header() %}
           <div id="logo-box">
-            <h1><a href="/">Mountaineering Acoustics Network</a></h1>
-            <div class="slogan">Mountaineering Acoustics at the Summit of Discovery</div>
+            <h1><a href="/">{{ site_full_name() }}</a></h1>
+            <div class="slogan">{{ site_slogan_text() }}</div>
           </div>
 {% endmacro %}

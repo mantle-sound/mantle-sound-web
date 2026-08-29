@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% include "macros/favicon.html" %}
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<title>{% block title %}Welcome{% endblock %} - Mountaineering Acoustics Network (MAN)</title>
+{% from "macros/site-brand.html" import site_brand %}
+<title>{% if this._path == '/' %}{{ site_brand() }}{% else %}{% block title %}Welcome{% endblock %} | {{ site_brand() }}{% endif %}</title>
 {% from "macros/structured-data-nav.html" import structured_data_nav %}
 {{ structured_data_nav(this) }}
 <body class="{% if this._path == '/' %}is-homepage{% endif %}">

@@ -1,5 +1,6 @@
 {% macro footer() %}
 {% from "macros/scroll-mascot.html" import scroll_mascot %}
+{% from "macros/site-brand.html" import mantle_sound_name, mantle_sound_href %}
 {{ scroll_mascot() }}
 <div class="subfooter">
   <div id="container">
@@ -15,7 +16,7 @@
   </div>
   <footer>
     <div id="copyright">
-      <a href="https://mantle-sound.org/">Mantle Sound</a> © 2025-2026 <br>Our content is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+      <a href="{{ mantle_sound_href() }}">{{ mantle_sound_name() }}</a> © 2025-2026 <br>Our content is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
       <span class="cc-icons">
         <img src="/files/cc-icons/cc.svg" alt="Creative Commons">
         <img src="/files/cc-icons/by.svg" alt="Attribution">

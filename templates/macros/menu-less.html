@@ -1,8 +1,9 @@
+{% from "macros/site-brand.html" import site_nav_label %}
 {% macro menu(is_homepage=false) %}
           <div class="navbar">
             <div class="navbar-logo hidden">
               <a href="/">
-                <span>MAN Network</span>
+                <span>{{ site_nav_label() }}</span>
               </a>
             </div>
             <div class="hamburger-menu" role="button" aria-label="Menu" aria-controls="main-nav" aria-expanded="false">
@@ -13,7 +14,7 @@
               </div>
             </div>
             <div class="nav-menu" id="main-nav">
-              <div class="nav-menu-item"><div class="nav-menu-org"><a href="/">MAN Network</a></div></div>
+              <div class="nav-menu-item"><div class="nav-menu-org"><a href="/">{{ site_nav_label() }}</a></div></div>
               <div class="nav-menu-item nav-menu-item--home"><a href="/" class="first">Home</a></div>
               <div class="nav-menu-item"><a href="/software">Software</a></div>
               <div class="nav-menu-item"><a href="/news">News</a></div>

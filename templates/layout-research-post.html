@@ -4,7 +4,8 @@
 <meta name="robots" content="noindex, follow">
 {% include "macros/favicon.html" %}
 <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<title>{% block page_title %}{% endblock %} - Mountaineering Acoustics Network (MAN)</title>
+{% from "macros/site-brand.html" import site_brand %}
+<title>{% block page_title %}{% endblock %} | {{ site_brand() }}</title>
 {% from "macros/structured-data-nav.html" import structured_data_nav %}
 {{ structured_data_nav(this) }}
 <body>
